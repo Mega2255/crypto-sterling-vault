@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Sterling Vault Admin - Login</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-app-compat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-auth-compat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-database-compat.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 50%, #a71e2a 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 450px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #dc3545, #a71e2a);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .admin-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .form-container {
+            padding: 40px 30px;
+        }
+
+        .security-notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 25px;
+            color: #856404;
+        }
+
+        .security-notice h4 {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .security-notice p {
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #dc3545;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #666;
+            font-size: 18px;
+            user-select: none;
+        }
+
+        .error {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #dc3545, #a71e2a);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .login-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(220, 53, 69, 0.3);
+        }
+
+        .login-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .admin-info {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid #e1e5e9;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Preloader Styles */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 50%, #a71e2a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        .preloader-text {
+            color: white;
+            font-size: 1.5em;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .preloader-subtext {
+            color: rgba(255,255,255,0.8);
+            font-size: 1em;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 10000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            background: #28a745;
+        }
+
+        .toast.error {
+            background: #dc3545;
+        }
+
+        .toast.warning {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        /* Loading state for login button */
+        .login-btn.loading::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            margin: auto;
+            border: 2px solid transparent;
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                margin: 10px auto;
+                border-radius: 15px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .form-container {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .form-container {
+                padding: 25px 15px;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="loader"></div>
+        <div class="preloader-text">Admin Access</div>
+        <div class="preloader-subtext">Verifying credentials...</div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="admin-icon">🔒</div>
+            <h1>Admin Portal</h1>
+            <p>Crypto Sterling Vault Management System</p>
+        </div>
+
+        <div class="form-container">
+            <div class="security-notice">
+                <h4>🛡️ Admin Access</h4>
+                <p>Use your Firebase Authentication credentials to access the admin dashboard. All activities are logged and monitored.</p>
+            </div>
+
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label for="adminEmail">Admin Email Address *</label>
+                    <input type="email" id="adminEmail" name="adminEmail" placeholder="Enter admin email" required>
+                    <div class="error" id="emailError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="adminPassword">Admin Password *</label>
+                    <div class="password-container">
+                        <input type="password" id="adminPassword" name="adminPassword" placeholder="Enter admin password" required>
+                        <span class="password-toggle" onclick="togglePassword('adminPassword')">👁️</span>
+                    </div>
+                    <div class="error" id="passwordError"></div>
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">
+                    Access Admin Dashboard
+                </button>
+            </form>
+
+            <div class="admin-info">
+                <p>Access granted to all users with valid Firebase Authentication credentials.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Firebase configuration
+       const firebaseConfig = {
+  apiKey: "AIzaSyBN0h_1Azi5l8jlU7sCC7ZbpsZi5x5BqiI",
+  authDomain: "calivra-4bca2.firebaseapp.com",
+  databaseURL: "https://calivra-4bca2-default-rtdb.firebaseio.com",
+  projectId: "calivra-4bca2",
+  storageBucket: "calivra-4bca2.firebasestorage.app",
+  messagingSenderId: "1002372257300",
+  appId: "1:1002372257300:web:ffacb3d683c408b09ef901",
+  measurementId: "G-26PQGX9XZ8"
+};
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const database = firebase.database();
+
+        // Hide preloader after page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Password visibility toggle
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const toggle = field.nextElementSibling;
+            
+            if (field.type === 'password') {
+                field.type = 'text';
+                toggle.textContent = '🙈';
+            } else {
+                field.type = 'password';
+                toggle.textContent = '👁️';
+            }
+        }
+
+        // Show toast notification
+        function showToast(message, type) {
+            const existingToasts = document.querySelectorAll('.toast');
+            existingToasts.forEach(toast => toast.remove());
+            
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => toast.classList.add('show'), 100);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    if (document.body.contains(toast)) {
+                        document.body.removeChild(toast);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Validation functions
+        function clearError(fieldName) {
+            const errorElement = document.getElementById(fieldName + 'Error');
+            if (errorElement) {
+                errorElement.textContent = '';
+            }
+        }
+
+        function showError(fieldName, message) {
+            const errorElement = document.getElementById(fieldName + 'Error');
+            if (errorElement) {
+                errorElement.textContent = message;
+            }
+        }
+
+        // Form validation and submission
+        document.getElementById('adminLoginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Clear previous errors
+            document.querySelectorAll('.error').forEach(el => el.textContent = '');
+            
+            const email = document.getElementById('adminEmail').value.trim();
+            const password = document.getElementById('adminPassword').value;
+            
+            let isValid = true;
+
+            // Validate required fields
+            if (!email) {
+                showError('email', 'Admin email is required');
+                isValid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showError('email', 'Please enter a valid email address');
+                isValid = false;
+            }
+
+            if (!password) {
+                showError('password', 'Admin password is required');
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            // Login process
+            const loginBtn = document.getElementById('loginBtn');
+            const originalText = loginBtn.textContent;
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Authenticating...';
+            loginBtn.classList.add('loading');
+
+            try {
+                // Sign in with Firebase Auth
+                const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                const user = userCredential.user;
+
+                console.log('Admin login successful:', {
+                    uid: user.uid,
+                    email: user.email,
+                    role: 'admin'
+                });
+
+                // Store admin session (any authenticated user can be admin)
+                sessionStorage.setItem('adminUser', JSON.stringify({
+                    uid: user.uid,
+                    email: user.email,
+                    role: 'admin',
+                    loginTime: new Date().toISOString()
+                }));
+
+                showToast('Admin authentication successful!', 'success');
+
+                // Redirect to admin dashboard
+                setTimeout(() => {
+                    window.location.href = 'admindashboard.html';
+                }, 1500);
+
+            } catch (error) {
+                console.error('Admin login error:', error);
+                
+                // Handle specific Firebase Auth errors
+                let errorMessage = 'Authentication failed. Please try again.';
+                
+                switch (error.code) {
+                    case 'auth/user-not-found':
+                        errorMessage = 'No account found with this email address';
+                        showError('email', errorMessage);
+                        break;
+                    case 'auth/wrong-password':
+                        errorMessage = 'Incorrect password';
+                        showError('password', errorMessage);
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage = 'Invalid email address';
+                        showError('email', errorMessage);
+                        break;
+                    case 'auth/user-disabled':
+                        errorMessage = 'This account has been disabled';
+                        break;
+                    case 'auth/too-many-requests':
+                        errorMessage = 'Too many failed attempts. Please try again later';
+                        break;
+                    case 'auth/network-request-failed':
+                        errorMessage = 'Network error. Please check your connection';
+                        break;
+                    default:
+                        if (error.message) {
+                            errorMessage = error.message;
+                        }
+                }
+                
+                showToast(errorMessage, 'error');
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.textContent = originalText;
+                loginBtn.classList.remove('loading');
+            }
+        });
+
+        // Real-time input validation
+        document.getElementById('adminEmail').addEventListener('input', (e) => {
+            if (e.target.value.trim().length > 0) {
+                clearError('email');
+            }
+        });
+
+        document.getElementById('adminPassword').addEventListener('input', (e) => {
+            if (e.target.value.length > 0) {
+                clearError('password');
+            }
+        });
+
+        // Enter key handling
+        document.getElementById('adminEmail').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('adminPassword').focus();
+            }
+        });
+
+        document.getElementById('adminPassword').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('adminLoginForm').dispatchEvent(new Event('submit'));
+            }
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Focus first input
+            document.getElementById('adminEmail').focus();
+            
+            // Check for existing admin session
+            const adminUser = sessionStorage.getItem('adminUser');
+            if (adminUser) {
+                const adminData = JSON.parse(adminUser);
+                showToast('Admin already authenticated. Redirecting...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'admindashboard.html';
+                }, 1000);
+                return;
+            }
+
+            console.log('Crypto Sterling Vault Admin Login System Loaded!');
+        });
+
+        // Security: Clear sensitive data on page unload
+        window.addEventListener('beforeunload', () => {
+            document.getElementById('adminPassword').value = '';
+        });
+
+        // Prevent form resubmission on browser back
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
+</body>
+</html>
