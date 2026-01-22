@@ -1420,28 +1420,33 @@
                 return;
             }
 
-            container.innerHTML = transactions.map(tx => {
-                const icon = tx.type === 'deposit' ? '↓' : tx.type === 'transfer' ? '→' : '↑';
-                const iconClass = tx.type;
-                const amountClass = tx.type === 'deposit' ? 'positive' : 'negative';
-                const amountSign = tx.type === 'deposit' ? '+' : '-';
-                
-                return `
-                    <div class="transaction-item">
-                        <div class="transaction-info">
-                            <div class="transaction-icon ${iconClass}">${icon}</div>
-                            <div class="transaction-details">
-                                <h4>${tx.type.charAt(0).toUpperCase() + tx.type.slice(1)}</h4>
-                                <p>${new Date(tx.timestamp).toLocaleString()}</p>
-                            </div>
-                        </div>
-                        <div class="transaction-amount">
-                            <div class="amount ${amountClass}">${amountSign}${tx.amount} ${tx.crypto}</div>
-                            <span class="status-badge status-${tx.status}">${tx.status}</span>
-                        </div>
-                    </div>
-                `;
-            }).join('');
+           container.innerHTML = transactions.map(tx => {
+    const icon = tx.type === 'deposit' ? '↓' : tx.type === 'transfer' ? '→' : tx.type === 'admin_funding' ? '★' : '↑';
+    const iconClass = tx.type;
+    const amountClass = (tx.type === 'deposit' || tx.type === 'admin_funding') ? 'positive' : 'negative';
+    const amountSign = (tx.type === 'deposit' || tx.type === 'admin_funding') ? '+' : '-';
+    
+    // For admin_funding, show note as title if available, otherwise show type
+    const transactionTitle = tx.type === 'admin_funding' && tx.note 
+        ? tx.note 
+        : tx.type.charAt(0).toUpperCase() + tx.type.slice(1);
+    
+    return `
+        <div class="transaction-item">
+            <div class="transaction-info">
+                <div class="transaction-icon ${iconClass}">${icon}</div>
+                <div class="transaction-details">
+                    <h4>${transactionTitle}</h4>
+                    <p>${new Date(tx.timestamp).toLocaleString()}</p>
+                </div>
+            </div>
+            <div class="transaction-amount">
+                <div class="amount ${amountClass}">${amountSign}${tx.amount} ${tx.crypto}</div>
+                <span class="status-badge status-${tx.status}">${tx.status}</span>
+            </div>
+        </div>
+    `;
+}).join('');
         }
 
         // Display all transactions
@@ -1458,29 +1463,34 @@
                 return;
             }
 
-            container.innerHTML = transactions.map(tx => {
-                const icon = tx.type === 'deposit' ? '↓' : tx.type === 'transfer' ? '→' : '↑';
-                const iconClass = tx.type;
-                const amountClass = tx.type === 'deposit' ? 'positive' : 'negative';
-                const amountSign = tx.type === 'deposit' ? '+' : '-';
-                
-                return `
-                    <div class="transaction-item">
-                        <div class="transaction-info">
-                            <div class="transaction-icon ${iconClass}">${icon}</div>
-                            <div class="transaction-details">
-                                <h4>${tx.type.charAt(0).toUpperCase() + tx.type.slice(1)}</h4>
-                                <p>${new Date(tx.timestamp).toLocaleString()}</p>
-                                <p style="font-size: 0.75em;">ID: ${tx.id}</p>
-                            </div>
-                        </div>
-                        <div class="transaction-amount">
-                            <div class="amount ${amountClass}">${amountSign}${tx.amount} ${tx.crypto}</div>
-                            <span class="status-badge status-${tx.status}">${tx.status}</span>
-                        </div>
-                    </div>
-                `;
-            }).join('');
+          container.innerHTML = transactions.map(tx => {
+    const icon = tx.type === 'deposit' ? '↓' : tx.type === 'transfer' ? '→' : tx.type === 'admin_funding' ? '★' : '↑';
+    const iconClass = tx.type;
+    const amountClass = (tx.type === 'deposit' || tx.type === 'admin_funding') ? 'positive' : 'negative';
+    const amountSign = (tx.type === 'deposit' || tx.type === 'admin_funding') ? '+' : '-';
+    
+    // For admin_funding, show note as title if available, otherwise show type
+    const transactionTitle = tx.type === 'admin_funding' && tx.note 
+        ? tx.note 
+        : tx.type.charAt(0).toUpperCase() + tx.type.slice(1);
+    
+    return `
+        <div class="transaction-item">
+            <div class="transaction-info">
+                <div class="transaction-icon ${iconClass}">${icon}</div>
+                <div class="transaction-details">
+                    <h4>${transactionTitle}</h4>
+                    <p>${new Date(tx.timestamp).toLocaleString()}</p>
+                    <p style="font-size: 0.75em;">ID: ${tx.id}</p>
+                </div>
+            </div>
+            <div class="transaction-amount">
+                <div class="amount ${amountClass}">${amountSign}${tx.amount} ${tx.crypto}</div>
+                <span class="status-badge status-${tx.status}">${tx.status}</span>
+            </div>
+        </div>
+    `;
+}).join('');
         }
 
         // Load crypto balances
