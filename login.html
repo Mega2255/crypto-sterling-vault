@@ -466,7 +466,7 @@
 
     <script>
         // Firebase configuration
-       const firebaseConfig = {
+        const firebaseConfig = {
   apiKey: "AIzaSyBN0h_1Azi5l8jlU7sCC7ZbpsZi5x5BqiI",
   authDomain: "calivra-4bca2.firebaseapp.com",
   databaseURL: "https://calivra-4bca2-default-rtdb.firebaseio.com",
@@ -728,7 +728,7 @@
 
                 // Redirect to dashboard after short delay
                 setTimeout(() => {
-                    window.location.href = 'dashboard.html';
+                    window.location.href = 'userdashboard.html';
                 }, 1500);
 
             } catch (error) {
@@ -815,7 +815,7 @@
                 if (user) {
                     showToast('You are already logged in. Redirecting...', 'success');
                     setTimeout(() => {
-                        window.location.href = 'dashboard.html';
+                        window.location.href = 'userdashboard.html';
                     }, 1000);
                 }
             });
