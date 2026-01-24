@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calivra Bank Services</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #b30000, #ff6666);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: #ffffff;
+            max-width: 1000px;
+            width: 94%;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            color: #b30000;
+            margin-bottom: 25px;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .service-card {
+            background: #fff5f5;
+            padding: 20px;
+            border-radius: 14px;
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            color: #b30000;
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 35px;
+            padding: 12px 22px;
+            background: #b30000;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #8f0000;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Our Services</h1>
+
+    <div class="services">
+        <div class="service-card">
+            <h3>Digital Banking</h3>
+            <p>Access your account, monitor transactions, and manage finances securely online.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Secure Transfers</h3>
+            <p>Fast and encrypted local and international money transfers.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Virtual Cards</h3>
+            <p>Generate secure virtual cards for online purchases and subscriptions.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>24/7 Support</h3>
+            <p>Our support team is available round-the-clock to assist you.</p>
+        </div>
+    </div>
+
+    <a href="index.html" class="back-btn">← Back to Home</a>
+</div>
+
+</body>
+</html>
