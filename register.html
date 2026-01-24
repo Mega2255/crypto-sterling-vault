@@ -3,1151 +3,330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Sterling Vault Broker - Register</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-app-compat.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-auth-compat.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-database-compat.min.js"></script>
+    <title>Register - Calivra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        .step {
+            display: none;
         }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #f7931e, #ff6b35);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 300;
-        }
-
-        .header p {
-            opacity: 0.9;
-            font-size: 1.1em;
-        }
-
-        .crypto-icons {
-            margin-top: 15px;
-            font-size: 1.5em;
-        }
-
-        .form-container {
-            padding: 40px 30px;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        label {
+        .step.active {
             display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 500;
+            animation: fadeIn 0.3s ease-in;
         }
-
-        input, select {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 12px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: #f8f9fa;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: #f7931e;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(247, 147, 30, 0.1);
+        :root {
+            --navy-blue: #001f3f;
+            --navy-light: #003d7a;
         }
-
-        .password-container {
-            position: relative;
-        }
-
-        .password-toggle {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #666;
-            font-size: 18px;
-            user-select: none;
-        }
-
-        .password-strength {
-            margin-top: 10px;
-            height: 4px;
-            background: #e1e5e9;
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .strength-bar {
-            height: 100%;
-            transition: all 0.3s ease;
-            border-radius: 2px;
-            width: 0%;
-        }
-
-        .strength-text {
-            margin-top: 5px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .error {
-            color: #e74c3c;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        .success {
-            color: #27ae60;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #f7931e, #ff6b35);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .submit-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(247, 147, 30, 0.3);
-        }
-
-        .submit-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* Preloader Styles */
-        .preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-
-        .preloader.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loader {
-            width: 80px;
-            height: 80px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-top: 3px solid #f7931e;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-
-        .preloader-text {
-            color: white;
-            font-size: 1.5em;
-            font-weight: 300;
-            margin-bottom: 10px;
-        }
-
-        .preloader-subtext {
-            color: rgba(255,255,255,0.8);
-            font-size: 1em;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Success message styles */
-        .success-container {
-            text-align: center;
-            padding: 40px 30px;
-        }
-
-        .success-icon {
-            font-size: 4em;
-            color: #f7931e;
-            margin-bottom: 20px;
-        }
-
-        .success-title {
-            font-size: 1.8em;
-            color: #333;
-            margin-bottom: 15px;
-        }
-
-        .success-message {
-            color: #666;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .account-details {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 4px solid #f7931e;
-        }
-
-        .account-detail {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .account-detail:last-child {
-            margin-bottom: 0;
-        }
-
-        .account-label {
-            font-weight: 600;
-            color: #333;
-        }
-
-        .account-value {
-            color: #666;
-            font-family: monospace;
-            font-size: 1.1em;
-        }
-
-        .crypto-balances {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 4px solid #f7931e;
-        }
-
-        .crypto-balance {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .crypto-balance:last-child {
-            margin-bottom: 0;
-        }
-
-        .crypto-name {
-            font-weight: 600;
-            color: #333;
-        }
-
-        .crypto-amount {
-            color: #666;
-            font-family: monospace;
-        }
-
-        .dashboard-btn {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: transform 0.3s ease;
-        }
-
-        .dashboard-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .login-link {
-            text-align: center;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #e1e5e9;
-        }
-
-        .login-link a {
-            color: #f7931e;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .login-link a:hover {
-            text-decoration: underline;
-        }
-
-        .countdown {
-            color: #666;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-
-        .countdown span {
-            font-weight: bold;
-            color: #f7931e;
-        }
-
-        /* Toast notification */
-        .toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 8px;
-            color: white;
-            font-weight: 500;
-            z-index: 10000;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-        }
-
-        .toast.show {
-            transform: translateX(0);
-        }
-
-        .toast.success {
-            background: #27ae60;
-        }
-
-        .toast.error {
-            background: #e74c3c;
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-
-            .container {
-                margin: 10px auto;
-                border-radius: 15px;
-            }
-
-            .header {
-                padding: 25px 15px;
-            }
-
-            .header h1 {
-                font-size: 2em;
-            }
-
-            .form-container {
-                padding: 30px 20px;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-
-            input, select {
-                font-size: 16px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header h1 {
-                font-size: 1.8em;
-            }
-
-            .form-container, .success-container {
-                padding: 25px 15px;
-            }
-
-            .form-group {
-                margin-bottom: 20px;
-            }
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--navy-blue) 0%, var(--navy-light) 100%);
         }
     </style>
 </head>
-<body>
-    <!-- Preloader -->
-    <div class="preloader" id="preloader">
-        <div class="loader"></div>
-        <div class="preloader-text">Crypto Sterling Vault Broker</div>
-        <div class="preloader-subtext">Securing your crypto future...</div>
-    </div>
-
-    <div class="container">
-        <div class="header">
-            <h1>Crypto Sterling Vault</h1>
-            <p>Create Your Trading Account</p>
-            <div class="crypto-icons">₿ Ξ ◊ ₳</div>
+<body class="min-h-screen gradient-bg flex items-center justify-center p-4 py-8">
+    <div class="w-full max-w-md">
+        <!-- Logo and Header -->
+        <div class="text-center mb-6">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-lg mb-3">
+                <i class="fas fa-shield-alt text-2xl" style="color: var(--navy-blue);"></i>
+            </div>
+            <h1 class="text-2xl md:text-3xl font-bold text-white mb-1">Create Account</h1>
+            <p class="text-white text-opacity-90 text-sm">Join Calivra today</p>
         </div>
 
-        <!-- Registration Form -->
-        <div class="form-container" id="registrationSection">
-            <form id="registrationForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="firstName">First Name *</label>
-                        <input type="text" id="firstName" name="firstName" required>
-                        <div class="error" id="firstNameError"></div>
+        <!-- Registration Card -->
+        <div class="bg-white rounded-2xl shadow-2xl p-6 md:p-8">
+            <!-- Progress Indicator -->
+            <div class="flex items-center justify-center mb-6">
+                <div class="flex items-center">
+                    <div id="step1-indicator" class="w-8 h-8 rounded-full text-white flex items-center justify-center font-bold text-sm transition-all" style="background-color: var(--navy-blue);">
+                        1
                     </div>
-                    <div class="form-group">
-                        <label for="lastName">Last Name *</label>
-                        <input type="text" id="lastName" name="lastName" required>
-                        <div class="error" id="lastNameError"></div>
+                    <div class="w-12 h-1 bg-gray-200 mx-1">
+                        <div id="progress-bar-1" class="h-full transition-all duration-300" style="width: 0%; background-color: var(--navy-blue);"></div>
+                    </div>
+                    <div id="step2-indicator" class="w-8 h-8 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center font-bold text-sm transition-all">
+                        2
+                    </div>
+                    <div class="w-12 h-1 bg-gray-200 mx-1">
+                        <div id="progress-bar-2" class="h-full transition-all duration-300" style="width: 0%; background-color: var(--navy-blue);"></div>
+                    </div>
+                    <div id="step3-indicator" class="w-8 h-8 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center font-bold text-sm transition-all">
+                        3
+                    </div>
+                </div>
+            </div>
+
+            <form id="register-form">
+                <!-- Step 1: Personal Info -->
+                <div id="step-1" class="step active">
+                    <div class="text-center mb-4">
+                        <h2 class="text-xl font-bold text-gray-800 mb-1">Personal Information</h2>
+                        <p class="text-gray-500 text-xs">Tell us about yourself</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">
+                                <i class="fas fa-user mr-1" style="color: var(--navy-blue);"></i>First Name
+                            </label>
+                            <input 
+                                type="text" 
+                                id="first-name" 
+                                required 
+                                class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
+                                style="--tw-ring-color: var(--navy-blue);"
+                                placeholder="Enter first name">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">
+                                <i class="fas fa-user mr-1" style="color: var(--navy-blue);"></i>Last Name
+                            </label>
+                            <input 
+                                type="text" 
+                                id="last-name" 
+                                required 
+                                class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
+                                style="--tw-ring-color: var(--navy-blue);"
+                                placeholder="Enter last name">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">
+                                <i class="fas fa-user mr-1" style="color: var(--navy-blue);"></i>Middle Name
+                            </label>
+                            <input 
+                                type="text" 
+                                id="middle-name" 
+                                class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
+                                style="--tw-ring-color: var(--navy-blue);"
+                                placeholder="Enter middle name (optional)">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">
+                                <i class="fas fa-at mr-1" style="color: var(--navy-blue);"></i>Username
+                            </label>
+                            <input 
+                                type="text" 
+                                id="username" 
+                                required 
+                                class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
+                                style="--tw-ring-color: var(--navy-blue);"
+                                placeholder="Choose a username">
+                            <p id="username-error" class="text-red-500 text-xs mt-1 hidden"></p>
+                        </div>
+                    </div>
+
+                    <button 
+                        type="button" 
+                        onclick="goToStep2()" 
+                        class="w-full text-white py-2.5 rounded-lg transition font-semibold mt-4 flex items-center justify-center text-sm"
+                        style="background-color: var(--navy-blue);"
+                        onmouseover="this.style.backgroundColor='var(--navy-light)'" 
+                        onmouseout="this.style.backgroundColor='var(--navy-blue)'">
+                        Next
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+
+                <!-- Step 2: Contact Info -->
+                <div id="step-2" class="step">
+                    <div class="text-center mb-4">
+                        <h2 class="text-xl font-bold text-gray-800 mb-1">Contact Information</h2>
+                        <p class="text-gray-500 text-xs">How can we reach you?</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">
+                                <i class="fas fa-envelope mr-1" style="color: var(--navy-blue);"></i>Email Address
+                            </label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                required 
+                                autocomplete="email"
+                                class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
+                                style="--tw-ring-color: var(--navy-blue);"
+                                placeholder="Enter email address">
+                            <p id="email-error" class="text-red-500 text-xs mt-1 hidden"></p>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">
+                                <i class="fas fa-phone mr-1" style="color: var(--navy-blue);"></i>Phone Number
+                            </label>
+                            <input 
+                                type="tel" 
+                                id="phone" 
+                                required 
+                                class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
+                                style="--tw-ring-color: var(--navy-blue);"
+                                placeholder="Enter phone number">
+                            <p id="phone-error" class="text-red-500 text-xs mt-1 hidden"></p>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">
+                                <i class="fas fa-globe mr-1" style="color: var(--navy-blue);"></i>Country
+                            </label>
+                            <select 
+                                id="country" 
+                                required 
+                                class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
+                                style="--tw-ring-color: var(--navy-blue);">
+                                <option value="">Select your country</option>
+                                <option value="Nigeria">Nigeria</option>
+                                <option value="Ghana">Ghana</option>
+                                <option value="Kenya">Kenya</option>
+                                <option value="South Africa">South Africa</option>
+                                <option value="United States">United States</option>
+                                <option value="United Kingdom">United Kingdom</option>
+                                <option value="Canada">Canada</option>
+                                <option value="Australia">Australia</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2 mt-4">
+                        <button 
+                            type="button" 
+                            onclick="goToStep1()" 
+                            class="w-1/3 bg-gray-100 text-gray-700 py-2.5 rounded-lg hover:bg-gray-200 transition font-semibold text-sm flex items-center justify-center">
+                            <i class="fas fa-arrow-left mr-1"></i>
+                            Back
+                        </button>
+                        <button 
+                            type="button" 
+                            onclick="goToStep3()" 
+                            class="w-2/3 text-white py-2.5 rounded-lg transition font-semibold text-sm flex items-center justify-center"
+                            style="background-color: var(--navy-blue);"
+                            onmouseover="this.style.backgroundColor='var(--navy-light)'" 
+                            onmouseout="this.style.backgroundColor='var(--navy-blue)'">
+                            Next
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="email">Email Address *</label>
-                    <input type="email" id="email" name="email" required>
-                    <div class="error" id="emailError"></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="username">Username *</label>
-                    <input type="text" id="username" name="username" required>
-                    <div class="error" id="usernameError"></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password *</label>
-                    <div class="password-container">
-                        <input type="password" id="password" name="password" required>
-                        <span class="password-toggle" onclick="togglePassword('password')">👁️</span>
+                <!-- Step 3: Account Setup -->
+                <div id="step-3" class="step">
+                    <div class="text-center mb-4">
+                        <h2 class="text-xl font-bold text-gray-800 mb-1">Account Setup</h2>
+                        <p class="text-gray-500 text-xs">Secure your account</p>
                     </div>
-                    <div class="password-strength">
-                        <div class="strength-bar" id="strengthBar"></div>
+
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">
+                                <i class="fas fa-lock mr-1" style="color: var(--navy-blue);"></i>Password
+                            </label>
+                            <div class="relative">
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    required 
+                                    autocomplete="new-password"
+                                    class="w-full px-3 py-2 pr-10 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
+                                    style="--tw-ring-color: var(--navy-blue);"
+                                    placeholder="Create password">
+                                <button 
+                                    type="button" 
+                                    onclick="togglePasswordVisibility('password')" 
+                                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                    <i class="fas fa-eye text-sm" id="password-icon"></i>
+                                </button>
+                            </div>
+                            <p id="password-error" class="text-red-500 text-xs mt-1 hidden"></p>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">
+                                <i class="fas fa-lock mr-1" style="color: var(--navy-blue);"></i>Confirm Password
+                            </label>
+                            <div class="relative">
+                                <input 
+                                    type="password" 
+                                    id="confirm-password" 
+                                    required 
+                                    autocomplete="new-password"
+                                    class="w-full px-3 py-2 pr-10 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
+                                    style="--tw-ring-color: var(--navy-blue);"
+                                    placeholder="Confirm password">
+                                <button 
+                                    type="button" 
+                                    onclick="togglePasswordVisibility('confirm-password')" 
+                                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                    <i class="fas fa-eye text-sm" id="confirm-password-icon"></i>
+                                </button>
+                            </div>
+                            <p id="confirm-password-error" class="text-red-500 text-xs mt-1 hidden"></p>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">
+                                <i class="fas fa-key mr-1" style="color: var(--navy-blue);"></i>Transaction PIN (4 digits)
+                            </label>
+                            <input 
+                                type="password" 
+                                id="transaction-pin" 
+                                required 
+                                maxlength="4"
+                                pattern="[0-9]{4}"
+                                class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
+                                style="--tw-ring-color: var(--navy-blue);"
+                                placeholder="Enter 4-digit PIN">
+                            <p id="pin-error" class="text-red-500 text-xs mt-1 hidden"></p>
+                        </div>
                     </div>
-                    <div class="strength-text" id="strengthText"></div>
-                    <div class="error" id="passwordError"></div>
-                </div>
 
-                <div class="form-group">
-                    <label for="confirmPassword">Confirm Password *</label>
-                    <div class="password-container">
-                        <input type="password" id="confirmPassword" name="confirmPassword" required>
-                        <span class="password-toggle" onclick="togglePassword('confirmPassword')">👁️</span>
+                    <div class="flex gap-2 mt-4">
+                        <button 
+                            type="button" 
+                            onclick="goToStep2FromStep3()" 
+                            class="w-1/3 bg-gray-100 text-gray-700 py-2.5 rounded-lg hover:bg-gray-200 transition font-semibold text-sm flex items-center justify-center">
+                            <i class="fas fa-arrow-left mr-1"></i>
+                            Back
+                        </button>
+                        <button 
+                            type="submit" 
+                            id="register-btn"
+                            class="w-2/3 text-white py-2.5 rounded-lg transition font-semibold text-sm flex items-center justify-center"
+                            style="background-color: var(--navy-blue);"
+                            onmouseover="this.style.backgroundColor='var(--navy-light)'" 
+                            onmouseout="this.style.backgroundColor='var(--navy-blue)'">
+                            <i class="fas fa-user-plus mr-2"></i>
+                            Create Account
+                        </button>
                     </div>
-                    <div class="error" id="confirmPasswordError"></div>
                 </div>
-
-                <div class="form-group">
-                    <label for="country">Country *</label>
-                    <input type="text" id="country" name="country" placeholder="Enter your country" required>
-                    <div class="error" id="countryError"></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Phone Number *</label>
-                    <input type="tel" id="phone" name="phone" placeholder="+1234567890" required>
-                    <div class="error" id="phoneError"></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="pin">4-Digit Trading PIN *</label>
-                    <input type="password" id="pin" name="pin" maxlength="4" placeholder="Enter 4-digit PIN" required>
-                    <div class="error" id="pinError"></div>
-                </div>
-
-                <button type="submit" class="submit-btn" id="submitBtn">
-                    Create Trading Account
-                </button>
             </form>
-            
-            <div class="login-link">
-                <p>Already have an account? <a href="login.html">Sign In</a></p>
+
+            <!-- Footer -->
+            <div class="mt-4 text-center">
+                <p class="text-xs text-gray-500">
+                    Already have an account? 
+                    <a href="login.html" class="hover:underline font-semibold" style="color: var(--navy-blue);">Login</a>
+                </p>
             </div>
         </div>
 
-        <!-- Success Section (hidden by default) -->
-        <div class="success-container" id="successSection" style="display: none;">
-            <div class="success-icon">🚀</div>
-            <h2 class="success-title">Trading Account Created!</h2>
-            <p class="success-message">Welcome to Crypto Sterling Vault Broker! Your trading account is ready for cryptocurrency transactions.</p>
-            
-            <div class="account-details">
-                <div class="account-detail">
-                    <span class="account-label">User ID:</span>
-                    <span class="account-value" id="displayUserId">-</span>
-                </div>
-                <div class="account-detail">
-                    <span class="account-label">Auth UID:</span>
-                    <span class="account-value" id="displayAuthUid">-</span>
-                </div>
-                <div class="account-detail">
-                    <span class="account-label">Trading Status:</span>
-                    <span class="account-value">Active</span>
-                </div>
-            </div>
-
-            <div class="crypto-balances">
-                <h3 style="margin-bottom: 15px; color: #333;">Initial Crypto Balances</h3>
-                <div class="crypto-balance">
-                    <span class="crypto-name">Bitcoin (BTC)</span>
-                    <span class="crypto-amount">0.00000000 BTC</span>
-                </div>
-                <div class="crypto-balance">
-                    <span class="crypto-name">Ethereum (ETH)</span>
-                    <span class="crypto-amount">0.00000000 ETH</span>
-                </div>
-                <div class="crypto-balance">
-                    <span class="crypto-name">Litecoin (LTC)</span>
-                    <span class="crypto-amount">0.00000000 LTC</span>
-                </div>
-                <div class="crypto-balance">
-                    <span class="crypto-name">Bitcoin Cash (BCH)</span>
-                    <span class="crypto-amount">0.00000000 BCH</span>
-                </div>
-                <div class="crypto-balance">
-                    <span class="crypto-name">Cardano (ADA)</span>
-                    <span class="crypto-amount">0.00000000 ADA</span>
-                </div>
-            </div>
-            
-            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">
-                Your trading account is now active. Start by depositing cryptocurrency to begin trading.
+        <!-- Security Notice -->
+        <div class="mt-4 text-center">
+            <p class="text-white text-opacity-75 text-xs flex items-center justify-center">
+                <i class="fas fa-shield-alt mr-2"></i>
+                Your information is secure and encrypted
             </p>
-
-            <div class="countdown" id="countdownText">
-                Redirecting to dashboard in <span id="countdownNumber">5</span> seconds...
-            </div>
-            
-            <button class="dashboard-btn" onclick="redirectToDashboard()">
-                Access Dashboard Now
-            </button>
         </div>
     </div>
 
-    <script>
-        // Firebase configuration
-      const firebaseConfig = {
-  apiKey: "AIzaSyBN0h_1Azi5l8jlU7sCC7ZbpsZi5x5BqiI",
-  authDomain: "calivra-4bca2.firebaseapp.com",
-  databaseURL: "https://calivra-4bca2-default-rtdb.firebaseio.com",
-  projectId: "calivra-4bca2",
-  storageBucket: "calivra-4bca2.firebasestorage.app",
-  messagingSenderId: "1002372257300",
-  appId: "1:1002372257300:web:ffacb3d683c408b09ef901",
-  measurementId: "G-26PQGX9XZ8"
-};
-
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const database = firebase.database();
-
-        let redirectCountdown = 5;
-        let countdownInterval = null;
-
-        // Hide preloader after page loads
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('preloader').classList.add('hidden');
-            }, 1500);
-        });
-
-        // Password visibility toggle
-        function togglePassword(fieldId) {
-            const field = document.getElementById(fieldId);
-            const toggle = field.nextElementSibling;
-            
-            if (field.type === 'password') {
-                field.type = 'text';
-                toggle.textContent = '🙈';
-            } else {
-                field.type = 'password';
-                toggle.textContent = '👁️';
-            }
-        }
-
-        // Password strength checker
-        function checkPasswordStrength(password) {
-            const strengthBar = document.getElementById('strengthBar');
-            const strengthText = document.getElementById('strengthText');
-            
-            let strength = 0;
-            let feedback = [];
-
-            if (password.length >= 8) strength++;
-            else if (password.length > 0) feedback.push('at least 8 characters');
-
-            if (/[a-z]/.test(password)) strength++;
-            else if (password.length > 0) feedback.push('lowercase letter');
-
-            if (/[A-Z]/.test(password)) strength++;
-            else if (password.length > 0) feedback.push('uppercase letter');
-
-            if (/\d/.test(password)) strength++;
-            else if (password.length > 0) feedback.push('number');
-
-            if (/[^A-Za-z0-9]/.test(password)) strength++;
-            else if (password.length > 0) feedback.push('special character');
-
-            const colors = ['#e74c3c', '#f39c12', '#f1c40f', '#2ecc71', '#27ae60'];
-            const labels = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'];
-            
-            if (password.length > 0) {
-                strengthBar.style.width = (strength * 20) + '%';
-                strengthBar.style.backgroundColor = colors[strength - 1] || '#e74c3c';
-                
-                strengthText.textContent = labels[strength - 1] || 'Very Weak';
-                strengthText.style.color = colors[strength - 1] || '#e74c3c';
-                
-                if (feedback.length > 0 && strength < 4) {
-                    strengthText.textContent += ' - Need: ' + feedback.join(', ');
-                }
-            } else {
-                strengthText.textContent = '';
-                strengthBar.style.width = '0%';
-                strengthBar.style.backgroundColor = '#e1e5e9';
-            }
-
-            return strength >= 3;
-        }
-
-        // Validate PIN (4 unique digits)
-        function validatePin(pin) {
-            if (pin.length !== 4) return false;
-            if (!/^\d{4}$/.test(pin)) return false;
-            
-            // Check for repeating digits
-            const digits = pin.split('');
-            const uniqueDigits = [...new Set(digits)];
-            return uniqueDigits.length === 4;
-        }
-
-        // Show toast notification
-        function showToast(message, type) {
-            // Remove any existing toasts
-            const existingToasts = document.querySelectorAll('.toast');
-            existingToasts.forEach(toast => toast.remove());
-            
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.textContent = message;
-            document.body.appendChild(toast);
-            
-            setTimeout(() => toast.classList.add('show'), 100);
-            setTimeout(() => {
-                toast.classList.remove('show');
-                setTimeout(() => {
-                    if (document.body.contains(toast)) {
-                        document.body.removeChild(toast);
-                    }
-                }, 300);
-            }, 3000);
-        }
-
-        // Generate unique user ID
-        function generateUserId() {
-            const timestamp = Date.now();
-            const random = Math.random().toString(36).substr(2, 9);
-            return `user_${timestamp}_${random}`;
-        }
-
-        // Redirect to dashboard
-        function redirectToDashboard() {
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-            }
-            window.location.href = 'userdashboard.html';
-        }
-
-        // Start countdown and redirect
-        function startCountdownAndRedirect() {
-            const countdownElement = document.getElementById('countdownNumber');
-            
-            countdownInterval = setInterval(() => {
-                redirectCountdown--;
-                if (countdownElement) {
-                    countdownElement.textContent = redirectCountdown;
-                }
-                
-                if (redirectCountdown <= 0) {
-                    clearInterval(countdownInterval);
-                    redirectToDashboard();
-                }
-            }, 1000);
-        }
-
-        // Show success section
-        function showSuccessSection(userId, authUid) {
-            document.getElementById('registrationSection').style.display = 'none';
-            document.getElementById('successSection').style.display = 'block';
-            
-            // Display user ID and Auth UID
-            document.getElementById('displayUserId').textContent = userId;
-            document.getElementById('displayAuthUid').textContent = authUid;
-            
-            // Start countdown for automatic redirect
-            startCountdownAndRedirect();
-        }
-
-        // Real-time validation functions
-        function clearError(fieldName) {
-            const errorElement = document.getElementById(fieldName + 'Error');
-            if (errorElement) {
-                errorElement.textContent = '';
-            }
-        }
-
-        function showError(fieldName, message) {
-            const errorElement = document.getElementById(fieldName + 'Error');
-            if (errorElement) {
-                errorElement.textContent = message;
-            }
-        }
-
-        // Form validation and submission
-        document.getElementById('registrationForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            // Clear all previous errors
-            document.querySelectorAll('.error').forEach(el => el.textContent = '');
-            
-            const formData = new FormData(e.target);
-            const data = Object.fromEntries(formData.entries());
-            
-            let isValid = true;
-
-            // Validate required fields
-            const requiredFields = ['firstName', 'lastName', 'email', 'username', 'password', 'confirmPassword', 'country', 'phone', 'pin'];
-            requiredFields.forEach(field => {
-                if (!data[field] || !data[field].trim()) {
-                    showError(field, 'This field is required');
-                    isValid = false;
-                }
-            });
-
-            // Email validation
-            if (data.email) {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(data.email)) {
-                    showError('email', 'Please enter a valid email address');
-                    isValid = false;
-                }
-            }
-
-            // Username validation
-            if (data.username) {
-                if (data.username.length < 3) {
-                    showError('username', 'Username must be at least 3 characters');
-                    isValid = false;
-                }
-                if (!/^[a-zA-Z0-9_]+$/.test(data.username)) {
-                    showError('username', 'Username can only contain letters, numbers, and underscores');
-                    isValid = false;
-                }
-            }
-
-            // Password validation
-            if (data.password) {
-                if (!checkPasswordStrength(data.password)) {
-                    showError('password', 'Password is too weak');
-                    isValid = false;
-                }
-            }
-
-            // Confirm password validation
-            if (data.password !== data.confirmPassword) {
-                showError('confirmPassword', 'Passwords do not match');
-                isValid = false;
-            }
-
-            // Phone validation
-            if (data.phone) {
-                const phoneRegex = /^\+?[\d\s\-\(\)]{10,}$/;
-                if (!phoneRegex.test(data.phone)) {
-                    showError('phone', 'Please enter a valid phone number');
-                    isValid = false;
-                }
-            }
-
-            // PIN validation
-            if (data.pin) {
-                if (!validatePin(data.pin)) {
-                    showError('pin', 'PIN must be 4 unique digits');
-                    isValid = false;
-                }
-            }
-
-            if (!isValid) return;
-
-            // Submit to Firebase
-            const submitBtn = document.getElementById('submitBtn');
-            const originalText = submitBtn.textContent;
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Creating Account...';
-
-            try {
-                // Check if username already exists in Realtime Database
-                const usersRef = database.ref('users');
-                const usernameSnapshot = await usersRef.orderByChild('username').equalTo(data.username.toLowerCase()).once('value');
-                
-                if (usernameSnapshot.exists()) {
-                    throw new Error('Username is already taken');
-                }
-
-                // Create user in Firebase Authentication
-                const userCredential = await auth.createUserWithEmailAndPassword(data.email, data.password);
-                const authUser = userCredential.user;
-                
-                // Update the user's profile with display name
-                await authUser.updateProfile({
-                    displayName: `${data.firstName} ${data.lastName}`
-                });
-
-                // Generate unique user ID for internal system
-                const userId = generateUserId();
-                
-                // Prepare user data for Realtime Database
-                const userData = {
-                    // Firebase Auth info
-                    authUid: authUser.uid,
-                    email: authUser.email,
-                    emailVerified: authUser.emailVerified,
-                    
-                    // Custom user data
-                    userId: userId,
-                    firstName: data.firstName.trim(),
-                    lastName: data.lastName.trim(),
-                    username: data.username.toLowerCase().trim(),
-                    country: data.country,
-                    phone: data.phone.trim(),
-                    pin: data.pin, // In production, hash this!
-                    createdAt: new Date().toISOString(),
-                    status: 'active',
-                    
-                    // Crypto balances - all start at zero
-                    balances: {
-                        BTC: 0,
-                        ETH: 0,
-                        LTC: 0,
-                        BCH: 0,
-                        ADA: 0
-                    },
-                    
-                    // Trading history
-                    transactions: [],
-                    
-                    // Wallet addresses (would be generated in real implementation)
-                    walletAddresses: {
-                        BTC: null,
-                        ETH: null,
-                        LTC: null,
-                        BCH: null,
-                        ADA: null
-                    },
-                    
-                    // Additional metadata
-                    lastLoginAt: null,
-                    profilePicture: null,
-                    preferences: {
-                        currency: 'USD',
-                        notifications: true,
-                        theme: 'light'
-                    }
-                };
-
-                // Save user data to Realtime Database using both Auth UID and custom User ID
-                await Promise.all([
-                    // Store by Auth UID for Firebase Auth integration
-                    usersRef.child(authUser.uid).set(userData),
-                    // Store by custom User ID for internal system
-                    database.ref('usersByUserId').child(userId).set({
-                        authUid: authUser.uid,
-                        email: authUser.email,
-                        username: data.username.toLowerCase().trim(),
-                        createdAt: new Date().toISOString()
-                    })
-                ]);
-                
-                // Store user session info
-                sessionStorage.setItem('currentUserId', userId);
-                sessionStorage.setItem('currentAuthUid', authUser.uid);
-                sessionStorage.setItem('userEmail', authUser.email);
-                
-                // Show success section
-                showSuccessSection(userId, authUser.uid);
-                
-                showToast('Trading account created successfully!', 'success');
-
-            } catch (error) {
-                console.error('Registration error:', error);
-                
-                // Handle specific Firebase Auth errors
-                let errorMessage = 'Registration failed. Please try again.';
-                
-                switch (error.code) {
-                    case 'auth/email-already-in-use':
-                        errorMessage = 'Email address is already registered';
-                        showError('email', errorMessage);
-                        break;
-                    case 'auth/invalid-email':
-                        errorMessage = 'Invalid email address';
-                        showError('email', errorMessage);
-                        break;
-                    case 'auth/operation-not-allowed':
-                        errorMessage = 'Email/password accounts are not enabled';
-                        break;
-                    case 'auth/weak-password':
-                        errorMessage = 'Password is too weak';
-                        showError('password', errorMessage);
-                        break;
-                    case 'auth/network-request-failed':
-                        errorMessage = 'Network error. Please check your connection';
-                        break;
-                    default:
-                        if (error.message) {
-                            errorMessage = error.message;
-                        }
-                }
-                
-                showToast(errorMessage, 'error');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
-            }
-        });
-
-        // Real-time password strength checking
-        document.getElementById('password').addEventListener('input', (e) => {
-            checkPasswordStrength(e.target.value);
-            if (e.target.value.length > 0) {
-                clearError('password');
-            }
-        });
-
-        // PIN input validation (only allow digits)
-        document.getElementById('pin').addEventListener('input', (e) => {
-            const value = e.target.value.replace(/\D/g, '');
-            e.target.value = value.substr(0, 4);
-            
-            if (value.length > 0) {
-                clearError('pin');
-                if (value.length === 4) {
-                    if (!validatePin(value)) {
-                        showError('pin', 'PIN must contain 4 unique digits');
-                    }
-                }
-            }
-        });
-
-        // Phone number formatting
-        document.getElementById('phone').addEventListener('input', (e) => {
-            let value = e.target.value.replace(/[^\d\+\-\s\(\)]/g, '');
-            e.target.value = value;
-            
-            if (value.length > 0) {
-                clearError('phone');
-            }
-        });
-
-        // Real-time validation for other fields
-        ['firstName', 'lastName', 'email', 'username'].forEach(fieldId => {
-            document.getElementById(fieldId).addEventListener('input', (e) => {
-                if (e.target.value.trim().length > 0) {
-                    clearError(fieldId);
-                }
-            });
-        });
-
-        // Country selection
-        document.getElementById('country').addEventListener('change', (e) => {
-            if (e.target.value) {
-                clearError('country');
-            }
-        });
-
-        // Confirm password validation
-        document.getElementById('confirmPassword').addEventListener('input', (e) => {
-            const password = document.getElementById('password').value;
-            if (e.target.value === password && e.target.value.length > 0) {
-                clearError('confirmPassword');
-            } else if (e.target.value.length > 0) {
-                showError('confirmPassword', 'Passwords do not match');
-            }
-        });
-
-        // Username availability check (real-time)
-        let usernameCheckTimeout;
-        document.getElementById('username').addEventListener('input', (e) => {
-            const username = e.target.value.trim().toLowerCase();
-            
-            clearTimeout(usernameCheckTimeout);
-            
-            if (username.length === 0) {
-                clearError('username');
-                return;
-            }
-            
-            if (username.length < 3) {
-                showError('username', 'Username must be at least 3 characters');
-                return;
-            }
-            
-            if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-                showError('username', 'Username can only contain letters, numbers, and underscores');
-                return;
-            }
-            
-            usernameCheckTimeout = setTimeout(async () => {
-                try {
-                    const snapshot = await database.ref('users').orderByChild('username').equalTo(username).once('value');
-                    if (snapshot.exists()) {
-                        showError('username', 'Username is already taken');
-                    } else {
-                        clearError('username');
-                    }
-                } catch (error) {
-                    console.error('Error checking username:', error);
-                }
-            }, 500);
-        });
-
-        // Email availability check - This will be handled by Firebase Auth during registration
-        let emailCheckTimeout;
-        document.getElementById('email').addEventListener('input', (e) => {
-            const email = e.target.value.trim().toLowerCase();
-            
-            clearTimeout(emailCheckTimeout);
-            
-            if (email.length === 0) {
-                clearError('email');
-                return;
-            }
-            
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showError('email', 'Please enter a valid email address');
-                return;
-            }
-            
-            // Clear error if email format is valid
-            // Firebase Auth will check for duplicates during registration
-            clearError('email');
-        });
-
-        // Name validation (only letters and spaces)
-        ['firstName', 'lastName'].forEach(fieldId => {
-            document.getElementById(fieldId).addEventListener('input', (e) => {
-                const value = e.target.value;
-                const validValue = value.replace(/[^a-zA-Z\s]/g, '');
-                if (value !== validValue) {
-                    e.target.value = validValue;
-                }
-                
-                if (validValue.trim().length > 0) {
-                    clearError(fieldId);
-                }
-            });
-        });
-
-        // Username validation (alphanumeric and underscore only)
-        document.getElementById('username').addEventListener('keypress', (e) => {
-            const char = e.key;
-            if (!/[a-zA-Z0-9_]/.test(char) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(char)) {
-                e.preventDefault();
-            }
-        });
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('firstName').focus();
-            
-            console.log('Crypto Sterling Vault Broker Registration System with Firebase Auth Loaded!');
-            console.log('Features:');
-            console.log('- Firebase Authentication integration');
-            console.log('- Real-time form validation');
-            console.log('- Username availability checking');
-            console.log('- Password strength indicator');
-            console.log('- Cryptocurrency wallet initialization');
-            console.log('- Dual storage (Auth UID + Custom User ID)');
-            console.log('- Zero balance crypto accounts');
-            console.log('- Mobile-responsive design');
-        });
-
-        // Handle page visibility change
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden && countdownInterval) {
-                clearInterval(countdownInterval);
-            }
-        });
-
-        // Handle browser navigation
-        window.addEventListener('beforeunload', (e) => {
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-            }
-        });
-
-        // Firebase connection monitoring
-        database.ref('.info/connected').on('value', (snapshot) => {
-            if (!snapshot.val()) {
-                showToast('Connection lost. Please check your internet connection.', 'error');
-            }
-        });
-
-        // Firebase Auth state observer
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                console.log('User signed in:', user.email);
-            } else {
-                console.log('User signed out');
-            }
-        });
-    </script>
 <!-- Begin of Chaport Live Chat code -->
 <script type="text/javascript">
 (function(w,d,v3){
@@ -1158,7 +337,12 @@ appId : '69727a7624f1437fc1298784',
 if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
 </script>
 <!-- End of Chaport Live Chat code -->
-
+  
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="register.js"></script>
 </body>
-
 </html>
