@@ -3,743 +3,591 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Sterling Vault - Your Trusted Crypto Trading Partner</title>
+    <title>Calivra - Banking Made Simple</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .hero-gradient {
-            background: linear-gradient(135deg, #f59e0b 0%, #ea580c 50%, #2563eb 100%);
-        }
-        
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.6s ease-out forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .security-badge {
-            background: linear-gradient(45deg, #2563eb, #1d4ed8);
-        }
-
-        .crypto-glow {
-            background: linear-gradient(45deg, #f59e0b, #ea580c);
-            box-shadow: 0 0 30px rgba(245, 158, 11, 0.3);
-        }
-
-        /* Price ticker animation */
-        .ticker-scroll {
-            animation: scroll 30s linear infinite;
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* Mobile menu animations */
-        .mobile-menu {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .mobile-menu.open {
-            max-height: 500px;
-            opacity: 1;
-        }
-
-        .hamburger {
-            cursor: pointer;
-            width: 24px;
-            height: 24px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-        }
-
-        .hamburger span {
-            display: block;
-            height: 2px;
-            width: 100%;
-            background: #374151;
-            border-radius: 1px;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-
-        /* Button hover effects */
-        .btn-primary {
-            background: linear-gradient(45deg, #f59e0b, #ea580c);
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(45deg, #d97706, #dc2626);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-secondary {
-            border: 2px solid #f59e0b;
-            color: #f59e0b;
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary:hover {
-            background: #f59e0b;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Service cards with new colors */
-        .service-card-1 { background: linear-gradient(135deg, #fef3c7, #fde68a); }
-        .service-card-2 { background: linear-gradient(135deg, #fed7aa, #fdba74); }
-        .service-card-3 { background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
-
-        /* Portfolio section with vibrant gradient */
-        .portfolio-gradient {
-            background: linear-gradient(135deg, #f59e0b 0%, #ea580c 50%, #2563eb 100%);
-        }
-
-        /* Security section icons */
-        .security-icon-1 { background: linear-gradient(45deg, #2563eb, #1d4ed8); }
-        .security-icon-2 { background: linear-gradient(45deg, #f59e0b, #d97706); }
-        .security-icon-3 { background: linear-gradient(45deg, #ea580c, #dc2626); }
-        .security-icon-4 { background: linear-gradient(45deg, #2563eb, #1e40af); }
-
-        /* CTA section */
-        .cta-gradient {
-            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
-        }
-
-        /* Responsive text scaling */
-        @media (max-width: 640px) {
-            .hero-title { font-size: 2rem; line-height: 1.2; }
-            .hero-subtitle { font-size: 1.125rem; }
-            .section-title { font-size: 2rem; }
-            .card-title { font-size: 1.25rem; }
-        }
-
-        @media (min-width: 641px) and (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; line-height: 1.2; }
-            .hero-subtitle { font-size: 1.25rem; }
-            .section-title { font-size: 2.5rem; }
-        }
-
-        /* Fix overflow issues */
-        body, html {
-            overflow-x: hidden;
-            width: 100%;
-        }
-
-        .container-responsive {
-            max-width: 100vw;
-            overflow-x: hidden;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-white container-responsive">
-    
-    <!-- Price Ticker -->
-    <div class="bg-gray-900 text-white py-2 overflow-hidden">
-        <div class="ticker-scroll whitespace-nowrap">
-            <span class="inline-block mx-4 sm:mx-8 text-xs sm:text-sm">
-                <span class="text-orange-400">BTC</span> $67,234.12 <span class="text-green-400">+2.34%</span>
-            </span>
-            <span class="inline-block mx-4 sm:mx-8 text-xs sm:text-sm">
-                <span class="text-blue-400">ETH</span> $3,456.78 <span class="text-green-400">+1.87%</span>
-            </span>
-            <span class="inline-block mx-4 sm:mx-8 text-xs sm:text-sm">
-                <span class="text-yellow-400">ADA</span> $0.4567 <span class="text-red-400">-0.23%</span>
-            </span>
-            <span class="inline-block mx-4 sm:mx-8 text-xs sm:text-sm">
-                <span class="text-yellow-400">SOL</span> $123.45 <span class="text-green-400">+3.12%</span>
-            </span>
-            <span class="inline-block mx-4 sm:mx-8 text-xs sm:text-sm">
-                <span class="text-green-400">USDT</span> $1.00 <span class="text-gray-400">0.00%</span>
-            </span>
-        </div>
+<body class="bg-white">
+    <!-- Top Banner -->
+    <div class="bg-[#1a2942] text-white py-2.5 px-4 text-center text-sm">
+        <span class="inline-flex items-center">
+            <span class="bg-[#ff5a5f] w-2 h-2 rounded-full mr-2"></span>
+            13 days left for a chance to win £10,000
+        </span>
     </div>
 
-    <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div class="flex justify-between items-center h-[72px]">
                 <!-- Logo -->
-                <div class="flex items-center space-x-2 sm:space-x-3">
-                    <div class="w-8 h-8 sm:w-10 sm:h-10 crypto-glow rounded-lg flex items-center justify-center">
-                        <svg class="w-4 h-4 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                    </div>
-                    <span class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">Crypto Sterling Vault</span>
+                <div class="flex items-center">
+                    <a href="#" class="text-[32px] font-bold text-[#ff5a5f] tracking-tight">Calivra</a>
                 </div>
-                
+
                 <!-- Desktop Navigation -->
-                <nav class="hidden lg:flex space-x-8">
-                    <a href="#trade" class="text-gray-700 hover:text-yellow-600 font-medium transition-colors">Trading</a>
-                    <a href="#services" class="text-gray-700 hover:text-yellow-600 font-medium transition-colors">Services</a>
-                    <a href="#portfolio" class="text-gray-700 hover:text-yellow-600 font-medium transition-colors">Portfolio</a>
-                    <a href="#security" class="text-gray-700 hover:text-yellow-600 font-medium transition-colors">Security</a>
-                </nav>
-                
-                <!-- Desktop Auth Buttons -->
-                <div class="hidden lg:flex items-center space-x-4">
-                    <a href="login.html" class="text-gray-700 hover:text-yellow-600 font-medium transition-colors">Sign In</a>
-                    <a href="register.html" class="text-gray-700 hover:text-yellow-600 font-medium transition-colors">Register</a>
-                    <a href="login.html" class="btn-primary text-white px-6 py-2 rounded-lg font-semibold">Start Trading</a>
-                </div>
-
-                <!-- Mobile/Tablet Auth + Menu -->
-                <div class="flex items-center space-x-3 lg:hidden">
-                    <!-- Mobile Auth Buttons -->
-                    <div class="hidden sm:flex items-center space-x-2">
-                        <a href="#" class="text-gray-700 hover:text-yellow-600 font-medium text-sm transition-colors">Sign In</a>
-                        <a href="#" class="btn-primary text-white px-3 py-1.5 rounded-lg font-semibold text-sm">Register</a>
-                    </div>
-                    
-                    <!-- Hamburger Menu -->
-                    <button class="hamburger lg:hidden" id="mobile-menu-toggle">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="mobile-menu lg:hidden bg-white border-t border-gray-200">
-            <div class="px-4 py-6 space-y-4">
-                <a href="#trade" class="block text-gray-700 hover:text-yellow-600 font-medium py-3 px-4 rounded-lg hover:bg-yellow-50 transition-colors">Trading</a>
-                <a href="#services" class="block text-gray-700 hover:text-yellow-600 font-medium py-3 px-4 rounded-lg hover:bg-yellow-50 transition-colors">Services</a>
-                <a href="#portfolio" class="block text-gray-700 hover:text-yellow-600 font-medium py-3 px-4 rounded-lg hover:bg-yellow-50 transition-colors">Portfolio</a>
-                <a href="#security" class="block text-gray-700 hover:text-yellow-600 font-medium py-3 px-4 rounded-lg hover:bg-yellow-50 transition-colors">Security</a>
-                
-                <!-- Mobile Auth Section -->
-                <div class="pt-4 border-t border-gray-200 space-y-3 sm:hidden">
-                    <a href="login.html" class="block text-yellow-600 hover:text-yellow-700 font-medium py-3 px-4 rounded-lg hover:bg-yellow-50 transition-colors">Sign In</a>
-                    <a href="register.html" class="block text-yellow-600 hover:text-yellow-700 font-medium py-3 px-4 rounded-lg hover:bg-yellow-50 transition-colors">Register</a>
-                    <a href="login.html" class="block btn-primary text-white px-4 py-3 rounded-lg font-medium text-center">Start Trading</a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero-gradient text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <div class="fade-in text-center lg:text-left">
-                    <h1 class="hero-title font-bold leading-tight mb-4 sm:mb-6">
-                        Crypto Trading <span class="text-yellow-200">Simplified</span>
-                    </h1>
-                    <p class="hero-subtitle text-blue-100 mb-6 sm:mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                        Access professional-grade cryptocurrency trading with advanced tools, competitive spreads, and institutional-level security. Your crypto journey starts here.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="#" class="bg-white text-orange-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-gray-50 transition text-center">
-                            Start Trading Now
-                        </a>
-                        <a href="#" class="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-white hover:text-orange-600 transition text-center">
-                            View Markets
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Quick Trade Card -->
-                <div class="relative mt-8 lg:mt-0" id="trade">
-                    <div class="bg-white bg-opacity-15 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
-                        <h3 class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Quick Trade</h3>
-                        <div class="space-y-3 sm:space-y-4">
-                            <button class="w-full bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg p-3 sm:p-4 text-left transition">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
-                                            <span class="text-xs font-bold text-white">₿</span>
-                                        </div>
-                                        <span class="font-medium text-sm sm:text-base">Bitcoin (BTC)</span>
-                                    </div>
-                                    <div class="text-right">
-                                        <div class="text-sm font-semibold">$67,234</div>
-                                        <div class="text-xs text-green-300">+2.34%</div>
-                                    </div>
-                                </div>
-                            </button>
-                            <button class="w-full bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg p-3 sm:p-4 text-left transition">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                                            <span class="text-xs font-bold text-white">Ξ</span>
-                                        </div>
-                                        <span class="font-medium text-sm sm:text-base">Ethereum (ETH)</span>
-                                    </div>
-                                    <div class="text-right">
-                                        <div class="text-sm font-semibold">$3,457</div>
-                                        <div class="text-xs text-green-300">+1.87%</div>
-                                    </div>
-                                </div>
-                            </button>
-                            <button class="w-full bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg p-3 sm:p-4 text-left transition">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
-                                            <span class="text-xs font-bold text-white">◎</span>
-                                        </div>
-                                        <span class="font-medium text-sm sm:text-base">Solana (SOL)</span>
-                                    </div>
-                                    <div class="text-right">
-                                        <div class="text-sm font-semibold">$123</div>
-                                        <div class="text-xs text-green-300">+3.12%</div>
-                                    </div>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="py-12 sm:py-16 lg:py-20 bg-white" id="services">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 sm:mb-16">
-                <h2 class="section-title font-bold text-gray-900 mb-4">Trading Services</h2>
-                <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-                    Comprehensive cryptocurrency trading solutions for both beginners and professional traders
-                </p>
-            </div>
-            
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                <div class="card-hover service-card-1 rounded-xl p-6 sm:p-8 text-center">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 security-icon-2 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                        </svg>
-                    </div>
-                    <h3 class="card-title font-semibold text-gray-900 mb-4">Spot Trading</h3>
-                    <p class="text-gray-600 mb-6 text-sm sm:text-base">
-                        Trade over 200+ cryptocurrencies with competitive spreads and deep liquidity
-                    </p>
-                    <a href="#" class="text-orange-600 font-semibold hover:text-orange-700 transition-colors">Learn More →</a>
-                </div>
-                
-                <div class="card-hover service-card-2 rounded-xl p-6 sm:p-8 text-center">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 security-icon-3 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="card-title font-semibold text-gray-900 mb-4">Portfolio Management</h3>
-                    <p class="text-gray-600 mb-6 text-sm sm:text-base">
-                        Advanced portfolio tracking and rebalancing tools with detailed analytics
-                    </p>
-                    <a href="#" class="text-orange-600 font-semibold hover:text-orange-700 transition-colors">Learn More →</a>
-                </div>
-                
-                <div class="card-hover service-card-3 rounded-xl p-6 sm:p-8 text-center sm:col-span-2 lg:col-span-1">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 security-icon-1 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8V6m0 4v4m0 4v2m-6-3a9 9 0 1118 0h-9a9 9 0 01-9 0z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="card-title font-semibold text-gray-900 mb-4">Staking Rewards</h3>
-                    <p class="text-gray-600 mb-6 text-sm sm:text-base">
-                        Earn passive income through our secure staking programs with competitive APY rates
-                    </p>
-                    <a href="#" class="text-blue-600 font-semibold hover:text-blue-700 transition-colors">Learn More →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section class="py-12 sm:py-16 lg:py-20 bg-gray-50" id="portfolio">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
-                <div class="order-2 lg:order-1">
-                    <h2 class="section-title font-bold text-gray-900 mb-6">
-                        Advanced Trading Tools
-                    </h2>
-                    <p class="text-lg sm:text-xl text-gray-600 mb-8">
-                        Professional-grade trading interface with real-time charts, technical indicators, and automated trading bots.
-                    </p>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-start space-x-4">
-                            <div class="w-8 h-8 security-icon-2 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Real-time Analytics</h3>
-                                <p class="text-gray-600">Live market data, advanced charting tools, and technical analysis indicators</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start space-x-4">
-                            <div class="w-8 h-8 security-icon-3 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Automated Trading</h3>
-                                <p class="text-gray-600">Set up trading bots with customizable strategies and risk management</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start space-x-4">
-                            <div class="w-8 h-8 security-icon-1 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Mobile Trading</h3>
-                                <p class="text-gray-600">Trade on-the-go with our award-winning mobile application</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="relative order-1 lg:order-2">
-                    <div class="portfolio-gradient rounded-2xl p-6 sm:p-8 text-white">
-                        <div class="bg-white bg-opacity-15 rounded-xl p-6 mb-6">
-                            <h3 class="text-2xl font-bold mb-4">Portfolio Overview</h3>
-                            <div class="space-y-4">
-                                <div class="flex justify-between items-center py-2 border-b border-white border-opacity-20">
-                                    <span class="text-sm sm:text-base">Total Balance</span>
-                                    <span class="font-semibold text-sm sm:text-base">$45,892.75</span>
-                                </div>
-                                <div class="flex justify-between items-center py-2 border-b border-white border-opacity-20">
-                                    <span class="text-sm sm:text-base">Bitcoin (BTC)</span>
-                                    <span class="font-semibold text-sm sm:text-base">0.68234 BTC</span>
-                                </div>
-                                <div class="flex justify-between items-center py-2 border-b border-white border-opacity-20">
-                                    <span class="text-sm sm:text-base">Ethereum (ETH)</span>
-                                    <span class="font-semibold text-sm sm:text-base">4.5671 ETH</span>
-                                </div>
-                                <div class="flex justify-between items-center py-2">
-                                    <span class="text-sm sm:text-base">Other Assets</span>
-                                    <span class="font-semibold text-sm sm:text-base">$8,450.12</span>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="w-full bg-white text-orange-600 py-3 rounded-lg font-semibold hover:bg-gray-50 transition">
-                            View Full Portfolio
+                <div class="hidden md:flex items-center space-x-8">
+                    <div class="relative group">
+                        <button class="flex items-center space-x-2 text-gray-600 hover:text-gray-900 text-[15px] font-medium">
+                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"/>
+                            </svg>
+                            <span>Links</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
                         </button>
+                        
+                        <!-- Dropdown -->
+                        <div class="dropdown absolute left-0 mt-3 w-56 bg-white rounded-xl shadow-2xl border border-gray-100 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0">
+                            <div class="py-2">
+                                <a href="about.html" class="block px-5 py-3 text-gray-700 hover:bg-gray-50 transition text-[15px] font-medium">About Calivra</a>
+                                <a href="services.html" class="block px-5 py-3 text-gray-700 hover:bg-gray-50 transition text-[15px] font-medium">Services</a>
+                                <a href="privacy.html" class="block px-5 py-3 text-gray-700 hover:bg-gray-50 transition text-[15px] font-medium">Privacy and Policy</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side Buttons -->
+<div class="hidden md:flex items-center space-x-3">
+    <button onclick="window.location.href='login.html'" class="flex items-center space-x-2 px-5 py-2 text-gray-700 hover:text-gray-900 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+        </svg>
+        <span class="font-medium text-[15px]"><a href="login.html">Login</a></span>
+    </button>
+
+    <button onclick="window.location.href='register.html'" class="flex items-center space-x-2 px-6 py-3 bg-[#1a2942] text-white rounded-full hover:bg-[#253852] transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+        </svg>
+        <span class="font-medium text-[15px]"><a href="register.html">Sign Up</a></span>
+    </button>
+</div>
+
+<!-- Mobile Menu Button -->
+<button id="mobileMenuBtn" class="md:hidden text-gray-700">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+</button>
+</div>
+</div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="mobile-menu fixed inset-y-0 left-0 w-72 bg-white shadow-xl z-50 md:hidden">
+    <div class="p-6">
+        <button id="closeMobileMenu" class="mb-8">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        </button>
+
+        <div class="space-y-5">
+            <a href="about.html" class="block text-gray-700 font-medium text-base">About Calivra</a>
+            <a href="services.html" class="block text-gray-700 font-medium text-base">Services</a>
+            <a href="privacy.html" class="block text-gray-700 font-medium text-base">Privacy and Policy</a>
+            <hr class="my-6 border-gray-200">
+
+            <button onclick="window.location.href='login.html'" class="flex items-center space-x-2 text-gray-700 font-medium text-base">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                </svg>
+                <span><a href="login.html">Login</a></span>
+            </button>
+
+            <button onclick="window.location.href='register.html'" class="flex items-center space-x-2 px-6 py-3 bg-[#1a2942] text-white rounded-full w-full justify-center font-medium">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                </svg>
+                <span><a href="register.html">Sign up</a></span>
+            </button>
+        </div>
+    </div>
+</div>
+
+    <!-- Hero Slider Section -->
+    <section class="max-w-[1400px] mx-auto px-6 lg:px-12 py-8 md:py-10">
+        <div class="slider-container rounded-[32px] overflow-hidden bg-gray-100 relative shadow-sm">
+            <div id="sliderTrack" class="slider-track">
+                <!-- Slide 1 - Hand holding red card -->
+                <div class="slide">
+                    <div class="relative h-[450px] md:h-[520px] lg:h-[580px]">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1600&h=900&fit=crop&q=80" alt="Hand holding Calivra card" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent">
+                            <div class="max-w-xl px-8 md:px-16 lg:px-20 h-full flex flex-col justify-center">
+                                <h1 class="hero-text text-4xl md:text-5xl lg:text-[56px] font-bold text-white mb-5 leading-tight">Calivra for all your money</h1>
+                                <p class="hero-subtext text-base md:text-lg lg:text-[18px] text-white/95 mb-7 leading-relaxed">Get clear on your spending. Unlock smarter ways to save. Invest with confidence.</p>
+                                <button class="bg-white text-gray-900 px-7 py-3.5 rounded-full font-semibold hover:bg-gray-100 transition w-fit text-[15px] shadow-lg">Open a free bank account</button>
+                            </div>
+                        </div>
+                        <!-- Trust Badges -->
+                        <div class="absolute bottom-5 right-5 flex flex-col gap-2">
+                            <div class="bg-white rounded-full px-4 py-2 shadow-lg flex items-center justify-center">
+                                <div class="text-center">
+                                    <div class="text-[10px] font-bold text-red-500 uppercase">Which?</div>
+                                    <div class="text-[9px] font-semibold text-gray-700">Recommended</div>
+                                    <div class="text-[8px] text-gray-600">Provider</div>
+                                </div>
+                            </div>
+                            <div class="bg-purple-600 rounded-full px-4 py-2 shadow-lg flex items-center justify-center">
+                                <div class="text-center">
+                                    <div class="text-[11px] font-bold text-white">FSCS</div>
+                                    <div class="text-[9px] font-semibold text-white">PROTECTED</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 - Red and white theme -->
+                <div class="slide">
+                    <div class="relative h-[450px] md:h-[520px] lg:h-[580px]">
+                        <img src="calivra card.png" alt="Red card on white" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent">
+                            <div class="max-w-xl px-8 md:px-16 lg:px-20 h-full flex flex-col justify-center">
+                                <h1 class="hero-text text-4xl md:text-5xl lg:text-[56px] font-bold text-white mb-5 leading-tight">Smart savings made simple</h1>
+                                <p class="hero-subtext text-base md:text-lg lg:text-[18px] text-white/95 mb-7 leading-relaxed">Save automatically and watch your money grow with our intelligent savings tools.</p>
+                                <button class="bg-white text-gray-900 px-7 py-3.5 rounded-full font-semibold hover:bg-gray-100 transition w-fit text-[15px] shadow-lg">Start saving today</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 - Red card focus -->
+                <div class="slide">
+                    <div class="relative h-[450px] md:h-[520px] lg:h-[580px]">
+                        <img src="https://images.unsplash.com/photo-1556742111-a301076d9d18?w=1600&h=900&fit=crop&q=80" alt="Red banking card" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent">
+                            <div class="max-w-xl px-8 md:px-16 lg:px-20 h-full flex flex-col justify-center">
+                                <h1 class="hero-text text-4xl md:text-5xl lg:text-[56px] font-bold text-white mb-5 leading-tight">Banking that goes with you</h1>
+                                <p class="hero-subtext text-base md:text-lg lg:text-[18px] text-white/95 mb-7 leading-relaxed">Access your money anywhere, anytime with instant notifications and total control.</p>
+                                <button class="bg-white text-gray-900 px-7 py-3.5 rounded-full font-semibold hover:bg-gray-100 transition w-fit text-[15px] shadow-lg">Get your card</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slider Controls -->
+            <div class="absolute left-6 bottom-6 flex items-center gap-3">
+                <button id="prevBtn" class="bg-black/30 hover:bg-black/50 text-white w-10 h-10 rounded-full transition backdrop-blur-sm flex items-center justify-center text-xl font-light">
+                    ←
+                </button>
+
+                <!-- Slider Dots -->
+                <div class="flex gap-1.5">
+                    <button class="slider-dot w-1.5 h-1.5 rounded-full bg-white/50 hover:bg-white transition" data-slide="0"></button>
+                    <button class="slider-dot w-1.5 h-1.5 rounded-full bg-white/50 hover:bg-white transition" data-slide="1"></button>
+                    <button class="slider-dot w-1.5 h-1.5 rounded-full bg-white/50 hover:bg-white transition" data-slide="2"></button>
+                </div>
+
+                <button id="nextBtn" class="bg-black/30 hover:bg-black/50 text-white w-10 h-10 rounded-full transition backdrop-blur-sm flex items-center justify-center text-xl font-light">
+                    →
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tell me about Section -->
+    <section class="max-w-[1400px] mx-auto px-6 lg:px-12 py-12 md:py-16">
+        <div class="max-w-3xl mx-auto bg-[#f5f5f5] rounded-[32px] shadow-sm p-8 md:p-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8">Tell me about...</h2>
+
+            <!-- Bank accounts -->
+            <div class="service-item border-b border-gray-300">
+                <div class="flex items-center justify-between py-5 cursor-pointer group">
+                    <span class="text-2xl md:text-3xl font-bold text-[#ff5a5f]">Bank accounts</span>
+                    <div class="service-icon opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <svg class="w-10 h-10 text-[#ff5a5f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Savings -->
+            <div class="service-item border-b border-gray-300">
+                <div class="flex items-center justify-between py-5 cursor-pointer group">
+                    <span class="text-2xl md:text-3xl font-bold text-[#ff5a5f]">Savings</span>
+                    <div class="service-icon opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <svg class="w-10 h-10 text-[#ff5a5f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Investments -->
+            <div class="service-item border-b border-gray-300">
+                <div class="flex items-center justify-between py-5 cursor-pointer group" onclick="toggleDropdown('investments')">
+                    <div class="flex items-center gap-3">
+                        <span class="arrow text-2xl font-bold text-gray-900 transition-transform duration-300" id="investments-arrow">›</span>
+                        <span class="text-2xl md:text-3xl font-bold text-[#ff5a5f]">Investments</span>
+                    </div>
+                    <div class="service-icon opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <svg class="w-10 h-10 text-[#ff5a5f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div id="investments-dropdown" class="dropdown-content overflow-hidden transition-all duration-300 max-h-0">
+                    <div class="bg-white rounded-2xl p-6 mb-4 mx-2">
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            Grow your wealth with Calivra Investments. Access a range of investment options including stocks, bonds, and funds, all from your banking app.
+                        </p>
+                        <p class="text-gray-700 leading-relaxed">
+                            <strong>Key features:</strong> Commission-free trading, diversified portfolios, expert guidance, and real-time market insights. Start investing with as little as £1.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Credit -->
+            <div class="service-item border-b border-gray-300">
+                <div class="flex items-center justify-between py-5 cursor-pointer group" onclick="toggleDropdown('credit')">
+                    <div class="flex items-center gap-3">
+                        <span class="arrow text-2xl font-bold text-gray-900 transition-transform duration-300" id="credit-arrow">›</span>
+                        <span class="text-2xl md:text-3xl font-bold text-[#ff5a5f]">Credit</span>
+                    </div>
+                    <div class="service-icon opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <svg class="w-10 h-10 text-[#ff5a5f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div id="credit-dropdown" class="dropdown-content overflow-hidden transition-all duration-300 max-h-0">
+                    <div class="bg-white rounded-2xl p-6 mb-4 mx-2">
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            Build your credit score and access flexible borrowing with Calivra Credit. Get instant credit decisions and manage everything in one place.
+                        </p>
+                        <p class="text-gray-700 leading-relaxed">
+                            <strong>Benefits:</strong> Competitive interest rates, no hidden fees, flexible repayment terms, and credit score tracking to help you improve your financial health.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Travel -->
+            <div class="service-item border-b border-gray-300">
+                <div class="flex items-center justify-between py-5 cursor-pointer group" onclick="toggleDropdown('travel')">
+                    <div class="flex items-center gap-3">
+                        <span class="arrow text-2xl font-bold text-gray-900 transition-transform duration-300" id="travel-arrow">›</span>
+                        <span class="text-2xl md:text-3xl font-bold text-[#ff5a5f]">Travel</span>
+                    </div>
+                    <div class="service-icon opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <svg class="w-10 h-10 text-[#ff5a5f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div id="travel-dropdown" class="dropdown-content overflow-hidden transition-all duration-300 max-h-0">
+                    <div class="bg-white rounded-2xl p-6 mb-4 mx-2">
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            Travel the world without worry. Spend abroad with no fees, get the best exchange rates, and manage multiple currencies seamlessly.
+                        </p>
+                        <p class="text-gray-700 leading-relaxed">
+                            <strong>Travel perks:</strong> Zero foreign transaction fees, instant spending notifications, travel insurance included, and 24/7 support wherever you are.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mortgages -->
+            <div class="service-item border-b border-gray-300">
+                <div class="flex items-center justify-between py-5 cursor-pointer group" onclick="toggleDropdown('mortgages')">
+                    <div class="flex items-center gap-3">
+                        <span class="arrow text-2xl font-bold text-gray-900 transition-transform duration-300" id="mortgages-arrow">›</span>
+                        <span class="text-2xl md:text-3xl font-bold text-[#ff5a5f]">Mortgages</span>
+                    </div>
+                    <div class="service-icon opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <svg class="w-10 h-10 text-[#ff5a5f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div id="mortgages-dropdown" class="dropdown-content overflow-hidden transition-all duration-300 max-h-0">
+                    <div class="bg-white rounded-2xl p-6 mb-4 mx-2">
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            Make your dream home a reality with Calivra Mortgages. Get pre-approved in minutes and access competitive rates tailored to your needs.
+                        </p>
+                        <p class="text-gray-700 leading-relaxed">
+                            <strong>Why choose us:</strong> Fast approval process, dedicated mortgage advisors, flexible terms, and tools to track your home-buying journey every step of the way.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pensions -->
+            <div class="service-item">
+                <div class="flex items-center justify-between py-5 cursor-pointer group" onclick="toggleDropdown('pensions')">
+                    <div class="flex items-center gap-3">
+                        <span class="arrow text-2xl font-bold text-gray-900 transition-transform duration-300" id="pensions-arrow">›</span>
+                        <span class="text-2xl md:text-3xl font-bold text-[#ff5a5f]">Pensions</span>
+                    </div>
+                    <div class="service-icon opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <svg class="w-10 h-10 text-[#ff5a5f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div id="pensions-dropdown" class="dropdown-content overflow-hidden transition-all duration-300 max-h-0">
+                    <div class="bg-white rounded-2xl p-6 mb-4 mx-2">
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            Secure your future with Calivra Pensions. Simple, transparent pension planning with expert guidance to help you retire comfortably.
+                        </p>
+                        <p class="text-gray-700 leading-relaxed">
+                            <strong>Retirement planning:</strong> Tax-efficient savings, flexible contribution options, pension consolidation, and retirement calculators to visualize your future.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Security Section -->
-    <section class="py-12 sm:py-16 lg:py-20 bg-white" id="security">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 sm:mb-16">
-                <div class="security-badge w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <svg class="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                    </svg>
+<section class="max-w-[1400px] mx-auto px-6 lg:px-12 py-10 md:py-16">
+    <div class="bg-[#111d2e] rounded-[40px] p-10 md:p-16 lg:p-20 flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 text-center md:text-left">
+        
+        <div class="flex-shrink-0 flex items-center justify-center w-full md:w-auto">
+            <img src="photo.png" alt="Which? Recommendation Badges" class="max-w-[280px] md:max-w-[340px] h-auto object-contain">
+        </div>
+
+        <div class="max-w-md">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-4">
+                Which? recommended <br class="hidden lg:block"> 2 years in a row
+            </h2>
+            <p class="text-white/80 text-lg md:text-xl mb-8 font-medium">
+                Join 14 million people already banking with Calivra.
+            </p>
+            <button class="bg-white text-[#111d2e] px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition shadow-lg w-full md:w-fit">
+                Join Calivra for free
+            </button>
+        </div>
+
+    </div>
+</section>
+    
+<section class="max-w-[1400px] mx-auto px-6 lg:px-12 py-16">
+    <div class="mb-10">
+        <div class="flex flex-wrap gap-2 mb-8">
+            <button onclick="filterCards('save')" id="btn-save" class="filter-btn px-5 py-1.5 bg-[#3a444e] text-white rounded-full text-[15px] font-semibold transition">Save</button>
+            <button onclick="filterCards('invest')" id="btn-invest" class="filter-btn px-5 py-1.5 bg-[#f3f4f6] text-[#3a444e] rounded-full text-[15px] font-semibold hover:bg-gray-200 transition">Invest</button>
+            <button onclick="filterCards('retire')" id="btn-retire" class="filter-btn px-5 py-1.5 bg-[#f3f4f6] text-[#3a444e] rounded-full text-[15px] font-semibold hover:bg-gray-200 transition">Retire</button>
+        </div>
+        <h2 class="text-[32px] md:text-[48px] font-extrabold text-[#1a2942] leading-tight flex items-center gap-3">
+            Build your money for tomorrow <span class="text-red-500">🚀</span>
+        </h2>
+        <p class="text-gray-500 text-lg mt-1 font-medium">Save for the things that matter.</p>
+    </div>
+
+    <div id="cards-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        </div>
+</section>
+
+<section class="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 md:py-24 bg-white">
+    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+        
+        <div class="flex-1 order-2 lg:order-1">
+            <h2 class="text-[32px] md:text-[48px] font-extrabold text-[#111d2e] leading-tight mb-6">
+                No phone? No problem.
+            </h2>
+            <p class="text-gray-500 text-lg md:text-xl mb-10 font-medium leading-relaxed max-w-xl">
+                If your phone's lost or stolen, you can log into your account on another device, like a laptop or tablet. You can freeze and unfreeze your accounts, check your transactions and balance, and remotely log out of all your devices.
+            </p>
+            <button class="bg-[#111d2e] text-white px-9 py-4 rounded-full font-bold text-[16px] hover:bg-slate-800 transition shadow-md">
+                Log in
+            </button>
+        </div>
+
+        <div class="flex-1 order-1 lg:order-2 w-full">
+            <div class="relative rounded-[40px] md:rounded-[60px] overflow-hidden bg-gradient-to-br from-[#ff3b30] to-[#ff6b6b] aspect-square md:aspect-auto md:h-[500px] flex items-center justify-center">
+                <img src="No_Phone__No_Problem_2x.png" 
+                     alt="Laptop on mosaic table" 
+                     class="w-full h-full object-cover mix-blend-normal">
+                
+                <div class="absolute inset-0 flex items-center justify-center p-8 md:p-12">
+                     </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 bg-white overflow-hidden">
+    <div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
+        
+        <div class="flex-1 order-1">
+            <h2 class="text-[32px] md:text-[48px] font-extrabold text-[#111d2e] leading-tight mb-4">
+                Security you can bank on
+            </h2>
+            <p class="text-gray-500 text-lg md:text-xl mb-8 font-medium">
+                Keep your money safe with industry-first fraud protection and 24/7 support.
+            </p>
+            <button class="bg-[#111d2e] text-white px-8 py-3.5 rounded-full font-bold text-[15px] hover:bg-slate-800 transition mb-12">
+                How we protect your money
+            </button>
+
+            <div class="bg-[#f0f9f9] rounded-3xl p-6 md:p-8 flex gap-5 max-w-md shadow-sm border border-emerald-50/50">
+                <div class="flex-shrink-0">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-red-500 to-orange-400 flex items-center justify-center text-white text-[10px] font-bold text-center leading-tight shadow-md">
+                        Industry<br>first
+                    </div>
                 </div>
-                <h2 class="section-title font-bold text-gray-900 mb-4">Enterprise-Grade Security</h2>
-                <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-12">
-                    Your digital assets are protected by military-grade security protocols and industry-leading custody solutions
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Call Status</h3>
+                    <p class="text-gray-600 text-[15px] leading-relaxed">
+                        This feature tells you if you're really speaking to Calivra, or if it could be a scammer. It helps prevent 700 fraud attempts a month.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-1 order-3 lg:order-2 flex justify-center">
+            <img src="mobile.png" alt="Trusta App Security" class="w-full max-w-[300px] md:max-w-[380px] h-auto object-contain">
+        </div>
+
+        <div class="flex-1 order-2 lg:order-3 space-y-12">
+            <div class="flex gap-5">
+                <div class="flex-shrink-0">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-red-500 to-orange-400 flex items-center justify-center text-white text-[10px] font-bold text-center leading-tight shadow-md">
+                        Industry<br>first
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Card freeze</h3>
+                    <p class="text-gray-600 text-[15px] leading-relaxed max-w-sm">
+                        Instantly freeze your card in the app if it gets lost, stolen or you suspect fraud.
+                    </p>
+                </div>
+            </div>
+
+            <div class="pl-[76px]">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Biometric login</h3>
+                <p class="text-gray-600 text-[15px] leading-relaxed max-w-sm">
+                    Switch on face or fingerprint ID to unlock your app and authorise payments.
                 </p>
             </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
-                <div class="text-center">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 security-icon-1 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-sm sm:text-lg font-semibold text-gray-900 mb-2">Cold Storage</h3>
-                    <p class="text-gray-600 text-xs sm:text-sm">95% of assets stored offline in secure cold wallets</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 security-icon-2 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-sm sm:text-lg font-semibold text-gray-900 mb-2">Regulatory Compliance</h3>
-                    <p class="text-gray-600 text-xs sm:text-sm">Fully compliant with global financial regulations</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 security-icon-3 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-sm sm:text-lg font-semibold text-gray-900 mb-2">Multi-Signature</h3>
-                    <p class="text-gray-600 text-xs sm:text-sm">Multi-signature wallets for enhanced security</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 security-icon-4 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-sm sm:text-lg font-semibold text-gray-900 mb-2">24/7 Monitoring</h3>
-                    <p class="text-gray-600 text-xs sm:text-sm">Continuous threat detection and prevention</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="py-12 sm:py-16 lg:py-20 cta-gradient text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="section-title font-bold mb-6">Ready to Start Trading?</h2>
-            <p class="text-lg sm:text-xl text-gray-300 mb-10 max-w-3xl mx-auto">
-                Join thousands of traders who trust Crypto Sterling Vault with their digital assets. Start your crypto journey today with professional-grade tools and security.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
-                <a href="#" class="btn-primary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold">
-                    Create Account
-                </a>
-                <a href="#" class="btn-secondary px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold">
-                    Explore Markets
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12 sm:py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-12">
-                <div class="col-span-2 md:col-span-1">
-                    <div class="flex items-center space-x-3 mb-6">
-                        <div class="w-10 h-10 crypto-glow rounded-lg flex items-center justify-center">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                            </svg>
-                        </div>
-                        <span class="text-2xl font-bold">Crypto Sterling Vault</span>
+            <div class="flex gap-5">
+                <div class="flex-shrink-0">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-red-500 to-orange-400 flex items-center justify-center text-white text-[10px] font-bold text-center leading-tight shadow-md">
+                        Industry<br>first
                     </div>
-                    <p class="text-gray-300 mb-6 text-sm sm:text-base pr-4">
-                        Professional cryptocurrency trading platform with institutional-grade security and advanced trading tools for all experience levels.
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Extra security controls</h3>
+                    <p class="text-gray-600 text-[15px] leading-relaxed max-w-sm">
+                        Add an extra layer of protection when making large payments.
                     </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition-colors">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition-colors">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0zM7.27 20.1H3.65V9.24h3.62V20.1zM5.47 7.76h-.03c-1.22 0-2-.83-2-1.87C3.44 4.78 4.18 4 5.47 4c1.29 0 2.08.78 2.11 1.89C7.58 6.93 6.76 7.76 5.47 7.76zM20.34 20.1h-3.63v-5.8c0-1.45-.52-2.45-1.83-2.45-1 0-1.6.67-1.87 1.32-.1.23-.11.55-.11.88v6.05H9.28s.05-9.82 0-10.84h3.63v1.54a3.6 3.6 0 013.26-1.8c2.39 0 4.18 1.56 4.18 4.89v6.21z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition-colors">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.1.12.112.225.085.347-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.750-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001 12.017.001z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Trading</h3>
-                    <ul class="space-y-2 text-gray-300 text-sm">
-                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Spot Trading</a></li>
-                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Futures Trading</a></li>
-                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Options Trading</a></li>
-                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Margin Trading</a></li>
-                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Copy Trading</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Services</h3>
-                    <ul class="space-y-2 text-gray-300 text-sm">
-                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Staking</a></li>
-                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Lending</a></li>
-                        <li><a href="#" class="hover:text-yellow-400 transition-colors">DeFi Products</a></li>
-                        <li><a href="#" class="hover:text-yellow-400 transition-colors">NFT Marketplace</a></li>
-                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Institutional Services</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Support</h3>
-                    <ul class="space-y-2 text-gray-300 text-sm">
-                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Help Center</a></li>
-                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Trading Guide</a></li>
-                        <li><a href="#" class="hover:text-yellow-400 transition-colors">API Documentation</a></li>
-                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Security Center</a></li>
-                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Contact Support</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-700 pt-8">
-                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                    <div class="text-gray-300 text-sm text-center md:text-left">
-                        <p>&copy; 2026 Crypto Sterling Vault. All rights reserved. Cryptocurrency trading involves risk.</p>
-                        <p class="mt-1">Digital assets are not covered by FDIC insurance.</p>
-                    </div>
-                    <div class="flex flex-wrap justify-center gap-4 text-sm text-gray-300">
-                        <a href="#" class="hover:text-yellow-400 transition-colors">Terms of Service</a>
-                        <a href="#" class="hover:text-yellow-400 transition-colors">Privacy Policy</a>
-                        <a href="#" class="hover:text-yellow-400 transition-colors">Risk Disclosure</a>
-                    </div>
                 </div>
             </div>
         </div>
-    </footer>
 
-    <script>
-        //  // Mobile menu functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        if (mobileMenuToggle && mobileMenu) {
-            mobileMenuToggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                // Toggle the 'open' class on the menu
-                mobileMenu.classList.toggle('open');
-                
-                // Toggle the 'active' class on the hamburger icon
-                this.classList.toggle('active');
+    </div>
+</section>
 
-                // Toggle body overflow to prevent scrolling when menu is open
-                if (mobileMenu.classList.contains('open')) {
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    document.body.style.overflow = '';
-                }
-            });
-            
-            // Close menu when clicking on menu links
-            const menuLinks = mobileMenu.querySelectorAll('a');
-            menuLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.remove('open');
-                    mobileMenuToggle.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
-            });
-            
-            // Close menu when clicking outside
-            document.addEventListener('click', function(e) {
-                if (mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
-                    mobileMenu.classList.remove('open');
-                    mobileMenuToggle.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
-            
-            // Handle window resize
-            window.addEventListener('resize', function() {
-                if (window.innerWidth >= 1024 && mobileMenu.classList.contains('open')) {
-                    mobileMenu.classList.remove('open');
-                    mobileMenuToggle.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
-        }
-        
-        // Smooth scrolling for anchor links
-        const anchorLinks = document.querySelectorAll('a[href^="#"]');
-        anchorLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href.length > 1) {
-                    const target = document.querySelector(href);
-                    if (target) {
-                        e.preventDefault();
-                        const headerOffset = 80;
-                        const elementPosition = target.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                        
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            });
-        });
 
-        // Simulate live price updates
-        function updatePrices() {
-            const priceElements = document.querySelectorAll('.ticker-scroll span');
-            priceElements.forEach(element => {
-                if (Math.random() > 0.7) {
-                    const priceMatch = element.innerHTML.match(/\$[\d,]+\.?\d*/);
-                    if (priceMatch) {
-                        const currentPrice = parseFloat(priceMatch[0].replace(/[$,]/g, ''));
-                        const change = (Math.random() - 0.5) * 0.02;
-                        const newPrice = currentPrice * (1 + change);
-                        const formattedPrice = '$' + newPrice.toLocaleString('en-US', {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2
-                        });
-                        
-                        element.innerHTML = element.innerHTML.replace(priceMatch[0], formattedPrice);
-                        
-                        const percentMatch = element.innerHTML.match(/[+-]?\d+\.\d+%/);
-                        if (percentMatch) {
-                            const newPercent = (change * 100).toFixed(2);
-                            const sign = newPercent >= 0 ? '+' : '';
-                            const colorClass = newPercent >= 0 ? 'text-green-400' : 'text-red-400';
-                            element.innerHTML = element.innerHTML.replace(
-                                /<span class="text-(green|red|gray)-400">.+?<\/span>/,
-                                `<span class="${colorClass}">${sign}${newPercent}%</span>`
-                            );
-                        }
-                    }
-                }
-            });
-        }
-        setInterval(updatePrices, 3000);
-    });
-    </script>
+
+<footer class="bg-[#111d2e] text-white pt-20 pb-10 px-6 lg:px-12">
+    <div class="max-w-[1400px] mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 mb-20">
+            <div>
+                <h4 class="font-bold text-[17px] mb-6">Products</h4>
+                <ul class="space-y-4 text-gray-400 text-[15px]">
+                    <li><a href="#" class="hover:underline">Current accounts</a></li>
+                    <li><a href="#" class="hover:underline">Business accounts</a></li>
+                    <li><a href="#" class="hover:underline">Savings</a></li>
+                    <li><a href="#" class="hover:underline">Credit cards</a></li>
+                    <li><a href="#" class="hover:underline">Loans</a></li>
+                    <li><a href="#" class="hover:underline">Investments</a></li>
+                    <li><a href="#" class="hover:underline">Pensions</a></li>
+                    <li><a href="#" class="hover:underline">Home Insurance</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-[17px] mb-6">Company</h4>
+                <ul class="space-y-4 text-gray-400 text-[15px]">
+                    <li><a href="#" class="hover:underline">Careers</a></li>
+                    <li><a href="#" class="hover:underline">Press</a></li>
+                    <li><a href="#" class="hover:underline">Blog</a></li>
+                    <li><a href="#" class="hover:underline">Investor information</a></li>
+                    <li><a href="#" class="hover:underline">Helping everyone belong</a></li>
+                    <li><a href="#" class="hover:underline">Modern slavery statement</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-[17px] mb-6">Using Calivra</h4>
+                <ul class="space-y-4 text-gray-400 text-[15px]">
+                    <li><a href="login.html" class="hover:underline">Web app login</a></li>
+                    <li><a href="#" class="hover:underline">Accessibility</a></li>
+                    <li><a href="services.html" class="hover:underline">Life events</a></li>
+                    <li><a href="#" class="hover:underline">Terms and Conditions</a></li>
+                    <li><a href="about.html" class="hover:underline">Information about our services</a></li>
+                    <li><a href="#" class="hover:underline">Savings hub</a></li>
+                    <li><a href="#" class="hover:underline">Personal loan calculator</a></li>
+                    <li><a href="#" class="hover:underline">Currency Converter</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-[17px] mb-6">Help and security</h4>
+                <ul class="space-y-4 text-gray-400 text-[15px]">
+                    <li><a href="#" class="hover:underline">Help centre</a></li>
+                    <li><a href="#" class="hover:underline">FAQs</a></li>
+                    <li><a href="#" class="hover:underline">Fraud protection</a></li>
+                    <li><a href="#" class="hover:underline">Security at Calivra</a></li>
+                    <li><a href="#" class="hover:underline">Money worries</a></li>
+                    <li><a href="#" class="hover:underline">FSCS information</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-[17px] mb-6">Site and app information</h4>
+                <ul class="space-y-4 text-gray-400 text-[15px]">
+                    <li><a href="#" class="hover:underline">Privacy notice</a></li>
+                    <li><a href="#" class="hover:underline">Cookie notice</a></li>
+                    <li><a href="#" class="hover:underline">Browser support policy</a></li>
+                    <li><a href="#" class="hover:underline">Mobile operating system support policy</a></li>
+                    <li><a href="#" class="hover:underline">App performance</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="flex justify-center mb-16">
+            <button class="flex items-center gap-2 bg-gray-800/50 px-4 py-1.5 rounded-md text-[13px] font-bold border border-gray-700">
+                <span class="opacity-70">GB</span> United Kingdom | English
+            </button>
+        </div>
+
+        <div class="text-center mb-16">
+            <h1 class="text-[#ff5a5f] text-[15vw] lg:text-[220px] font-black tracking-tighter leading-none select-none">
+                Calivra
+            </h1>
+        </div>
+
+        <div class="text-[11px] text-gray-500 max-w-5xl mx-auto text-center leading-relaxed mb-12">
+            Calivra Bank Limited is a company registered in England and Wales (No.09446231). Calivra Bank Limited is authorised by the Prudential Regulation Authority and regulated by the Financial Conduct Authority and the Prudential Regulation Authority. Our financial Services Register number is 730427. Our address is Broadwalk House, 5 Appold St, London EC2A 2AG.
+        </div>
+
+        <div class="flex flex-col md:flex-row items-center justify-between gap-8 border-t border-gray-800 pt-10">
+            <div class="flex items-center gap-6">
+                <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook text-xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin text-xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-youtube text-xl"></i></a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" class="h-10"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="h-10"></a>
+            </div>
+        </div>
+    </div>
+</footer>
 
 <!-- Begin of Chaport Live Chat code -->
 <script type="text/javascript">
@@ -751,6 +599,6 @@ appId : '69727a7624f1437fc1298784',
 if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
 </script>
 <!-- End of Chaport Live Chat code -->
+    <script src="script.js"></script>
 </body>
-
 </html>
