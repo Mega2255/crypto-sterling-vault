@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Calivra</title>
+    <title>Register - Calivra Banking</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
         .step {
             display: none;
         }
@@ -19,388 +22,305 @@
             to { opacity: 1; transform: translateY(0); }
         }
         :root {
-            --navy-blue: #001f3f;
-            --navy-light: #003d7a;
+            --primary-color: #0891b2;
+            --primary-light: #06b6d4;
         }
         .gradient-bg {
-            background: linear-gradient(135deg, var(--navy-blue) 0%, var(--navy-light) 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
         }
     </style>
 </head>
-<body class="min-h-screen gradient-bg flex items-center justify-center p-4 py-8">
-    <div class="w-full max-w-md">
+<body class="min-h-screen gradient-bg py-8 px-4">
+    <div class="max-w-2xl mx-auto">
         <!-- Logo and Header -->
-        <div class="text-center mb-6">
-            <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-lg mb-3">
-                <i class="fas fa-shield-alt text-2xl" style="color: var(--navy-blue);"></i>
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-lg mb-4">
+                <i class="fas fa-university text-3xl" style="color: var(--primary-color);"></i>
             </div>
-            <h1 class="text-2xl md:text-3xl font-bold text-white mb-1">Create Account</h1>
-            <p class="text-white text-opacity-90 text-sm">Join Calivra today</p>
+            <h1 class="text-3xl md:text-4xl font-bold text-white mb-2">Calivra Banking</h1>
+            <p class="text-white text-opacity-90">Create your account in just 3 simple steps</p>
         </div>
 
         <!-- Registration Card -->
         <div class="bg-white rounded-2xl shadow-2xl p-6 md:p-8">
-            <!-- Progress Indicator -->
-            <div class="flex items-center justify-center mb-6">
-                <div class="flex items-center">
-                    <div id="step1-indicator" class="w-8 h-8 rounded-full text-white flex items-center justify-center font-bold text-sm transition-all" style="background-color: var(--navy-blue);">
+            <!-- Progress Steps -->
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex-1 flex items-center">
+                    <div id="step1-indicator" class="w-10 h-10 rounded-full text-white flex items-center justify-center font-bold z-10" style="background-color: var(--primary-color);">
                         1
                     </div>
-                    <div class="w-12 h-1 bg-gray-200 mx-1">
-                        <div id="progress-bar-1" class="h-full transition-all duration-300" style="width: 0%; background-color: var(--navy-blue);"></div>
+                    <div class="flex-1 h-1 bg-gray-200 -ml-2">
+                        <div id="progress-bar-1" class="h-full transition-all duration-300" style="width: 0%; background-color: var(--primary-color);"></div>
                     </div>
-                    <div id="step2-indicator" class="w-8 h-8 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center font-bold text-sm transition-all">
+                </div>
+                <div class="flex-1 flex items-center">
+                    <div id="step2-indicator" class="w-10 h-10 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center font-bold z-10">
                         2
                     </div>
-                    <div class="w-12 h-1 bg-gray-200 mx-1">
-                        <div id="progress-bar-2" class="h-full transition-all duration-300" style="width: 0%; background-color: var(--navy-blue);"></div>
+                    <div class="flex-1 h-1 bg-gray-200 -ml-2">
+                        <div id="progress-bar-2" class="h-full transition-all duration-300" style="width: 0%; background-color: var(--primary-color);"></div>
                     </div>
-                    <div id="step3-indicator" class="w-8 h-8 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center font-bold text-sm transition-all">
+                </div>
+                <div>
+                    <div id="step3-indicator" class="w-10 h-10 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center font-bold">
                         3
                     </div>
                 </div>
             </div>
 
             <form id="register-form">
-                <!-- Step 1: Personal Info -->
+                <!-- STEP 1: Personal Information -->
                 <div id="step-1" class="step active">
-                    <div class="text-center mb-4">
-                        <h2 class="text-xl font-bold text-gray-800 mb-1">Personal Information</h2>
-                        <p class="text-gray-500 text-xs">Tell us about yourself</p>
+                    <div class="text-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">Personal Information</h2>
+                        <p class="text-gray-500 text-sm">Let's start with your basic details</p>
                     </div>
 
-                    <div class="space-y-3">
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-700 mb-1">
-                                <i class="fas fa-user mr-1" style="color: var(--navy-blue);"></i>First Name
-                            </label>
-                            <input 
-                                type="text" 
-                                id="first-name" 
-                                required 
-                                class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
-                                style="--tw-ring-color: var(--navy-blue);"
-                                placeholder="Enter first name">
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <i class="fas fa-user mr-2" style="color: var(--primary-color);"></i>First Name *
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="first-name" 
+                                    required
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:border-cyan-500 transition outline-none"
+                                    placeholder="Enter first name">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <i class="fas fa-user mr-2" style="color: var(--primary-color);"></i>Last Name *
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="last-name" 
+                                    required
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:border-cyan-500 transition outline-none"
+                                    placeholder="Enter last name">
+                            </div>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-semibold text-gray-700 mb-1">
-                                <i class="fas fa-user mr-1" style="color: var(--navy-blue);"></i>Last Name
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-user-tag mr-2" style="color: var(--primary-color);"></i>Middle Name (Optional)
                             </label>
                             <input 
                                 type="text" 
-                                id="last-name" 
-                                required 
-                                class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
-                                style="--tw-ring-color: var(--navy-blue);"
-                                placeholder="Enter last name">
+                                id="middle-name"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:border-cyan-500 transition outline-none"
+                                placeholder="Enter middle name">
                         </div>
 
                         <div>
-                            <label class="block text-xs font-semibold text-gray-700 mb-1">
-                                <i class="fas fa-user mr-1" style="color: var(--navy-blue);"></i>Middle Name
-                            </label>
-                            <input 
-                                type="text" 
-                                id="middle-name" 
-                                class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
-                                style="--tw-ring-color: var(--navy-blue);"
-                                placeholder="Enter middle name (optional)">
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-700 mb-1">
-                                <i class="fas fa-at mr-1" style="color: var(--navy-blue);"></i>Username
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-at mr-2" style="color: var(--primary-color);"></i>Username *
                             </label>
                             <input 
                                 type="text" 
                                 id="username" 
-                                required 
-                                class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
-                                style="--tw-ring-color: var(--navy-blue);"
-                                placeholder="Choose a username">
-                            <p id="username-error" class="text-red-500 text-xs mt-1 hidden"></p>
+                                required
+                                minlength="3"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:border-cyan-500 transition outline-none"
+                                placeholder="Choose a unique username">
+                            <p id="username-error" class="text-red-500 text-sm mt-1 hidden"></p>
                         </div>
                     </div>
 
                     <button 
                         type="button" 
                         onclick="goToStep2()" 
-                        class="w-full text-white py-2.5 rounded-lg transition font-semibold mt-4 flex items-center justify-center text-sm"
-                        style="background-color: var(--navy-blue);"
-                        onmouseover="this.style.backgroundColor='var(--navy-light)'" 
-                        onmouseout="this.style.backgroundColor='var(--navy-blue)'">
-                        Next
+                        class="w-full mt-6 text-white py-3 rounded-lg transition font-semibold text-lg flex items-center justify-center"
+                        style="background-color: var(--primary-color);"
+                        onmouseover="this.style.backgroundColor='var(--primary-light)'" 
+                        onmouseout="this.style.backgroundColor='var(--primary-color)'">
+                        Next Step
                         <i class="fas fa-arrow-right ml-2"></i>
                     </button>
                 </div>
 
-                <!-- Step 2: Contact Info -->
+                <!-- STEP 2: Contact Information -->
                 <div id="step-2" class="step">
-                    <div class="text-center mb-4">
-                        <h2 class="text-xl font-bold text-gray-800 mb-1">Contact Information</h2>
-                        <p class="text-gray-500 text-xs">How can we reach you?</p>
+                    <div class="text-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">Contact Information</h2>
+                        <p class="text-gray-500 text-sm">How can we reach you?</p>
                     </div>
 
-                    <div class="space-y-3">
+                    <div class="space-y-4">
                         <div>
-                            <label class="block text-xs font-semibold text-gray-700 mb-1">
-                                <i class="fas fa-envelope mr-1" style="color: var(--navy-blue);"></i>Email Address
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-envelope mr-2" style="color: var(--primary-color);"></i>Email Address *
                             </label>
                             <input 
                                 type="email" 
                                 id="email" 
-                                required 
-                                autocomplete="email"
-                                class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
-                                style="--tw-ring-color: var(--navy-blue);"
-                                placeholder="Enter email address">
-                            <p id="email-error" class="text-red-500 text-xs mt-1 hidden"></p>
+                                required
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:border-cyan-500 transition outline-none"
+                                placeholder="Enter your email">
+                            <p id="email-error" class="text-red-500 text-sm mt-1 hidden"></p>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-semibold text-gray-700 mb-1">
-                                <i class="fas fa-phone mr-1" style="color: var(--navy-blue);"></i>Phone Number
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-phone mr-2" style="color: var(--primary-color);"></i>Phone Number *
                             </label>
                             <input 
                                 type="tel" 
                                 id="phone" 
-                                required 
-                                class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
-                                style="--tw-ring-color: var(--navy-blue);"
-                                placeholder="Enter phone number">
-                            <p id="phone-error" class="text-red-500 text-xs mt-1 hidden"></p>
+                                required
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:border-cyan-500 transition outline-none"
+                                placeholder="+234 800 000 0000">
+                            <p id="phone-error" class="text-red-500 text-sm mt-1 hidden"></p>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-semibold text-gray-700 mb-1">
-                                <i class="fas fa-globe mr-1" style="color: var(--navy-blue);"></i>Country
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-globe mr-2" style="color: var(--primary-color);"></i>Country *
                             </label>
                             <select 
                                 id="country" 
-                                required 
-                                class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
-                                style="--tw-ring-color: var(--navy-blue);">
-                               <option value="">Select your country</option>
-
-<!-- Africa -->
-<option value="Nigeria">Nigeria</option>
-<option value="Ghana">Ghana</option>
-<option value="Kenya">Kenya</option>
-<option value="South Africa">South Africa</option>
-<option value="Egypt">Egypt</option>
-<option value="Morocco">Morocco</option>
-<option value="Algeria">Algeria</option>
-<option value="Tunisia">Tunisia</option>
-<option value="Ethiopia">Ethiopia</option>
-<option value="Uganda">Uganda</option>
-<option value="Tanzania">Tanzania</option>
-<option value="Rwanda">Rwanda</option>
-<option value="Cameroon">Cameroon</option>
-<option value="Ivory Coast">Ivory Coast</option>
-<option value="Senegal">Senegal</option>
-<option value="Zambia">Zambia</option>
-<option value="Zimbabwe">Zimbabwe</option>
-<option value="Namibia">Namibia</option>
-<option value="Botswana">Botswana</option>
-<option value="Angola">Angola</option>
-
-<!-- North America -->
-<option value="United States">United States</option>
-<option value="Canada">Canada</option>
-<option value="Mexico">Mexico</option>
-
-<!-- South America -->
-<option value="Brazil">Brazil</option>
-<option value="Argentina">Argentina</option>
-<option value="Chile">Chile</option>
-<option value="Colombia">Colombia</option>
-<option value="Peru">Peru</option>
-<option value="Uruguay">Uruguay</option>
-<option value="Paraguay">Paraguay</option>
-<option value="Bolivia">Bolivia</option>
-<option value="Ecuador">Ecuador</option>
-<option value="Venezuela">Venezuela</option>
-
-<!-- Europe -->
-<option value="United Kingdom">United Kingdom</option>
-<option value="Ireland">Ireland</option>
-<option value="Germany">Germany</option>
-<option value="France">France</option>
-<option value="Netherlands">Netherlands</option>
-<option value="Belgium">Belgium</option>
-<option value="Switzerland">Switzerland</option>
-<option value="Austria">Austria</option>
-<option value="Italy">Italy</option>
-<option value="Spain">Spain</option>
-<option value="Portugal">Portugal</option>
-<option value="Norway">Norway</option>
-<option value="Sweden">Sweden</option>
-<option value="Denmark">Denmark</option>
-<option value="Finland">Finland</option>
-<option value="Poland">Poland</option>
-<option value="Czech Republic">Czech Republic</option>
-<option value="Hungary">Hungary</option>
-<option value="Greece">Greece</option>
-<option value="Romania">Romania</option>
-<option value="Bulgaria">Bulgaria</option>
-<option value="Slovakia">Slovakia</option>
-<option value="Croatia">Croatia</option>
-<option value="Serbia">Serbia</option>
-<option value="Ukraine">Ukraine</option>
-<option value="Russia">Russia</option>
-<option value="Turkey">Turkey</option>
-
-<!-- Middle East -->
-<option value="United Arab Emirates">United Arab Emirates</option>
-<option value="Saudi Arabia">Saudi Arabia</option>
-<option value="Qatar">Qatar</option>
-<option value="Kuwait">Kuwait</option>
-<option value="Oman">Oman</option>
-<option value="Bahrain">Bahrain</option>
-<option value="Israel">Israel</option>
-<option value="Jordan">Jordan</option>
-<option value="Lebanon">Lebanon</option>
-<option value="Iran">Iran</option>
-
-<!-- Asia -->
-<option value="India">India</option>
-<option value="China">China</option>
-<option value="Japan">Japan</option>
-<option value="South Korea">South Korea</option>
-<option value="Singapore">Singapore</option>
-<option value="Malaysia">Malaysia</option>
-<option value="Thailand">Thailand</option>
-<option value="Vietnam">Vietnam</option>
-<option value="Philippines">Philippines</option>
-<option value="Indonesia">Indonesia</option>
-<option value="Pakistan">Pakistan</option>
-<option value="Bangladesh">Bangladesh</option>
-<option value="Sri Lanka">Sri Lanka</option>
-<option value="Nepal">Nepal</option>
-<option value="Hong Kong">Hong Kong</option>
-<option value="Taiwan">Taiwan</option>
-
-<!-- Oceania -->
-<option value="Australia">Australia</option>
-<option value="New Zealand">New Zealand</option>
-<option value="Fiji">Fiji</option>
-<option value="Papua New Guinea">Papua New Guinea</option>
-
-<option value="Other">Other</option>
-
+                                required
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:border-cyan-500 transition outline-none">
+                                <option value="">Select your country</option>
+                                <option value="Nigeria">Nigeria</option>
+                                <option value="Ghana">Ghana</option>
+                                <option value="Kenya">Kenya</option>
+                                <option value="South Africa">South Africa</option>
+                                <option value="United States">United States</option>
+                                <option value="United Kingdom">United Kingdom</option>
+                                <option value="Canada">Canada</option>
+                                <option value="Other">Other</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="flex gap-2 mt-4">
+                    <div class="flex gap-4 mt-6">
                         <button 
                             type="button" 
                             onclick="goToStep1()" 
-                            class="w-1/3 bg-gray-100 text-gray-700 py-2.5 rounded-lg hover:bg-gray-200 transition font-semibold text-sm flex items-center justify-center">
-                            <i class="fas fa-arrow-left mr-1"></i>
+                            class="flex-1 bg-gray-100 text-gray-700 py-3 rounded-lg hover:bg-gray-200 transition font-semibold flex items-center justify-center">
+                            <i class="fas fa-arrow-left mr-2"></i>
                             Back
                         </button>
                         <button 
                             type="button" 
                             onclick="goToStep3()" 
-                            class="w-2/3 text-white py-2.5 rounded-lg transition font-semibold text-sm flex items-center justify-center"
-                            style="background-color: var(--navy-blue);"
-                            onmouseover="this.style.backgroundColor='var(--navy-light)'" 
-                            onmouseout="this.style.backgroundColor='var(--navy-blue)'">
-                            Next
+                            class="flex-1 text-white py-3 rounded-lg transition font-semibold flex items-center justify-center"
+                            style="background-color: var(--primary-color);"
+                            onmouseover="this.style.backgroundColor='var(--primary-light)'" 
+                            onmouseout="this.style.backgroundColor='var(--primary-color)'">
+                            Next Step
                             <i class="fas fa-arrow-right ml-2"></i>
                         </button>
                     </div>
                 </div>
 
-                <!-- Step 3: Account Setup -->
+                <!-- STEP 3: Security -->
                 <div id="step-3" class="step">
-                    <div class="text-center mb-4">
-                        <h2 class="text-xl font-bold text-gray-800 mb-1">Account Setup</h2>
-                        <p class="text-gray-500 text-xs">Secure your account</p>
+                    <div class="text-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">Security Setup</h2>
+                        <p class="text-gray-500 text-sm">Protect your account with a password and PIN</p>
                     </div>
 
-                    <div class="space-y-3">
+                    <div class="space-y-4">
                         <div>
-                            <label class="block text-xs font-semibold text-gray-700 mb-1">
-                                <i class="fas fa-lock mr-1" style="color: var(--navy-blue);"></i>Password
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-lock mr-2" style="color: var(--primary-color);"></i>Password *
                             </label>
                             <div class="relative">
                                 <input 
                                     type="password" 
                                     id="password" 
-                                    required 
-                                    autocomplete="new-password"
-                                    class="w-full px-3 py-2 pr-10 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
-                                    style="--tw-ring-color: var(--navy-blue);"
-                                    placeholder="Create password">
+                                    required
+                                    minlength="6"
+                                    class="w-full px-4 py-3 pr-12 border-2 border-gray-200 rounded-lg focus:ring-2 focus:border-cyan-500 transition outline-none"
+                                    placeholder="Create a strong password">
                                 <button 
                                     type="button" 
                                     onclick="togglePasswordVisibility('password')" 
-                                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                                    <i class="fas fa-eye text-sm" id="password-icon"></i>
+                                    class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                    <i class="fas fa-eye" id="password-icon"></i>
                                 </button>
                             </div>
-                            <p id="password-error" class="text-red-500 text-xs mt-1 hidden"></p>
+                            <p class="text-xs text-gray-500 mt-1">Must be at least 6 characters</p>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-semibold text-gray-700 mb-1">
-                                <i class="fas fa-lock mr-1" style="color: var(--navy-blue);"></i>Confirm Password
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-lock mr-2" style="color: var(--primary-color);"></i>Confirm Password *
                             </label>
                             <div class="relative">
                                 <input 
                                     type="password" 
                                     id="confirm-password" 
-                                    required 
-                                    autocomplete="new-password"
-                                    class="w-full px-3 py-2 pr-10 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
-                                    style="--tw-ring-color: var(--navy-blue);"
-                                    placeholder="Confirm password">
+                                    required
+                                    minlength="6"
+                                    class="w-full px-4 py-3 pr-12 border-2 border-gray-200 rounded-lg focus:ring-2 focus:border-cyan-500 transition outline-none"
+                                    placeholder="Confirm your password">
                                 <button 
                                     type="button" 
                                     onclick="togglePasswordVisibility('confirm-password')" 
-                                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                                    <i class="fas fa-eye text-sm" id="confirm-password-icon"></i>
+                                    class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                    <i class="fas fa-eye" id="confirm-password-icon"></i>
                                 </button>
                             </div>
-                            <p id="confirm-password-error" class="text-red-500 text-xs mt-1 hidden"></p>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-semibold text-gray-700 mb-1">
-                                <i class="fas fa-key mr-1" style="color: var(--navy-blue);"></i>Transaction PIN (4 digits)
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-key mr-2" style="color: var(--primary-color);"></i>Transaction PIN *
                             </label>
                             <input 
                                 type="password" 
                                 id="transaction-pin" 
-                                required 
+                                required
                                 maxlength="4"
                                 pattern="[0-9]{4}"
-                                class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 transition outline-none"
-                                style="--tw-ring-color: var(--navy-blue);"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:border-cyan-500 transition outline-none"
                                 placeholder="Enter 4-digit PIN">
-                            <p id="pin-error" class="text-red-500 text-xs mt-1 hidden"></p>
+                            <p class="text-xs text-gray-500 mt-1">4-digit PIN for authorizing transactions</p>
                         </div>
+
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-4">
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-info-circle text-blue-500 mt-1"></i>
+                                <div class="text-sm text-gray-700">
+                                    <p class="font-semibold mb-1">Security Tips:</p>
+                                    <ul class="list-disc list-inside space-y-1 text-xs">
+                                        <li>Use a unique password you don't use elsewhere</li>
+                                        <li>Your PIN will be required for all transactions</li>
+                                        <li>Never share your password or PIN with anyone</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <label class="flex items-start mt-4">
+                            <input type="checkbox" required class="w-4 h-4 mt-1 rounded focus:ring-2" style="color: var(--primary-color);">
+                            <span class="ml-3 text-sm text-gray-600">
+                                I agree to the <a href="#" class="text-cyan-500 hover:underline">Terms of Service</a> and <a href="#" class="text-cyan-500 hover:underline">Privacy Policy</a>
+                            </span>
+                        </label>
                     </div>
 
-                    <div class="flex gap-2 mt-4">
+                    <div class="flex gap-4 mt-6">
                         <button 
                             type="button" 
                             onclick="goToStep2FromStep3()" 
-                            class="w-1/3 bg-gray-100 text-gray-700 py-2.5 rounded-lg hover:bg-gray-200 transition font-semibold text-sm flex items-center justify-center">
-                            <i class="fas fa-arrow-left mr-1"></i>
+                            class="flex-1 bg-gray-100 text-gray-700 py-3 rounded-lg hover:bg-gray-200 transition font-semibold flex items-center justify-center">
+                            <i class="fas fa-arrow-left mr-2"></i>
                             Back
                         </button>
                         <button 
                             type="submit" 
                             id="register-btn"
-                            class="w-2/3 text-white py-2.5 rounded-lg transition font-semibold text-sm flex items-center justify-center"
-                            style="background-color: var(--navy-blue);"
-                            onmouseover="this.style.backgroundColor='var(--navy-light)'" 
-                            onmouseout="this.style.backgroundColor='var(--navy-blue)'">
-                            <i class="fas fa-user-plus mr-2"></i>
+                            class="flex-1 text-white py-3 rounded-lg transition font-semibold flex items-center justify-center"
+                            style="background-color: var(--primary-color);"
+                            onmouseover="this.style.backgroundColor='var(--primary-light)'" 
+                            onmouseout="this.style.backgroundColor='var(--primary-color)'">
+                            <i class="fas fa-check mr-2"></i>
                             Create Account
                         </button>
                     </div>
@@ -408,16 +328,16 @@
             </form>
 
             <!-- Footer -->
-            <div class="mt-4 text-center">
-                <p class="text-xs text-gray-500">
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-500">
                     Already have an account? 
-                    <a href="login.html" class="hover:underline font-semibold" style="color: var(--navy-blue);">Login</a>
+                    <a href="login.html" class="hover:underline font-semibold" style="color: var(--primary-color);">Login here</a>
                 </p>
             </div>
         </div>
 
         <!-- Security Notice -->
-        <div class="mt-4 text-center">
+        <div class="mt-6 text-center">
             <p class="text-white text-opacity-75 text-xs flex items-center justify-center">
                 <i class="fas fa-shield-alt mr-2"></i>
                 Your information is secure and encrypted
@@ -425,7 +345,18 @@
         </div>
     </div>
 
-<!-- Begin of Chaport Live Chat code -->
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    
+    <!-- Firebase Config -->
+    <script src="firebase-config.js"></script>
+    
+    <!-- Registration Script -->
+    <script src="register.js"></script>
+
+    <!-- Begin of Chaport Live Chat code -->
 <script type="text/javascript">
 (function(w,d,v3){
 w.chaportConfig = {
@@ -435,13 +366,5 @@ appId : '69727a7624f1437fc1298784',
 if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
 </script>
 <!-- End of Chaport Live Chat code -->
-  
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
-    <script src="firebase-config.js"></script>
-    <script src="register.js"></script>
 </body>
 </html>
-
