@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRAND - Loan Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/font-awesome.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Mobile Menu Button -->
+    <button id="mobileMenuBtn" class="lg:hidden fixed top-4 left-4 z-50 bg-cyan-500 text-white p-2 rounded-lg">
+        <i class="fa fa-bars text-xl"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-40 overflow-y-auto">
+        <div class="p-6 border-b">
+            <h1 class="text-2xl font-bold text-gray-800">GRAND</h1>
+        </div>
+
+        <div class="p-6 border-b">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-cyan-500 rounded-full flex items-center justify-center text-white font-semibold">
+                    U
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-semibold text-gray-800" data-user-name>Loading...</h3>
+                    <p class="text-sm text-gray-500">ID: <span data-account-number>Loading...</span></p>
+                </div>
+            </div>
+            <div class="mt-4">
+                <button class="w-full text-left text-sm text-red-500 flex items-center space-x-2">
+                    <i class="fa fa-exclamation-circle"></i>
+                    <span>Verify KYC</span>
+                </button>
+            </div>
+            <div class="mt-3 flex space-x-2">
+                <button class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">
+                    <i class="fa fa-user mr-1"></i> Profile
+                </button>
+                <button data-logout class="flex-1 px-3 py-2 bg-cyan-500 text-white rounded-lg text-sm hover:bg-cyan-600">
+                    <i class="fa fa-sign-out mr-1"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <div class="p-4">
+            <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Main Menu</p>
+                <a href="userdashboard.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="transactions.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-exchange-alt"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="cards.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-credit-card"></i>
+                    <span>Cards</span>
+                </a>
+            </div>
+
+            <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Transfers</p>
+                <a href="local-transfer.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-paper-plane"></i>
+                    <span>Local Transfer</span>
+                </a>
+                <a href="international-wire.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-globe"></i>
+                    <span>International Wire</span>
+                </a>
+                <a href="deposit.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-download"></i>
+                    <span>Deposit</span>
+                </a>
+            </div>
+
+            <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Services</p>
+                <a href="loan-request.html" class="flex items-center space-x-3 px-4 py-3 bg-cyan-500 text-white rounded-lg mb-1">
+                    <i class="fa fa-file-alt"></i>
+                    <span>Loan Request</span>
+                </a>
+                <a href="irs-tax-refund.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-receipt"></i>
+                    <span>IRS Tax Refund</span>
+                </a>
+                <a href="loan-history.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-history"></i>
+                    <span>Loan History</span>
+                </a>
+            </div>
+
+            <div>
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Account</p>
+                <a href="settings.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="support.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-question-circle"></i>
+                    <span>Support Ticket</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="lg:ml-64 min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b sticky top-0 z-30">
+            <div class="px-4 lg:px-8 py-4 flex items-center justify-between">
+                <div class="flex items-center space-x-2 text-gray-500">
+                    <i class="fa fa-calendar"></i>
+                    <span class="text-sm hidden sm:inline">Saturday, January 24, 2026</span>
+                    <span class="text-sm sm:hidden">Jan 24, 2026</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="relative">
+                        <i class="fa fa-bell text-gray-600 text-xl"></i>
+                    </button>
+                    <button class="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center text-white font-semibold text-sm" data-balance>
+                        $0
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Breadcrumb -->
+        <div class="px-4 lg:px-8 py-4 bg-white border-b">
+            <div class="flex items-center space-x-2 text-sm text-gray-500">
+                <a href="userdashboard.html" class="hover:text-cyan-500">Dashboard</a>
+                <i class="fa fa-chevron-right text-xs"></i>
+                <span class="text-gray-800">Loan Services</span>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <main class="p-4 lg:p-8">
+            <!-- Loan Services Info Section -->
+            <div id="loanInfoSection">
+                <!-- Hero Section -->
+                <div class="bg-gradient-to-r from-cyan-500 to-cyan-600 rounded-2xl p-8 text-white mb-8">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <i class="fa fa-hand-holding-usd text-5xl"></i>
+                        <div>
+                            <h1 class="text-3xl font-bold mb-2">Loan Services</h1>
+                            <p class="text-lg opacity-90">Financial solutions to help you achieve your goals</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Why Choose Our Loan Services -->
+                <div class="bg-white rounded-2xl shadow-sm p-8 mb-8">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center">
+                            <i class="fa fa-check-circle text-cyan-600 text-2xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">Why Choose Our Loan Services</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fa fa-clock text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-gray-800 mb-2">Quick Approval</h3>
+                            <p class="text-sm text-gray-600">Get a decision within hours and funds within days</p>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fa fa-percentage text-green-600 text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-gray-800 mb-2">Competitive Rates</h3>
+                            <p class="text-sm text-gray-600">Low interest rates tailored to your credit profile</p>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fa fa-file-alt text-purple-600 text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-gray-800 mb-2">Simple Process</h3>
+                            <p class="text-sm text-gray-600">Straightforward application with minimal paperwork</p>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fa fa-shield-alt text-orange-600 text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-gray-800 mb-2">Secure & Confidential</h3>
+                            <p class="text-sm text-gray-600">Your information is protected with industry-level security</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Available Loan Types -->
+                <div class="bg-white rounded-2xl shadow-sm p-8 mb-8">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center">
+                            <i class="fa fa-list text-cyan-600 text-2xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">Available Loan Types</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Personal Home Loans -->
+                        <div class="border border-gray-200 rounded-xl p-6 hover:border-cyan-500 hover:shadow-lg transition-all cursor-pointer" onclick="showLoanForm()">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <div class="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center">
+                                    <i class="fa fa-home text-cyan-600"></i>
+                                </div>
+                                <h3 class="font-semibold text-gray-800">Personal Home Loans</h3>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">Competitive rates for agents with affordable terms</p>
+                            <button class="text-cyan-500 font-medium text-sm hover:underline">Apply Now →</button>
+                        </div>
+
+                        <!-- Automobile Loans -->
+                        <div class="border border-gray-200 rounded-xl p-6 hover:border-cyan-500 hover:shadow-lg transition-all cursor-pointer" onclick="showLoanForm()">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <i class="fa fa-car text-blue-600"></i>
+                                </div>
+                                <h3 class="font-semibold text-gray-800">Automobile Loans</h3>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">Finance your dream car with flexible repayment options</p>
+                            <button class="text-cyan-500 font-medium text-sm hover:underline">Apply Now →</button>
+                        </div>
+
+                        <!-- Joint Mortgage -->
+                        <div class="border border-gray-200 rounded-xl p-6 hover:border-cyan-500 hover:shadow-lg transition-all cursor-pointer" onclick="showLoanForm()">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                                    <i class="fa fa-users text-green-600"></i>
+                                </div>
+                                <h3 class="font-semibold text-gray-800">Joint Mortgage</h3>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">Partner with family or friends for home ownership</p>
+                            <button class="text-cyan-500 font-medium text-sm hover:underline">Apply Now →</button>
+                        </div>
+
+                        <!-- Secured Overdraft -->
+                        <div class="border border-gray-200 rounded-xl p-6 hover:border-cyan-500 hover:shadow-lg transition-all cursor-pointer" onclick="showLoanForm()">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                                    <i class="fa fa-shield text-purple-600"></i>
+                                </div>
+                                <h3 class="font-semibold text-gray-800">Secured Overdraft</h3>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">Access funds against your deposits or assets</p>
+                            <button class="text-cyan-500 font-medium text-sm hover:underline">Apply Now →</button>
+                        </div>
+
+                        <!-- Health Finance -->
+                        <div class="border border-gray-200 rounded-xl p-6 hover:border-cyan-500 hover:shadow-lg transition-all cursor-pointer" onclick="showLoanForm()">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                                    <i class="fa fa-heartbeat text-red-600"></i>
+                                </div>
+                                <h3 class="font-semibold text-gray-800">Health Finance</h3>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">Cover medical expenses with easy repayment plans</p>
+                            <button class="text-cyan-500 font-medium text-sm hover:underline">Apply Now →</button>
+                        </div>
+
+                        <!-- Business Loan -->
+                        <div class="border border-gray-200 rounded-xl p-6 hover:border-cyan-500 hover:shadow-lg transition-all cursor-pointer" onclick="showLoanForm()">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
+                                    <i class="fa fa-briefcase text-yellow-600"></i>
+                                </div>
+                                <h3 class="font-semibold text-gray-800">Business Loan</h3>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">Grow your business with tailored financing solutions</p>
+                            <button class="text-cyan-500 font-medium text-sm hover:underline">Apply Now →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Apply Now CTA -->
+                <div class="text-center">
+                    <button onclick="showLoanForm()" class="px-10 py-5 bg-cyan-500 text-white text-lg font-semibold rounded-xl hover:bg-cyan-600 shadow-lg">
+                        <i class="fa fa-plus-circle mr-3"></i>
+                        Start Your Loan Application
+                    </button>
+                </div>
+            </div>
+
+            <!-- Loan Application Form Section -->
+            <div id="loanFormSection" class="hidden">
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-white rounded-2xl shadow-sm p-8">
+                        <div class="flex items-center justify-between mb-8">
+                            <div class="flex items-center space-x-4">
+                                <button onclick="showLoanInfo()" class="text-gray-600 hover:text-cyan-500">
+                                    <i class="fa fa-arrow-left text-2xl"></i>
+                                </button>
+                                <h1 class="text-3xl font-bold text-gray-800">Loan Application Form</h1>
+                            </div>
+                        </div>
+
+                        <form id="loanApplicationForm">
+                            <!-- Personal Information Section -->
+                            <div class="mb-8">
+                                <div class="flex items-center space-x-3 mb-6">
+                                    <div class="w-10 h-10 bg-cyan-500 text-white rounded-full flex items-center justify-center font-bold">
+                                        1
+                                    </div>
+                                    <h2 class="text-xl font-bold text-gray-800">Loan Details</h2>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                    <!-- Loan Amount -->
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                                            Loan Amount (USD) *
+                                        </label>
+                                        <div class="relative">
+                                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">$</span>
+                                            <input 
+                                                type="text" 
+                                                placeholder="Enter loan amount" 
+                                                required
+                                                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                                            >
+                                        </div>
+                                    </div>
+
+                                    <!-- Duration -->
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                                            Duration (Months) *
+                                        </label>
+                                        <div class="relative">
+                                            <i class="fa fa-calendar absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                            <select required class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent appearance-none">
+                                                <option value="">Select duration</option>
+                                                <option value="6">6 Months</option>
+                                                <option value="12">12 Months</option>
+                                                <option value="24">24 Months</option>
+                                                <option value="36">36 Months</option>
+                                                <option value="48">48 Months</option>
+                                                <option value="60">60 Months</option>
+                                            </select>
+                                            <i class="fa fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Credit Facility -->
+                                <div class="mb-6">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                                        Credit Facility *
+                                    </label>
+                                    <div class="relative">
+                                        <i class="fa fa-building absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                        <select required class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent appearance-none">
+                                            <option value="">Select Loan/Credit Facility</option>
+                                            <option value="personal">Personal Home Loan</option>
+                                            <option value="auto">Automobile Loan</option>
+                                            <option value="mortgage">Joint Mortgage</option>
+                                            <option value="overdraft">Secured Overdraft</option>
+                                            <option value="health">Health Finance</option>
+                                            <option value="business">Business Loan</option>
+                                        </select>
+                                        <i class="fa fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                                    </div>
+                                </div>
+
+                                <!-- Purpose of Loan -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                                        Purpose of Loan *
+                                    </label>
+                                    <div class="relative">
+                                        <i class="fa fa-comment absolute left-4 top-4 text-gray-400"></i>
+                                        <textarea 
+                                            rows="4" 
+                                            placeholder="Please describe the purpose of this loan..." 
+                                            required
+                                            class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent resize-none"
+                                        ></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Financial Information Section -->
+                            <div class="mb-8">
+                                <div class="flex items-center space-x-3 mb-6">
+                                    <div class="w-10 h-10 bg-cyan-500 text-white rounded-full flex items-center justify-center font-bold">
+                                        2
+                                    </div>
+                                    <h2 class="text-xl font-bold text-gray-800">Financial Information</h2>
+                                </div>
+
+                                <!-- Monthly Net Income -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                                        Monthly Net Income *
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">$</span>
+                                        <select required class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent appearance-none">
+                                            <option value="">Select income range</option>
+                                            <option value="1">Less than $1,000</option>
+                                            <option value="2">$1,000 - $2,000</option>
+                                            <option value="3">$2,000 - $5,000</option>
+                                            <option value="4">$5,000 - $10,000</option>
+                                            <option value="5">$10,000 - $20,000</option>
+                                            <option value="6">Above $20,000</option>
+                                        </select>
+                                        <i class="fa fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Terms and Conditions -->
+                            <div class="mb-8">
+                                <label class="flex items-start space-x-3 cursor-pointer">
+                                    <input type="checkbox" required class="w-5 h-5 mt-1 text-cyan-500 border-gray-300 rounded focus:ring-cyan-500">
+                                    <div class="text-sm text-gray-600">
+                                        <span class="font-semibold text-gray-800">I agree to the terms and conditions</span>
+                                        <p class="mt-1">By submitting this application, I confirm that all information provided is accurate and complete. I authorize Grand Chase to verify my information and credit history.</p>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- Submit Buttons -->
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <button 
+                                    type="submit" 
+                                    class="flex-1 px-6 py-4 bg-cyan-500 text-white rounded-lg font-semibold hover:bg-cyan-600 flex items-center justify-center"
+                                >
+                                    <i class="fa fa-paper-plane mr-2"></i>
+                                    Submit Loan Application
+                                </button>
+                                <button 
+                                    type="button" 
+                                    onclick="showLoanInfo()"
+                                    class="flex-1 px-6 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 flex items-center justify-center"
+                                >
+                                    <i class="fa fa-times mr-2"></i>
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t mt-12 py-6">
+            <div class="px-4 lg:px-8 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500">
+                <p>Calivra © 2026 CalivraChase. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-cyan-500">Privacy Policy</a>
+                    <a href="#" class="hover:text-cyan-500">Terms of Service</a>
+                    <a href="#" class="hover:text-cyan-500">Contact Support</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    
+    <!-- Firebase Config & User Script -->
+    <script src="firebase-config.js"></script>
+    <script src="user-dashboard.js"></script>
+
+   <script>
+    // 1. KEEP: Mobile menu toggle logic
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const sidebar = document.getElementById('sidebar');
+
+    mobileMenuBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('-translate-x-full');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (window.innerWidth < 1024) {
+            if (!sidebar.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                sidebar.classList.add('-translate-x-full');
+            }
+        }
+    });
+
+    // 2. KEEP: Show/Hide Loan Form functions
+    function showLoanForm() {
+        document.getElementById('loanInfoSection').classList.add('hidden');
+        document.getElementById('loanFormSection').classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showLoanInfo() {
+        document.getElementById('loanFormSection').classList.add('hidden');
+        document.getElementById('loanInfoSection').classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 3. UPDATED: New Form submission with Firebase saving
+    document.getElementById('loanApplicationForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Get Form Data from the inputs
+        const loanData = {
+            amount: e.target.querySelector('input[placeholder="Enter loan amount"]').value,
+            duration: e.target.querySelectorAll('select')[0].value,
+            type: e.target.querySelectorAll('select')[1].value,
+            purpose: e.target.querySelector('textarea').value,
+            income: e.target.querySelectorAll('select')[2].value,
+            status: 'Pending',
+            dateApplied: new Date().toLocaleDateString(),
+            timestamp: Date.now()
+        };
+
+        // Get current user from Firebase
+        const user = firebase.auth().currentUser;
+
+        if (user) {
+            try {
+                // Save to Firebase under this user's specific ID
+                await firebase.database().ref('users/' + user.uid + '/loans').push(loanData);
+                alert('Loan application submitted successfully! Our team will review your application.');
+                window.location.href = 'loan-history.html';
+            } catch (error) {
+                console.error("Error saving loan:", error);
+                alert('Database Error: Failed to submit application.');
+            }
+        } else {
+            alert('Error: You must be logged in to apply for a loan.');
+        }
+    });
+</script>
+<!-- Begin of Chaport Live Chat code -->
+<script type="text/javascript">
+(function(w,d,v3){
+w.chaportConfig = {
+appId : '69727a7624f1437fc1298784',
+};
+
+if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
+</script>
+<!-- End of Chaport Live Chat code -->
+</body>
+</html>
