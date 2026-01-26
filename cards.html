@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRAND - Cards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/font-awesome.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Mobile Menu Button -->
+    <button id="mobileMenuBtn" class="lg:hidden fixed top-4 left-4 z-50 bg-cyan-500 text-white p-2 rounded-lg">
+        <i class="fa fa-bars text-xl"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-40 overflow-y-auto">
+        <div class="p-6 border-b">
+            <h1 class="text-2xl font-bold text-gray-800">GRAND</h1>
+        </div>
+
+        <div class="p-6 border-b">
+            <div class="flex items-center space-x-3">
+                <!-- ✅ FIXED: Dynamic avatar -->
+                <div class="w-12 h-12 bg-cyan-500 rounded-full flex items-center justify-center text-white font-semibold">
+                    U
+                </div>
+                <div class="flex-1">
+                    <!-- ✅ FIXED: Dynamic name -->
+                    <h3 class="font-semibold text-gray-800" data-user-name>Loading...</h3>
+                    <!-- ✅ FIXED: Dynamic account number -->
+                    <p class="text-sm text-gray-500">ID: <span data-account-number>Loading...</span></p>
+                </div>
+            </div>
+            <div class="mt-4">
+                <button class="w-full text-left text-sm text-red-500 flex items-center space-x-2">
+                    <i class="fa fa-exclamation-circle"></i>
+                    <span>Verify KYC</span>
+                </button>
+            </div>
+            <div class="mt-3 flex space-x-2">
+                <button class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">
+                    <i class="fa fa-user mr-1"></i> Profile
+                </button>
+                <!-- ✅ FIXED: Added data-logout -->
+                <button data-logout class="flex-1 px-3 py-2 bg-cyan-500 text-white rounded-lg text-sm hover:bg-cyan-600">
+                    <i class="fa fa-sign-out mr-1"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <div class="p-4">
+            <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Main Menu</p>
+                <a href="userdashboard.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="transactions.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-exchange-alt"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="cards.html" class="flex items-center space-x-3 px-4 py-3 bg-cyan-500 text-white rounded-lg mb-1">
+                    <i class="fa fa-credit-card"></i>
+                    <span>Cards</span>
+                </a>
+            </div>
+
+            <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Transfers</p>
+                <a href="local-transfer.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-paper-plane"></i>
+                    <span>Local Transfer</span>
+                </a>
+                <a href="international-wire.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-globe"></i>
+                    <span>International Wire</span>
+                </a>
+                <a href="deposit.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-download"></i>
+                    <span>Deposit</span>
+                </a>
+            </div>
+
+            <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Services</p>
+                <a href="loan-request.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-file-alt"></i>
+                    <span>Loan Request</span>
+                </a>
+                <a href="irs-tax-refund.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-receipt"></i>
+                    <span>IRS Tax Refund</span>
+                </a>
+                <a href="loan-history.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-history"></i>
+                    <span>Loan History</span>
+                </a>
+            </div>
+
+            <div>
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Account</p>
+                <a href="settings.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="support.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-question-circle"></i>
+                    <span>Support Ticket</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="lg:ml-64 min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b sticky top-0 z-30">
+            <div class="px-4 lg:px-8 py-4 flex items-center justify-between">
+                <div class="flex items-center space-x-2 text-gray-500">
+                    <i class="fa fa-calendar"></i>
+                    <span class="text-sm" id="currentDate">Saturday, January 24, 2026</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="relative">
+                        <i class="fa fa-bell text-gray-600 text-xl"></i>
+                    </button>
+                    <!-- ✅ FIXED: Dynamic balance -->
+                    <button class="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center text-white font-semibold text-xs" data-balance>
+                        $0
+                    </button>
+                    <button class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                        <i class="fa fa-user text-gray-600"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Breadcrumb -->
+        <div class="px-4 lg:px-8 py-4 bg-white border-b">
+            <div class="flex items-center space-x-2 text-sm text-gray-500">
+                <a href="userdashboard.html" class="hover:text-cyan-500">Dashboard</a>
+                <i class="fa fa-chevron-right text-xs"></i>
+                <span class="text-gray-800">Cards</span>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <main class="p-4 lg:p-8">
+            <div class="mb-6 flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-gray-800">Apply for Virtual Card</h1>
+            </div>
+
+            <!-- Hero Section -->
+            <div class="bg-gradient-to-r from-cyan-500 to-cyan-600 rounded-2xl p-8 text-white mb-8">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold mb-2">Apply for a Virtual Card</h2>
+                        <p class="opacity-90">Get instant access to a virtual card for online payments and subscriptions</p>
+                    </div>
+                    <i class="fa fa-credit-card text-6xl opacity-20"></i>
+                </div>
+            </div>
+
+            <!-- Application Form -->
+            <div class="bg-white rounded-2xl shadow-sm p-6 lg:p-8 mb-12">
+                <form id="cardApplicationForm">
+                    <!-- Card Details -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Card Details</h3>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <!-- Card Type -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Card Type</label>
+                                <div class="space-y-3">
+                                    <label class="flex items-center p-4 border-2 border-cyan-500 bg-cyan-50 rounded-lg cursor-pointer">
+                                        <input type="radio" name="cardType" value="visa" checked class="w-4 h-4 text-cyan-500">
+                                        <div class="ml-4 flex-1">
+                                            <div class="flex items-center justify-between">
+                                                <div>
+                                                    <p class="font-semibold text-gray-800">Visa</p>
+                                                    <p class="text-sm text-gray-500">Accepted worldwide, suitable for most online purchases</p>
+                                                </div>
+                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 16'%3E%3Cpath fill='%231434CB' d='M19.5 3.2l-3.2 9.6h-2.4L11.7 5c-.2-.6-.4-1-1-1.2-.9-.5-2.4-1-3.7-1.3l.1-.3h6.4c.8 0 1.6.6 1.7 1.5l1.6 8.3 3.9-9.8h2.8zm11.2 6.5c0-2.5-3.5-2.7-3.5-3.8 0-.4.3-.7.9-.8.6-.1 2.2-.2 4 .7l.7-3.3c-1-.4-2.2-.7-3.8-.7-4 0-6.9 2.2-6.9 5.2 0 2.3 2 3.5 3.6 4.3 1.6.8 2.2 1.3 2.2 2 0 1.1-1.3 1.6-2.5 1.6-2.1 0-3.2-.5-4.1-1l-.7 3.4c.9.4 2.7.8 4.5.8 4.3 0 7.1-2.1 7.1-5.4h.5zm10.5 3.1h2.4l-2.1-9.6h-2.2c-.7 0-1.3.4-1.6 1l-5.6 8.6h4l.8-2.2h4.9l.4 2.2zm-4.2-5.2l2 5.5H36l2.2-5.5zM29.5 3.2l-3.2 9.6h-3.8l3.2-9.6h3.8z'/%3E%3C/svg%3E" alt="Visa" class="h-8">
+                                            </div>
+                                        </div>
+                                    </label>
+
+                                    <label class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-gray-300">
+                                        <input type="radio" name="cardType" value="mastercard" class="w-4 h-4 text-cyan-500">
+                                        <div class="ml-4 flex-1">
+                                            <div class="flex items-center justify-between">
+                                                <div>
+                                                    <p class="font-semibold text-gray-800">Mastercard</p>
+                                                    <p class="text-sm text-gray-500">Global acceptance with enhanced security features</p>
+                                                </div>
+                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 32'%3E%3Cg fill='none'%3E%3Ccircle cx='15' cy='16' r='14' fill='%23EB001B'/%3E%3Ccircle cx='33' cy='16' r='14' fill='%23F79E1B'/%3E%3Cpath fill='%23FF5F00' d='M24 6.3c-2.8 2.4-4.5 6-4.5 10s1.7 7.6 4.5 10c2.8-2.4 4.5-6 4.5-10s-1.7-7.6-4.5-10z'/%3E%3C/g%3E%3C/svg%3E" alt="Mastercard" class="h-8">
+                                            </div>
+                                        </div>
+                                    </label>
+
+                                    <label class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-gray-300">
+                                        <input type="radio" name="cardType" value="amex" class="w-4 h-4 text-cyan-500">
+                                        <div class="ml-4 flex-1">
+                                            <div class="flex items-center justify-between">
+                                                <div>
+                                                    <p class="font-semibold text-gray-800">American Express</p>
+                                                    <p class="text-sm text-gray-500">Premium benefits and exclusive rewards program</p>
+                                                </div>
+                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 32'%3E%3Crect fill='%23006FCF' width='48' height='32' rx='4'/%3E%3Ctext x='24' y='20' font-family='Arial Black' font-size='10' fill='white' text-anchor='middle' font-weight='bold'%3EAMEX%3C/text%3E%3C/svg%3E" alt="American Express" class="h-8">
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Card Level -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Card Level *</label>
+                                <select id="cardLevel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
+                                    <option value="standard">Standard - $5.00</option>
+                                    <option value="gold">Gold - $15.00</option>
+                                    <option value="platinum">Platinum - $25.00</option>
+                                </select>
+                                <p class="mt-2 text-sm text-gray-500">Different levels offer varied spending limits and features</p>
+
+                                <!-- Currency & Spending Limit -->
+                                <div class="mt-4 grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Currency</label>
+                                        <select id="currency" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
+                                            <option value="usd">USD - US Dollar</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Daily Spending Limit</label>
+                                        <select id="spendingLimit" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
+                                            <option value="1000">$ 1000</option>
+                                        </select>
+                                        <p class="mt-1 text-xs text-gray-500">Limits: $1,000.00 - $10,000.00</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Billing Information -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Billing Information</h3>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Cardholder Name *</label>
+                                <!-- ✅ FIXED: Dynamic cardholder name from user data -->
+                                <input type="text" id="cardholderName" data-user-name class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent" placeholder="Loading..." required>
+                                <p class="mt-1 text-xs text-gray-500">Name as it will appear on your card</p>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Billing Address *</label>
+                                <textarea id="billingAddress" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent" placeholder="Enter your billing address" required></textarea>
+                                <p class="mt-1 text-xs text-gray-500">Address used for verification when making purchases</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Issuance Fee -->
+                    <div class="mb-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                        <div class="flex items-start space-x-3">
+                            <i class="fa fa-info-circle text-blue-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-gray-800 mb-2">Card Issuance Fee</p>
+                                <p class="text-sm text-gray-600 mb-2">There is a one-time issuance fee for your new virtual card:</p>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Standard: $5.00</li>
+                                    <li>• Gold: $15.00</li>
+                                    <li>• Platinum: $25.00</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="flex items-center justify-between">
+                        <a href="userdashboard.html" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                            <i class="fa fa-arrow-left mr-2"></i>Back to Dashboard
+                        </a>
+                        <button type="submit" class="px-8 py-3 bg-cyan-500 text-white rounded-lg font-semibold hover:bg-cyan-600">
+                            <i class="fa fa-check mr-2"></i>Submit Application
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- My Cards Section -->
+            <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+                <div class="p-4 lg:p-6 border-b">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">My Cards</h2>
+                    <p class="text-sm text-gray-500">View your virtual cards and applications</p>
+                </div>
+
+                <!-- Desktop Table View -->
+                <div class="hidden lg:block overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Card Type</th>
+                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Level</th>
+                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody id="desktopCards">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Mobile Card View -->
+                <div class="lg:hidden p-4" id="mobileCards">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t mt-12 py-6">
+            <div class="px-4 lg:px-8 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500">
+                <p>Calivra © 2026 Calivra Chase. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-cyan-500">Privacy Policy</a>
+                    <a href="#" class="hover:text-cyan-500">Terms of Service</a>
+                    <a href="#" class="hover:text-cyan-500">Contact Support</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    
+    <!-- Firebase Config -->
+    <script src="firebase-config.js"></script>
+    
+    <!-- User Dashboard Script -->
+    <script src="user-dashboard.js"></script>
+
+    <script>
+        // Dynamic date
+        const date = new Date();
+        document.getElementById('currentDate').textContent = date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const sidebar = document.getElementById('sidebar');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth < 1024) {
+                if (!sidebar.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    sidebar.classList.add('-translate-x-full');
+                }
+            }
+        });
+
+        // Card application submission with Firebase
+        document.getElementById('cardApplicationForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const user = firebase.auth().currentUser;
+            if (!user) {
+                alert("You must be logged in to apply for a card.");
+                return;
+            }
+
+            // Collect form data
+            const cardType = document.querySelector('input[name="cardType"]:checked').value;
+            const cardLevel = document.getElementById('cardLevel').value;
+            const currency = document.getElementById('currency').value;
+            const spendingLimit = parseFloat(document.getElementById('spendingLimit').value);
+            const cardholderName = document.getElementById('cardholderName').value.trim();
+            const billingAddress = document.getElementById('billingAddress').value.trim();
+
+            if (!cardholderName || !billingAddress) {
+                alert("Please fill in cardholder name and billing address.");
+                return;
+            }
+
+            // Determine fee based on level
+            let fee = 0;
+            if (cardLevel === 'standard') fee = 5;
+            else if (cardLevel === 'gold') fee = 15;
+            else if (cardLevel === 'platinum') fee = 25;
+
+            // Check balance (but don't deduct yet, since pending approval)
+            try {
+                const balanceRef = firebase.database().ref(`users/${user.uid}/balance`);
+                const snapshot = await balanceRef.once('value');
+                const currentBalance = snapshot.val() || 0;
+
+                if (currentBalance < fee) {
+                    alert(`Insufficient balance. You need $${fee.toFixed(2)} for this card level.`);
+                    return;
+                }
+
+                // Generate virtual card details (fake for demo)
+                let cardPrefix = '4'; // Default Visa
+                if (cardType === 'mastercard') cardPrefix = '5';
+                else if (cardType === 'amex') cardPrefix = '3';
+                const cardNumber = cardPrefix + Math.floor(100000000000000 + Math.random() * 900000000000000).toString();
+                const expiryDate = new Date(Date.now() + 3 * 365 * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', { month: '2-digit', year: '2-digit' });
+                const cvv = Math.floor(100 + Math.random() * 900).toString();
+
+                // Prepare application data
+                const applicationData = {
+                    cardType,
+                    cardLevel,
+                    currency,
+                    spendingLimit,
+                    cardholderName,
+                    billingAddress,
+                    fee,
+                    cardNumber,
+                    expiryDate,
+                    cvv,
+                    status: 'Pending', // Admin approves
+                    requestedAt: new Date().toISOString(),
+                    timestamp: Date.now()
+                };
+
+                // Save to Firebase under cardApplications
+                await firebase.database().ref(`users/${user.uid}/cardApplications`).push(applicationData);
+
+                // Create pending transaction record (similar to transfers)
+                const transactionData = {
+                    type: 'Card Issuance',
+                    amount: fee,
+                    description: `${cardLevel.charAt(0).toUpperCase() + cardLevel.slice(1)} ${cardType.toUpperCase()} Virtual Card`,
+                    status: 'Pending',
+                    category: 'Debit',
+                    date: new Date().toLocaleDateString(),
+                    timestamp: Date.now()
+                };
+                await firebase.database().ref(`users/${user.uid}/transactions`).push(transactionData);
+
+                alert(`Application for ${cardLevel} ${cardType} card submitted successfully!\nFee: $${fee.toFixed(2)} (will be deducted upon approval)\nIt will be reviewed by admin shortly.`);
+
+                // Reload to show new pending card
+                location.reload();
+
+            } catch (error) {
+                console.error("Card application error:", error);
+                alert("Error submitting application: " + error.message);
+            }
+        });
+
+        // Fetch and display cards
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                const desktopBody = document.getElementById('desktopCards');
+                const mobileBody = document.getElementById('mobileCards');
+                const cardsRef = firebase.database().ref(`users/${user.uid}/cardApplications`);
+
+                cardsRef.on('value', (snapshot) => {
+                    const cards = snapshot.val();
+                    let desktopHtml = '';
+                    let mobileHtml = '';
+
+                    if (cards) {
+                        // Sort by newest first
+                        const cardArray = Object.values(cards).sort((a, b) => b.timestamp - a.timestamp);
+                        cardArray.forEach(card => {
+                            const statusColor = card.status === 'Approved' ? 'text-green-600 bg-green-100' : 'text-yellow-600 bg-yellow-100';
+                            const details = card.status === 'Approved' ? 
+                                `Number: ${card.cardNumber}<br>Expiry: ${card.expiryDate}<br>CVV: ${card.cvv}` : 
+                                'Details available upon approval';
+
+                            // Desktop row
+                            desktopHtml += `
+                                <tr class="border-b hover:bg-gray-50">
+                                    <td class="px-6 py-4 text-gray-600">${card.cardType.toUpperCase()}</td>
+                                    <td class="px-6 py-4 text-gray-600">${card.cardLevel.charAt(0).toUpperCase() + card.cardLevel.slice(1)}</td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-3 py-1 rounded-full text-xs font-medium ${statusColor}">
+                                            ${card.status}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-gray-600">${details}</td>
+                                </tr>`;
+
+                            // Mobile card
+                            mobileHtml += `
+                                <div class="bg-white rounded-lg shadow-sm p-4 mb-4">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div>
+                                            <p class="font-semibold text-gray-800">${card.cardType.toUpperCase()} - ${card.cardLevel.charAt(0).toUpperCase() + card.cardLevel.slice(1)}</p>
+                                            <p class="text-xs text-gray-500">Requested: ${new Date(card.timestamp).toLocaleDateString()}</p>
+                                        </div>
+                                        <span class="px-2 py-1 rounded-full text-xs font-medium ${statusColor}">
+                                            ${card.status}
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-gray-600">${details}</p>
+                                </div>`;
+                        });
+                    } else {
+                        // No cards placeholder
+                        desktopHtml = `
+                            <tr>
+                                <td colspan="4" class="px-6 py-32 text-center">
+                                    <div class="flex flex-col items-center justify-center">
+                                        <i class="fa fa-credit-card text-6xl text-gray-300 mb-4"></i>
+                                        <p class="text-xl font-semibold text-gray-600 mb-2">No cards yet</p>
+                                        <p class="text-gray-500 mb-6">Apply for a virtual card above</p>
+                                    </div>
+                                </td>
+                            </tr>`;
+                        mobileHtml = `
+                            <div class="text-center py-20">
+                                <i class="fa fa-credit-card text-5xl text-gray-300 mb-4"></i>
+                                <p class="text-lg font-semibold text-gray-600 mb-2">No cards yet</p>
+                                <p class="text-sm text-gray-500 mb-6">Apply for a virtual card above</p>
+                            </div>`;
+                    }
+
+                    desktopBody.innerHTML = desktopHtml;
+                    mobileBody.innerHTML = mobileHtml;
+                });
+            }
+        });
+    </script>
+    <!-- Begin of Chaport Live Chat code -->
+<script type="text/javascript">
+(function(w,d,v3){
+w.chaportConfig = {
+appId : '69727a7624f1437fc1298784',
+};
+
+if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
+</script>
+<!-- End of Chaport Live Chat code -->
+</body>
+</html>
