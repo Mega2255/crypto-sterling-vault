@@ -1,5 +1,8 @@
-// 1. Initialize Form Data Object
-let formData = {
+// Registration Script - FIXED VERSION
+// Ensures data persists BEFORE redirect
+
+// 1. Initialize Form Data Object - USING WINDOW SCOPE
+window.formData = {
     firstName: '',
     lastName: '',
     middleName: '',
@@ -20,8 +23,14 @@ function generateAccountNumber() {
 function goToStep2() {
     const firstName = document.getElementById('first-name').value.trim();
     const lastName = document.getElementById('last-name').value.trim();
+    const middleName = document.getElementById('middle-name').value.trim();
     const username = document.getElementById('username').value.trim();
     const usernameError = document.getElementById('username-error');
+
+    console.log('=== STEP 1 DEBUG ===');
+    console.log('First Name Input:', firstName);
+    console.log('Last Name Input:', lastName);
+    console.log('Username Input:', username);
 
     if (!firstName || !lastName || !username) {
         alert('Please fill in all required fields');
@@ -36,10 +45,13 @@ function goToStep2() {
 
     usernameError.classList.add('hidden');
 
-    formData.firstName = firstName;
-    formData.lastName = lastName;
-    formData.middleName = document.getElementById('middle-name').value.trim();
-    formData.username = username;
+    // SAVE TO GLOBAL OBJECT
+    window.formData.firstName = firstName;
+    window.formData.lastName = lastName;
+    window.formData.middleName = middleName;
+    window.formData.username = username;
+
+    console.log('✅ Saved to formData:', window.formData);
 
     document.getElementById('step-1').classList.remove('active');
     document.getElementById('step-2').classList.add('active');
@@ -61,7 +73,11 @@ function goToStep3() {
     const phone = document.getElementById('phone').value.trim();
     const country = document.getElementById('country').value;
     const emailError = document.getElementById('email-error');
-    const phoneError = document.getElementById('phone-error');
+
+    console.log('=== STEP 2 DEBUG ===');
+    console.log('Email Input:', email);
+    console.log('Phone Input:', phone);
+    console.log('Country Input:', country);
 
     if (!email || !phone || !country) {
         alert('Please fill in all required fields');
@@ -76,9 +92,12 @@ function goToStep3() {
     }
     emailError.classList.add('hidden');
 
-    formData.email = email;
-    formData.phone = phone;
-    formData.country = country;
+    // SAVE TO GLOBAL OBJECT
+    window.formData.email = email;
+    window.formData.phone = phone;
+    window.formData.country = country;
+
+    console.log('✅ Saved to formData:', window.formData);
 
     document.getElementById('step-2').classList.remove('active');
     document.getElementById('step-3').classList.add('active');
@@ -120,7 +139,7 @@ function togglePasswordVisibility(fieldId) {
     }
 }
 
-// 7. FINAL SUBMISSION (The fix is here)
+// 7. FINAL SUBMISSION - ENHANCED WITH PROPER VERIFICATION
 document.getElementById('register-form').addEventListener('submit', async function(e) {
     e.preventDefault();
 
@@ -134,67 +153,177 @@ document.getElementById('register-form').addEventListener('submit', async functi
         return;
     }
 
-    if (transactionPin.length !== 4) {
-        alert("Transaction PIN must be 4 digits");
+    if (transactionPin.length !== 4 || isNaN(transactionPin)) {
+        alert("Transaction PIN must be exactly 4 digits");
+        return;
+    }
+
+    console.log('=== FINAL SUBMISSION DEBUG ===');
+    console.log('Complete Form Data:', window.formData);
+
+    // CRITICAL CHECK
+    if (!window.formData.firstName || !window.formData.lastName || !window.formData.email) {
+        alert('ERROR: Required data is missing! Please go back and re-enter your information.');
+        console.error('Form data is incomplete:', window.formData);
         return;
     }
 
     // Set Loading state
-    registerBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Processing...';
+    registerBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Creating Account...';
     registerBtn.disabled = true;
 
     try {
+        console.log('Step 1: Creating Firebase auth user...');
+        
         // A. Create Authentication User
-        const userCredential = await auth.createUserWithEmailAndPassword(formData.email, password);
+        const userCredential = await firebase.auth().createUserWithEmailAndPassword(
+            window.formData.email, 
+            password
+        );
         const user = userCredential.user;
 
-        // B. Generate the Account Number
-        const generatedAcc = generateAccountNumber();
+        console.log('✅ User authentication created with UID:', user.uid);
 
-        // C. Prepare Database Object (All details included)
+        // B. Update Auth Profile FIRST (helps with display name)
+        await user.updateProfile({
+            displayName: `${window.formData.firstName} ${window.formData.lastName}`
+        });
+        console.log('✅ Auth profile updated');
+
+        // C. Generate the Account Number
+        const generatedAccountNumber = generateAccountNumber();
+        console.log('✅ Generated account number:', generatedAccountNumber);
+
+        // D. Prepare Complete Database Object
         const finalUserData = {
-            uid: user.uid,
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            middleName: formData.middleName || "",
-            fullName: `${formData.firstName} ${formData.lastName}`,
-            username: formData.username,
-            email: formData.email,
-            phone: formData.phone,
-            country: formData.country,
-            accountNumber: generatedAcc,
+            // Authentication Info
+            userId: user.uid,
+            email: window.formData.email,
+            
+            // Personal Information - CRITICAL FIELDS
+            firstName: window.formData.firstName,
+            lastName: window.formData.lastName,
+            middleName: window.formData.middleName || "",
+            username: window.formData.username,
+            phone: window.formData.phone,
+            country: window.formData.country,
+            
+            // Additional Profile Fields
+            dateOfBirth: '',
+            gender: '',
+            address: '',
+            city: '',
+            
+            // Account Details
+            accountNumber: generatedAccountNumber,
+            accountType: 'Standard',
+            balance: 0,
+            transactionLimit: 500000,
+            
+            // Security
             transactionPin: transactionPin,
-            balance: 0.00,
-            accountStatus: "Active",
-            createdAt: new Date().toISOString()
+            kycVerified: false,
+            
+            // Timestamps
+            createdAt: firebase.database.ServerValue.TIMESTAMP,
+            lastLogin: firebase.database.ServerValue.TIMESTAMP
         };
 
-        // D. SAVE TO DATABASE FIRST (Wait for completion)
-        await database.ref('users/' + user.uid).set(finalUserData);
-        
-        // E. Update Auth Profile for backup
-        await user.updateProfile({
-            displayName: formData.username
-        });
+        console.log('Step 2: Saving user data to Firebase...');
+        console.log('Data to save:', finalUserData);
 
-        // SUCCESS
-        alert("Registration Successful! Account Number: " + generatedAcc);
+        // E. ✅ CRITICAL: AWAIT THE DATABASE WRITE
+        await firebase.database().ref('users/' + user.uid).set(finalUserData);
         
-        // F. REDIRECT ONLY AFTER EVERYTHING IS SAVED
-        window.location.href = 'userdashboard.html';
+        console.log('✅ Data saved to Firebase Realtime Database!');
+        
+        // F. ✅ WAIT FOR FIREBASE TO CONFIRM THE WRITE
+        registerBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Verifying data...';
+        
+        // Wait 500ms for Firebase to process
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        // G. ✅ VERIFY the data was actually written
+        console.log('Step 3: Verifying data in Firebase...');
+        const verification = await firebase.database().ref('users/' + user.uid).once('value');
+        const savedData = verification.val();
+        
+        if (!savedData) {
+            throw new Error('Data verification failed - no data found in database');
+        }
+        
+        console.log('✅ VERIFICATION PASSED - Data in Firebase:', savedData);
+        console.log('  firstName:', savedData.firstName);
+        console.log('  lastName:', savedData.lastName);
+        console.log('  email:', savedData.email);
+        console.log('  accountNumber:', savedData.accountNumber);
+
+        // H. SUCCESS - Show success message
+        registerBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Success!';
+        registerBtn.style.backgroundColor = '#10b981';
+        
+        // Show detailed success alert
+        alert(
+            `✅ Registration Successful!\n\n` +
+            `Name: ${window.formData.firstName} ${window.formData.lastName}\n` +
+            `Email: ${window.formData.email}\n` +
+            `Account Number: ${generatedAccountNumber}\n\n` +
+            `Please save your account number for future reference!`
+        );
+        
+        console.log('✅ Registration complete! Preparing to redirect...');
+        
+        // I. ✅ WAIT 2 SECONDS TO ENSURE EVERYTHING IS SYNCED
+        registerBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Redirecting...';
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        // J. ✅ REDIRECT TO DASHBOARD
+        console.log('✅ Redirecting to dashboard now...');
+        window.location.href = 'index.html';
 
     } catch (error) {
-        console.error("Registration Error:", error);
-        alert("Registration Failed: " + error.message);
-        registerBtn.innerHTML = 'Create Account';
+        console.error("❌ Registration Error:", error);
+        console.error("Error code:", error.code);
+        console.error("Error message:", error.message);
+        
+        let errorMessage = "Registration Failed:\n\n";
+        
+        if (error.code === 'auth/email-already-in-use') {
+            errorMessage += 'This email is already registered.\nPlease login instead or use a different email.';
+        } else if (error.code === 'auth/weak-password') {
+            errorMessage += 'Password is too weak.\nPlease use at least 6 characters.';
+        } else if (error.code === 'auth/invalid-email') {
+            errorMessage += 'Invalid email address format.';
+        } else if (error.code === 'auth/network-request-failed') {
+            errorMessage += 'Network error.\nPlease check your internet connection and try again.';
+        } else if (error.message) {
+            errorMessage += error.message;
+        } else {
+            errorMessage += 'An unknown error occurred. Please try again.';
+        }
+        
+        alert(errorMessage);
+        
+        // Reset button
+        registerBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Create Account';
         registerBtn.disabled = false;
+        registerBtn.style.backgroundColor = '#0891b2';
     }
 });
 
-// 8. Auth State Observer
-auth.onAuthStateChanged((user) => {
-    // If user is logged in and tries to access register page, send them to dashboard
+// 8. ✅ PREVENT DOUBLE REGISTRATION - Redirect if already logged in
+firebase.auth().onAuthStateChanged((user) => {
     if (user && window.location.pathname.includes('register.html')) {
-        // window.location.href = 'userdashboard.html';
+        console.log('⚠️ User already logged in, redirecting to dashboard');
+        // Small delay to show they're logged in
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 1000);
     }
 });
+
+// 9. Debug on page load
+console.log('=== REGISTER.JS LOADED SUCCESSFULLY ===');
+console.log('Initial formData:', window.formData);
+console.log('Firebase auth available:', typeof firebase !== 'undefined' && typeof firebase.auth === 'function');
+console.log('Firebase database available:', typeof firebase !== 'undefined' && typeof firebase.database === 'function');
