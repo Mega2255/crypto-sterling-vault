@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRAND - Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/font-awesome.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Mobile Menu Button -->
+    <button id="mobileMenuBtn" class="lg:hidden fixed top-4 left-4 z-50 bg-cyan-500 text-white p-2 rounded-lg">
+        <i class="fa fa-bars text-xl"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-40 overflow-y-auto">
+        <div class="p-6 border-b">
+            <h1 class="text-2xl font-bold text-gray-800">GRAND</h1>
+        </div>
+
+        <div class="p-6 border-b">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-cyan-500 rounded-full flex items-center justify-center text-white font-semibold" data-user-initials>BS</div>
+                <div class="flex-1">
+                    <h3 class="font-semibold text-gray-800" data-user-name>Loading...</h3>
+                    <p class="text-sm text-gray-500">ID: <span data-account-number>Loading...</span></p>
+                </div>
+            </div>
+            <div class="mt-4">
+                <button class="w-full text-left text-sm text-red-500 flex items-center space-x-2">
+                    <i class="fa fa-exclamation-circle"></i>
+                    <span>Verify KYC</span>
+                </button>
+            </div>
+            <div class="mt-3 flex space-x-2">
+                <a href="profile.html" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50 text-center inline-block">
+                    <i class="fa fa-user mr-1"></i> Profile
+                </a>
+                <button data-logout class="flex-1 px-3 py-2 bg-cyan-500 text-white rounded-lg text-sm hover:bg-cyan-600">
+                    <i class="fa fa-sign-out mr-1"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <div class="p-4">
+            <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Main Menu</p>
+                <a href="userdashboard.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="transactions.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-exchange-alt"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="cards.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-credit-card"></i>
+                    <span>Cards</span>
+                </a>
+            </div>
+
+            <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Transfers</p>
+                <a href="local-transfer.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-paper-plane"></i>
+                    <span>Local Transfer</span>
+                </a>
+                <a href="international-wire.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-globe"></i>
+                    <span>International Wire</span>
+                </a>
+                <a href="deposit.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-download"></i>
+                    <span>Deposit</span>
+                </a>
+            </div>
+
+            <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Services</p>
+                <a href="loan-request.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-file-alt"></i>
+                    <span>Loan Request</span>
+                </a>
+                <a href="irs-tax-refund.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-receipt"></i>
+                    <span>IRS Tax Refund</span>
+                </a>
+                <a href="loan-history.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-history"></i>
+                    <span>Loan History</span>
+                </a>
+            </div>
+
+            <div>
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Account</p>
+                <a href="settings.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="support.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-question-circle"></i>
+                    <span>Support Ticket</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="lg:ml-64 min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b sticky top-0 z-30">
+            <div class="px-4 lg:px-8 py-4 flex items-center justify-between">
+                <div class="flex items-center space-x-2 text-gray-500">
+                    <i class="fa fa-calendar"></i>
+                    <span class="text-sm hidden sm:inline">Saturday, January 24, 2026</span>
+                    <span class="text-sm sm:hidden">Jan 24, 2026</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="relative">
+                        <i class="fa fa-bell text-gray-600 text-xl"></i>
+                    </button>
+                    <button class="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center text-white font-semibold text-sm" data-balance>$0</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Breadcrumb -->
+        <div class="px-4 lg:px-8 py-4 bg-white border-b">
+            <div class="flex items-center space-x-2 text-sm text-gray-500">
+                <a href="userdashboard.html" class="hover:text-cyan-500">Dashboard</a>
+                <i class="fa fa-chevron-right text-xs"></i>
+                <span class="text-gray-800">Profile</span>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <main class="p-4 lg:p-8">
+            <!-- Profile Header -->
+            <div class="bg-gradient-to-r from-cyan-500 to-cyan-600 rounded-2xl p-6 lg:p-8 text-white mb-6">
+                <div class="flex flex-col sm:flex-row items-center gap-6">
+                    <div class="relative">
+                        <div class="w-24 h-24 lg:w-32 lg:h-32 bg-white/20 rounded-full flex items-center justify-center text-4xl lg:text-5xl font-bold" data-user-initials-large>BS</div>
+                        <button class="absolute bottom-0 right-0 w-10 h-10 bg-white text-cyan-500 rounded-full flex items-center justify-center hover:bg-gray-100">
+                            <i class="fa fa-camera"></i>
+                        </button>
+                    </div>
+                    <div class="text-center sm:text-left flex-1">
+                        <h1 class="text-2xl lg:text-3xl font-bold mb-2" data-user-name-large>Loading...</h1>
+                        <p class="opacity-90 mb-2">Account ID: <span data-account-number-large>Loading...</span></p>
+                        <div class="flex flex-wrap gap-2 justify-center sm:justify-start">
+                            <span class="px-3 py-1 bg-red-500 rounded-full text-xs font-semibold">KYC Not Verified</span>
+                            <span class="px-3 py-1 bg-white/20 rounded-full text-xs font-semibold">Standard Account</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Personal Information -->
+                <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm p-4 lg:p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-semibold text-gray-800">Personal Information</h2>
+                        <button id="editBtn" class="px-4 py-2 text-cyan-500 border border-cyan-500 rounded-lg hover:bg-cyan-50">
+                            <i class="fa fa-edit mr-2"></i>Edit
+                        </button>
+                    </div>
+
+                    <form id="profileForm">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                                <input type="text" id="firstName" value="" disabled class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 disabled:bg-gray-100">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                                <input type="text" id="lastName" value="" disabled class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 disabled:bg-gray-100">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                                <input type="email" id="email" value="" disabled class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 disabled:bg-gray-100">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                                <input type="tel" id="phone" value="" disabled class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 disabled:bg-gray-100">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Date of Birth</label>
+                                <input type="date" id="dateOfBirth" value="" disabled class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 disabled:bg-gray-100">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Gender</label>
+                                <select id="gender" disabled class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 disabled:bg-gray-100">
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+
+                            <div class="sm:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Address</label>
+                                <textarea id="address" rows="3" disabled class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 disabled:bg-gray-100"></textarea>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">City</label>
+                                <input type="text" id="city" value="" disabled class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 disabled:bg-gray-100">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Country</label>
+                                <input type="text" id="country" value="" disabled class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 disabled:bg-gray-100">
+                            </div>
+                        </div>
+
+                        <div id="saveBtn" class="hidden mt-6 flex gap-4">
+                            <button type="submit" class="flex-1 px-6 py-3 bg-cyan-500 text-white rounded-lg font-semibold hover:bg-cyan-600">
+                                <i class="fa fa-save mr-2"></i>Save Changes
+                            </button>
+                            <button type="button" id="cancelBtn" class="flex-1 px-6 py-3 border border-gray-300 rounded-lg font-semibold hover:bg-gray-50">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Quick Actions & Account Info -->
+                <div class="space-y-6">
+                    <!-- Account Status -->
+                    <div class="bg-white rounded-2xl shadow-sm p-4 lg:p-6">
+                        <h3 class="font-semibold text-gray-800 mb-4">Account Status</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-3 bg-red-50 rounded-lg">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fa fa-exclamation-circle text-red-500"></i>
+                                    <span class="text-sm font-medium">KYC Verification</span>
+                                </div>
+                                <span class="text-xs text-red-600 font-semibold">Pending</span>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fa fa-check-circle text-green-500"></i>
+                                    <span class="text-sm font-medium">Email Verified</span>
+                                </div>
+                                <span class="text-xs text-green-600 font-semibold">Active</span>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fa fa-check-circle text-green-500"></i>
+                                    <span class="text-sm font-medium">Phone Verified</span>
+                                </div>
+                                <span class="text-xs text-green-600 font-semibold">Active</span>
+                            </div>
+                        </div>
+
+                        <button class="w-full mt-4 px-4 py-3 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600">
+                            <i class="fa fa-shield-alt mr-2"></i>Complete KYC Verification
+                        </button>
+                    </div>
+
+                    <!-- Account Details -->
+                    <div class="bg-white rounded-2xl shadow-sm p-4 lg:p-6">
+                        <h3 class="font-semibold text-gray-800 mb-4">Account Details</h3>
+                        
+                        <div class="space-y-3">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Account Type</span>
+                                <span class="font-semibold">Standard</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Member Since</span>
+                                <span class="font-semibold">Jan 24, 2026</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Account Status</span>
+                                <span class="font-semibold text-green-600">Active</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Transaction Limit</span>
+                                <span class="font-semibold" data-transaction-limit>NGN 500,000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Actions -->
+                    <div class="bg-white rounded-2xl shadow-sm p-4 lg:p-6">
+                        <h3 class="font-semibold text-gray-800 mb-4">Security</h3>
+                        
+                        <div class="space-y-3">
+                            <button class="w-full px-4 py-3 border border-gray-300 rounded-lg text-left hover:bg-gray-50 flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fa fa-key text-gray-600"></i>
+                                    <span class="text-sm font-medium">Change Password</span>
+                                </div>
+                                <i class="fa fa-chevron-right text-gray-400"></i>
+                            </button>
+
+                            <button class="w-full px-4 py-3 border border-gray-300 rounded-lg text-left hover:bg-gray-50 flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fa fa-lock text-gray-600"></i>
+                                    <span class="text-sm font-medium">Change PIN</span>
+                                </div>
+                                <i class="fa fa-chevron-right text-gray-400"></i>
+                            </button>
+
+                            <button class="w-full px-4 py-3 border border-gray-300 rounded-lg text-left hover:bg-gray-50 flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fa fa-mobile-alt text-gray-600"></i>
+                                    <span class="text-sm font-medium">Two-Factor Auth</span>
+                                </div>
+                                <i class="fa fa-chevron-right text-gray-400"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t mt-12 py-6">
+            <div class="px-4 lg:px-8 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500">
+                <p>GRAND © 2026 Grand Chase. All rights reserved.</p>
+                <div class="flex flex-wrap justify-center gap-4 lg:gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-cyan-500">Privacy Policy</a>
+                    <a href="#" class="hover:text-cyan-500">Terms of Service</a>
+                    <a href="#" class="hover:text-cyan-500">Contact Support</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    
+    <!-- Firebase Config (assume this exists in your project) -->
+    <script src="firebase-config.js"></script>
+
+    <script>
+        // Global user state (shared logic from user-dashboard.js)
+        let currentUser = null;
+        let userAccountData = null;
+        let isLoadingData = true;
+        let authInitialized = false;
+
+        // Initialize user session
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('=== PROFILE PAGE LOADED ===');
+            showLoadingState();
+            initializeUserSession();
+            setupEventListeners();
+        });
+
+        // Show loading state
+        function showLoadingState() {
+            const nameElements = document.querySelectorAll('[data-user-name], [data-user-name-large]');
+            nameElements.forEach(el => { el.textContent = 'Loading...'; });
+            
+            const accountElements = document.querySelectorAll('[data-account-number], [data-account-number-large]');
+            accountElements.forEach(el => { el.textContent = 'Loading...'; });
+            
+            const initialsElements = document.querySelectorAll('[data-user-initials], [data-user-initials-large]');
+            initialsElements.forEach(el => { el.textContent = 'U'; });
+            
+            const balanceElements = document.querySelectorAll('[data-balance]');
+            balanceElements.forEach(el => { el.textContent = '...'; });
+        }
+
+        // Initialize user session
+        function initializeUserSession() {
+            console.log('Initializing user session...');
+            
+            const authTimeout = setTimeout(() => {
+                if (!authInitialized) {
+                    console.error('⚠️ Auth initialization timeout - redirecting to login');
+                    window.location.href = 'login.html';
+                }
+            }, 5000);
+            
+            firebase.auth().onAuthStateChanged((user) => {
+                authInitialized = true;
+                clearTimeout(authTimeout);
+                
+                console.log('=== AUTH STATE CHANGED ===');
+                console.log('User object:', user);
+                
+                if (user) {
+                    console.log('✅ User authenticated:', user.uid);
+                    currentUser = user;
+                    loadUserData(user.uid);
+                } else {
+                    console.log('❌ No user authenticated');
+                    const currentPath = window.location.pathname;
+                    const isAuthPage = currentPath.includes('login.html') || currentPath.includes('register.html');
+                    if (!isAuthPage) {
+                        console.log('Redirecting to login...');
+                        window.location.href = 'login.html';
+                    }
+                }
+            }, (error) => {
+                console.error('❌ Auth state error:', error);
+                authInitialized = true;
+                clearTimeout(authTimeout);
+                alert('Authentication error: ' + error.message);
+                window.location.href = 'login.html';
+            });
+        }
+
+        // Load user data from Firebase
+        function loadUserData(userId) {
+            console.log('Setting up real-time listener for user:', userId);
+
+            const userRef = firebase.database().ref('users/' + userId);
+
+            const dataTimeout = setTimeout(() => {
+                if (isLoadingData) {
+                    console.error('⚠️ Data loading timeout');
+                    alert('Unable to load user data. Please refresh the page.');
+                }
+            }, 10000);
+
+            userRef.on('value', (snapshot) => {
+                clearTimeout(dataTimeout);
+                userAccountData = snapshot.val();
+
+                console.log('=== DATA RECEIVED FROM FIREBASE ===');
+                console.log('User data:', userAccountData);
+
+                if (userAccountData) {
+                    isLoadingData = false;
+                    updateUIWithUserData();
+                } else {
+                    console.warn('⚠️ No user data found in database');
+                    isLoadingData = false;
+                    createUserProfile(userId);
+                }
+            }, (error) => {
+                clearTimeout(dataTimeout);
+                console.error('❌ Error loading user data:', error);
+                isLoadingData = false;
+                alert('Error loading account data: ' + error.message);
+            });
+        }
+
+        // Create fallback profile if missing
+        function createUserProfile(userId) {
+            console.warn('Creating fallback user profile for:', userId);
+            
+            const newUser = {
+                userId: userId,
+                email: currentUser.email,
+                accountNumber: generateAccountNumber(),
+                balance: 0,
+                transactionLimit: 500000,
+                kycVerified: false,
+                accountType: 'Standard',
+                createdAt: firebase.database.ServerValue.TIMESTAMP,
+                firstName: currentUser.displayName || 'User',
+                lastName: '',
+                middleName: '',
+                username: currentUser.email.split('@')[0],
+                phone: '',
+                address: '',
+                city: '',
+                country: '',
+                dateOfBirth: '',
+                gender: ''
+            };
+            
+            firebase.database().ref('users/' + userId).set(newUser)
+                .then(() => {
+                    console.log('✅ Fallback profile created successfully');
+                })
+                .catch((error) => {
+                    console.error('❌ Error creating fallback profile:', error);
+                    alert('Error creating user profile. Please contact support.');
+                });
+        }
+
+        // Generate account number
+        function generateAccountNumber() {
+            return Math.floor(1000000000 + Math.random() * 9000000000).toString();
+        }
+
+        // Generate user initials
+        function getUserInitials() {
+            if (!userAccountData) return 'U';
+            
+            const firstName = userAccountData.firstName || '';
+            const lastName = userAccountData.lastName || '';
+            
+            if (!firstName && !lastName) {
+                if (userAccountData.username) {
+                    return userAccountData.username.charAt(0).toUpperCase();
+                }
+                return currentUser.email ? currentUser.email.charAt(0).toUpperCase() : 'U';
+            }
+            
+            const firstInitial = firstName.charAt(0).toUpperCase() || '';
+            const lastInitial = lastName.charAt(0).toUpperCase() || '';
+            
+            return firstInitial + lastInitial;
+        }
+
+        // Update UI with user data (adapted for profile.html)
+        function updateUIWithUserData() {
+            if (!userAccountData) {
+                console.warn('updateUIWithUserData called but userAccountData is null');
+                return;
+            }
+            
+            console.log('=== UPDATING UI ===');
+            
+            // Update balance
+            const balanceElements = document.querySelectorAll('[data-balance]');
+            balanceElements.forEach(el => {
+                el.textContent = formatCurrency(userAccountData.balance || 0);
+            });
+            
+            // Update account number
+            const accountNumberElements = document.querySelectorAll('[data-account-number], [data-account-number-large]');
+            accountNumberElements.forEach(el => {
+                el.textContent = userAccountData.accountNumber || '';
+            });
+            
+            // Update user name
+            let userName = '';
+            if (userAccountData.firstName && userAccountData.lastName) {
+                userName = `${userAccountData.firstName} ${userAccountData.lastName}`;
+            } else if (userAccountData.firstName) {
+                userName = userAccountData.firstName;
+            } else if (userAccountData.lastName) {
+                userName = userAccountData.lastName;
+            } else if (userAccountData.username) {
+                userName = userAccountData.username;
+            } else {
+                userName = 'User';
+            }
+            
+            const nameElements = document.querySelectorAll('[data-user-name], [data-user-name-large]');
+            nameElements.forEach(el => {
+                el.textContent = userName;
+            });
+            
+            // Update initials
+            const initials = getUserInitials();
+            const initialsElements = document.querySelectorAll('[data-user-initials], [data-user-initials-large]');
+            initialsElements.forEach(el => {
+                el.textContent = initials;
+            });
+            
+            // Update profile form fields
+            document.getElementById('firstName').value = userAccountData.firstName || '';
+            document.getElementById('lastName').value = userAccountData.lastName || '';
+            document.getElementById('email').value = userAccountData.email || '';
+            document.getElementById('phone').value = userAccountData.phone || '';
+            document.getElementById('dateOfBirth').value = userAccountData.dateOfBirth || '';
+            document.getElementById('gender').value = userAccountData.gender || 'Male';
+            document.getElementById('address').value = userAccountData.address || '';
+            document.getElementById('city').value = userAccountData.city || '';
+            document.getElementById('country').value = userAccountData.country || '';
+            
+            // Update transaction limit
+            const limitElements = document.querySelectorAll('[data-transaction-limit]');
+            limitElements.forEach(el => {
+                el.textContent = formatCurrency(userAccountData.transactionLimit || 500000);
+            });
+            
+            console.log('=== UI UPDATE COMPLETE ===');
+        }
+
+        // Format currency
+        function formatCurrency(amount, currency = 'NGN') {
+            return new Intl.NumberFormat('en-NG', {
+                style: 'decimal',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(amount);
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Mobile menu
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const sidebar = document.getElementById('sidebar');
+            if (mobileMenuBtn && sidebar) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    sidebar.classList.toggle('-translate-x-full');
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (window.innerWidth < 1024) {
+                        if (!sidebar.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                            sidebar.classList.add('-translate-x-full');
+                        }
+                    }
+                });
+            }
+
+            // Profile edit functionality (existing + save to Firebase)
+            const editBtn = document.getElementById('editBtn');
+            const saveBtn = document.getElementById('saveBtn');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const form = document.getElementById('profileForm');
+            const inputs = form.querySelectorAll('input, textarea, select');
+
+            if (editBtn && saveBtn && cancelBtn && form && inputs) {
+                editBtn.addEventListener('click', () => {
+                    inputs.forEach(input => input.disabled = false);
+                    saveBtn.classList.remove('hidden');
+                    editBtn.classList.add('hidden');
+                });
+
+                cancelBtn.addEventListener('click', () => {
+                    inputs.forEach(input => input.disabled = true);
+                    saveBtn.classList.add('hidden');
+                    editBtn.classList.remove('hidden');
+                    // Reset to original values
+                    if (userAccountData) {
+                        document.getElementById('firstName').value = userAccountData.firstName || '';
+                        document.getElementById('lastName').value = userAccountData.lastName || '';
+                        document.getElementById('email').value = userAccountData.email || '';
+                        document.getElementById('phone').value = userAccountData.phone || '';
+                        document.getElementById('dateOfBirth').value = userAccountData.dateOfBirth || '';
+                        document.getElementById('gender').value = userAccountData.gender || 'Male';
+                        document.getElementById('address').value = userAccountData.address || '';
+                        document.getElementById('city').value = userAccountData.city || '';
+                        document.getElementById('country').value = userAccountData.country || '';
+                    }
+                });
+
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    if (!currentUser || !userAccountData) return;
+
+                    // Collect updated data
+                    const updatedData = {
+                        firstName: document.getElementById('firstName').value,
+                        lastName: document.getElementById('lastName').value,
+                        email: document.getElementById('email').value,
+                        phone: document.getElementById('phone').value,
+                        dateOfBirth: document.getElementById('dateOfBirth').value,
+                        gender: document.getElementById('gender').value,
+                        address: document.getElementById('address').value,
+                        city: document.getElementById('city').value,
+                        country: document.getElementById('country').value
+                    };
+
+                    // Update Firebase
+                    firebase.database().ref('users/' + currentUser.uid).update(updatedData)
+                        .then(() => {
+                            console.log('✅ Profile updated in Firebase');
+                            userAccountData = { ...userAccountData, ...updatedData };
+                            updateUIWithUserData();
+                            inputs.forEach(input => input.disabled = true);
+                            saveBtn.classList.add('hidden');
+                            editBtn.classList.remove('hidden');
+                            alert('Profile updated successfully!');
+                        })
+                        .catch((error) => {
+                            console.error('❌ Update error:', error);
+                            alert('Failed to update profile: ' + error.message);
+                        });
+                });
+            }
+
+            // Logout
+            const logoutButtons = document.querySelectorAll('[data-logout]');
+            logoutButtons.forEach(btn => {
+                btn.addEventListener('click', handleLogout);
+            });
+        }
+
+        // Handle Logout
+        function handleLogout(e) {
+            e.preventDefault();
+            firebase.auth().signOut()
+                .then(() => {
+                    window.location.href = 'login.html';
+                })
+                .catch((error) => {
+                    console.error('Error logging out:', error);
+                    alert('Logout failed. Please try again.');
+                });
+        }
+
+        console.log('=== PROFILE.JS LOADED SUCCESSFULLY ===');
+    </script>
+<!-- Begin of Chaport Live Chat code -->
+<script type="text/javascript">
+(function(w,d,v3){
+w.chaportConfig = {
+appId : '69727a7624f1437fc1298784',
+};
+
+if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
+</script>
+<!-- End of Chaport Live Chat code -->
+
+</body>
+</html>
