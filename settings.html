@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRAND - Settings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/font-awesome.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .toggle-checkbox:checked { right: 0; border-color: #06b6d4; }
+        .toggle-checkbox:checked + .toggle-label { background-color: #06b6d4; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Mobile Menu Button -->
+    <button id="mobileMenuBtn" class="lg:hidden fixed top-4 left-4 z-50 bg-cyan-500 text-white p-2 rounded-lg">
+        <i class="fa fa-bars text-xl"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-40 overflow-y-auto">
+        <div class="p-6 border-b">
+            <h1 class="text-2xl font-bold text-gray-800">GRAND</h1>
+        </div>
+
+        <div class="p-6 border-b">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-cyan-500 rounded-full flex items-center justify-center text-white font-semibold">
+                    U
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-semibold text-gray-800" data-user-name>Loading...</h3>
+                    <p class="text-sm text-gray-500">ID: <span data-account-number>Loading...</span></p>
+                </div>
+            </div>
+            <div class="mt-4">
+                <button class="w-full text-left text-sm text-red-500 flex items-center space-x-2">
+                    <i class="fa fa-exclamation-circle"></i>
+                    <span>Verify KYC</span>
+                </button>
+            </div>
+            <div class="mt-3 flex space-x-2">
+                <button class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">
+                    <i class="fa fa-user mr-1"></i> Profile
+                </button>
+                <button data-logout class="flex-1 px-3 py-2 bg-cyan-500 text-white rounded-lg text-sm hover:bg-cyan-600">
+                    <i class="fa fa-sign-out mr-1"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <div class="p-4">
+            <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Main Menu</p>
+                <a href="userdashboard.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="transactions.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-exchange-alt"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="cards.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-credit-card"></i>
+                    <span>Cards</span>
+                </a>
+            </div>
+
+            <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Transfers</p>
+                <a href="local-transfer.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-paper-plane"></i>
+                    <span>Local Transfer</span>
+                </a>
+                <a href="international-wire.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-globe"></i>
+                    <span>International Wire</span>
+                </a>
+                <a href="deposit.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-download"></i>
+                    <span>Deposit</span>
+                </a>
+            </div>
+
+            <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Services</p>
+                <a href="loan-request.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-file-alt"></i>
+                    <span>Loan Request</span>
+                </a>
+                <a href="irs-tax-refund.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-receipt"></i>
+                    <span>IRS Tax Refund</span>
+                </a>
+                <a href="loan-history.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-history"></i>
+                    <span>Loan History</span>
+                </a>
+            </div>
+
+            <div>
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Account</p>
+                <a href="settings.html" class="flex items-center space-x-3 px-4 py-3 bg-cyan-500 text-white rounded-lg mb-1">
+                    <i class="fa fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="support.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-question-circle"></i>
+                    <span>Support Ticket</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="lg:ml-64 min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b sticky top-0 z-30">
+            <div class="px-4 lg:px-8 py-4 flex items-center justify-between">
+                <div class="flex items-center space-x-2 text-gray-500">
+                    <i class="fa fa-calendar"></i>
+                    <span class="text-sm hidden sm:inline">Saturday, January 24, 2026</span>
+                    <span class="text-sm sm:hidden">Jan 24, 2026</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="relative">
+                        <i class="fa fa-bell text-gray-600 text-xl"></i>
+                    </button>
+                    <button class="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center text-white font-semibold text-sm" data-balance>
+                        $0
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Breadcrumb -->
+        <div class="px-4 lg:px-8 py-4 bg-white border-b">
+            <div class="flex items-center space-x-2 text-sm text-gray-500">
+                <a href="userdashboard.html" class="hover:text-cyan-500">Dashboard</a>
+                <i class="fa fa-chevron-right text-xs"></i>
+                <span class="text-gray-800">Settings</span>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <main class="p-4 lg:p-8">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-cyan-500 to-cyan-600 rounded-2xl p-6 lg:p-8 text-white mb-6">
+                <div class="flex items-center space-x-3">
+                    <i class="fa fa-cog text-3xl lg:text-4xl"></i>
+                    <div>
+                        <h1 class="text-2xl lg:text-3xl font-bold">Settings</h1>
+                        <p class="text-sm lg:text-base opacity-90">Manage your account preferences and security</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Security Settings -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Change Password -->
+                    <div class="bg-white rounded-2xl shadow-sm p-4 lg:p-6">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">Change Password</h2>
+                        
+                        <form id="passwordForm">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Current Password</label>
+                                    <div class="relative">
+                                        <i class="fa fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                        <input type="password" placeholder="Enter current password" class="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
+                                        <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">New Password</label>
+                                    <div class="relative">
+                                        <i class="fa fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                        <input type="password" placeholder="Enter new password" class="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
+                                        <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label>
+                                    <div class="relative">
+                                        <i class="fa fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                        <input type="password" placeholder="Confirm new password" class="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
+                                        <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="mt-6 w-full sm:w-auto px-6 py-3 bg-cyan-500 text-white rounded-lg font-semibold hover:bg-cyan-600">
+                                <i class="fa fa-save mr-2"></i>Update Password
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Change PIN -->
+                    <div class="bg-white rounded-2xl shadow-sm p-4 lg:p-6">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">Change Transaction PIN</h2>
+                        
+                        <form id="pinForm">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Current PIN</label>
+                                    <div class="relative">
+                                        <i class="fa fa-key absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                        <input type="password" placeholder="Enter current PIN" maxlength="10" class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">New PIN</label>
+                                    <div class="relative">
+                                        <i class="fa fa-key absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                        <input type="password" placeholder="Enter new PIN (4-10 digits)" maxlength="10" class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Confirm New PIN</label>
+                                    <div class="relative">
+                                        <i class="fa fa-key absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                        <input type="password" placeholder="Confirm new PIN" maxlength="10" class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="mt-6 w-full sm:w-auto px-6 py-3 bg-cyan-500 text-white rounded-lg font-semibold hover:bg-cyan-600">
+                                <i class="fa fa-save mr-2"></i>Update PIN
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Notification Preferences -->
+                    <div class="bg-white rounded-2xl shadow-sm p-4 lg:p-6">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">Notification Preferences</h2>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between py-3 border-b">
+                                <div>
+                                    <p class="font-medium text-gray-800">Email Notifications</p>
+                                    <p class="text-sm text-gray-500">Receive transaction alerts via email</p>
+                                </div>
+                                <div class="relative inline-block w-12 select-none">
+                                    <input type="checkbox" id="emailNotif" checked class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-all duration-300 right-0">
+                                    <label for="emailNotif" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between py-3 border-b">
+                                <div>
+                                    <p class="font-medium text-gray-800">SMS Notifications</p>
+                                    <p class="text-sm text-gray-500">Receive alerts via SMS</p>
+                                </div>
+                                <div class="relative inline-block w-12 select-none">
+                                    <input type="checkbox" id="smsNotif" checked class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-all duration-300 right-0">
+                                    <label for="smsNotif" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between py-3 border-b">
+                                <div>
+                                    <p class="font-medium text-gray-800">Push Notifications</p>
+                                    <p class="text-sm text-gray-500">Receive push notifications on mobile</p>
+                                </div>
+                                <div class="relative inline-block w-12 select-none">
+                                    <input type="checkbox" id="pushNotif" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-all duration-300">
+                                    <label for="pushNotif" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between py-3">
+                                <div>
+                                    <p class="font-medium text-gray-800">Marketing Emails</p>
+                                    <p class="text-sm text-gray-500">Receive promotional offers and updates</p>
+                                </div>
+                                <div class="relative inline-block w-12 select-none">
+                                    <input type="checkbox" id="marketingNotif" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-all duration-300">
+                                    <label for="marketingNotif" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Settings -->
+                <div class="space-y-6">
+                    <!-- Account Limits -->
+                    <div class="bg-white rounded-2xl shadow-sm p-4 lg:p-6">
+                        <h3 class="font-semibold text-gray-800 mb-4">Account Limits</h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm text-gray-600">Daily Transfer Limit</span>
+                                    <span class="text-sm font-semibold">NGN 500,000</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-cyan-500 h-2 rounded-full" style="width: 0%"></div>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">Used: NGN 0</p>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm text-gray-600">Monthly Transfer Limit</span>
+                                    <span class="text-sm font-semibold">NGN 5,000,000</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-cyan-500 h-2 rounded-full" style="width: 0%"></div>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">Used: NGN 0</p>
+                            </div>
+                        </div>
+
+                        <button class="mt-4 w-full px-4 py-2 border border-cyan-500 text-cyan-500 rounded-lg hover:bg-cyan-50 text-sm font-semibold">
+                            Request Limit Increase
+                        </button>
+                    </div>
+
+                    <!-- Privacy Settings -->
+                    <div class="bg-white rounded-2xl shadow-sm p-4 lg:p-6">
+                        <h3 class="font-semibold text-gray-800 mb-4">Privacy & Security</h3>
+                        
+                        <div class="space-y-3">
+                            <button class="w-full px-4 py-3 border border-gray-300 rounded-lg text-left hover:bg-gray-50 flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fa fa-shield-alt text-gray-600"></i>
+                                    <span class="text-sm font-medium">Two-Factor Authentication</span>
+                                </div>
+                                <i class="fa fa-chevron-right text-gray-400"></i>
+                            </button>
+
+                            <button class="w-full px-4 py-3 border border-gray-300 rounded-lg text-left hover:bg-gray-50 flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fa fa-laptop text-gray-600"></i>
+                                    <span class="text-sm font-medium">Active Sessions</span>
+                                </div>
+                                <i class="fa fa-chevron-right text-gray-400"></i>
+                            </button>
+
+                            <button class="w-full px-4 py-3 border border-gray-300 rounded-lg text-left hover:bg-gray-50 flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fa fa-history text-gray-600"></i>
+                                    <span class="text-sm font-medium">Login History</span>
+                                </div>
+                                <i class="fa fa-chevron-right text-gray-400"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Danger Zone -->
+                    <div class="bg-white rounded-2xl shadow-sm p-4 lg:p-6 border-2 border-red-200">
+                        <h3 class="font-semibold text-red-600 mb-4">Danger Zone</h3>
+                        
+                        <div class="space-y-3">
+                            <button class="w-full px-4 py-3 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 text-sm font-semibold">
+                                <i class="fa fa-pause-circle mr-2"></i>Freeze Account
+                            </button>
+
+                            <button class="w-full px-4 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 text-sm font-semibold">
+                                <i class="fa fa-trash mr-2"></i>Close Account
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t mt-12 py-6">
+            <div class="px-4 lg:px-8 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500">
+                <p>GRAND © 2026 Grand Chase. All rights reserved.</p>
+                <div class="flex flex-wrap justify-center gap-4 lg:gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-cyan-500">Privacy Policy</a>
+                    <a href="#" class="hover:text-cyan-500">Terms of Service</a>
+                    <a href="#" class="hover:text-cyan-500">Contact Support</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    
+    <!-- Firebase Config -->
+    <script src="firebase-config.js"></script>
+    
+    <!-- User Dashboard Script -->
+    <script src="user-dashboard.js"></script>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const sidebar = document.getElementById('sidebar');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth < 1024) {
+                if (!sidebar.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    sidebar.classList.add('-translate-x-full');
+                }
+            }
+        });
+
+        document.getElementById('passwordForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Password updated successfully!');
+        });
+
+        document.getElementById('pinForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Transaction PIN updated successfully!');
+        });
+    </script>
+</body>
+</html>
