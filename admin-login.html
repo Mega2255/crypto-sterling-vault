@@ -88,7 +88,7 @@
         // Check if already logged in
         auth.onAuthStateChanged((user) => {
             if (user && user.email.includes('admin')) {
-                window.location.href = 'admindashboard.html';
+                window.location.href = 'admin-dashboard.html';
             }
         });
 
@@ -110,7 +110,7 @@
 
                 // Simple security check (matches your dashboard logic)
                 if (user.email.includes('admin')) {
-                    window.location.href = 'admindashboard.html';
+                    window.location.href = 'admin-dashboard.html';
                 } else {
                     await auth.signOut();
                     throw new Error("Unauthorized: You do not have admin privileges.");
