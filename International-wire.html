@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calivra - International Wire Transfer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Mobile Menu Button -->
+    <button id="mobileMenuBtn" class="lg:hidden fixed top-4 left-4 z-50 bg-cyan-500 text-white p-2 rounded-lg">
+        <i class="fa fa-bars text-xl"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-40 overflow-y-auto">
+        <div class="p-6 border-b">
+            <h1 class="text-2xl font-bold text-gray-800">Calivra</h1>
+        </div>
+
+        <div class="p-6 border-b">
+            <div class="flex items-center space-x-3">
+                <!-- ✅ FIXED: Added dynamic initials -->
+                <div class="w-12 h-12 bg-cyan-500 rounded-full flex items-center justify-center text-white font-semibold">
+                    U
+                </div>
+                <div class="flex-1">
+                    <!-- ✅ FIXED: Added data-user-name attribute -->
+                    <h3 class="font-semibold text-gray-800" data-user-name>Loading...</h3>
+                    <!-- ✅ FIXED: Added data-account-number attribute -->
+                    <p class="text-sm text-gray-500">ID: <span data-account-number>Loading...</span></p>
+                </div>
+            </div>
+            <div class="mt-4">
+                <button class="w-full text-left text-sm text-red-500 flex items-center space-x-2">
+                    <i class="fa fa-exclamation-circle"></i>
+                    <span>Verify KYC</span>
+                </button>
+            </div>
+            <div class="mt-3 flex space-x-2">
+                <button class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">
+                    <i class="fa fa-user mr-1"></i> Profile
+                </button>
+                <!-- ✅ FIXED: Added data-logout attribute -->
+                <button data-logout class="flex-1 px-3 py-2 bg-cyan-500 text-white rounded-lg text-sm hover:bg-cyan-600">
+                    <i class="fa fa-sign-out mr-1"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <div class="p-4">
+            <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Main Menu</p>
+                <a href="userdashboard.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="transactions.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-exchange-alt"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="cards.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-credit-card"></i>
+                    <span>Cards</span>
+                </a>
+            </div>
+
+            <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Transfers</p>
+                <a href="local-transfer.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-paper-plane"></i>
+                    <span>Local Transfer</span>
+                </a>
+                <a href="international-wire.html" class="flex items-center space-x-3 px-4 py-3 bg-cyan-500 text-white rounded-lg mb-1">
+                    <i class="fa fa-globe"></i>
+                    <span>International Wire</span>
+                </a>
+                <a href="deposit.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-download"></i>
+                    <span>Deposit</span>
+                </a>
+            </div>
+
+            <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Services</p>
+                <a href="loan-request.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-file-alt"></i>
+                    <span>Loan Request</span>
+                </a>
+                <a href="irs-tax-refund.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-receipt"></i>
+                    <span>IRS Tax Refund</span>
+                </a>
+                <a href="loan-history.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-history"></i>
+                    <span>Loan History</span>
+                </a>
+            </div>
+
+            <div>
+                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Account</p>
+                <a href="settings.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="support.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg mb-1">
+                    <i class="fa fa-question-circle"></i>
+                    <span>Support Ticket</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="lg:ml-64 min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b sticky top-0 z-30">
+            <div class="px-4 lg:px-8 py-4 flex items-center justify-between">
+                <div class="flex items-center space-x-2 text-gray-500">
+                    <i class="fa fa-calendar"></i>
+                    <span class="text-sm hidden sm:inline" id="currentDate">Saturday, January 24, 2026</span>
+                    <span class="text-sm sm:hidden" id="shortDate">Jan 24, 2026</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="relative">
+                        <i class="fa fa-bell text-gray-600 text-xl"></i>
+                    </button>
+                    <!-- ✅ FIXED: Added data-balance attribute -->
+                    <button class="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center text-white font-semibold text-xs" data-balance>
+                        $0
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Breadcrumb -->
+        <div class="px-4 lg:px-8 py-4 bg-white border-b">
+            <div class="flex items-center space-x-2 text-sm text-gray-500">
+                <a href="userdashboard.html" class="hover:text-cyan-500">Dashboard</a>
+                <i class="fa fa-chevron-right text-xs"></i>
+                <span class="text-gray-800">International Transfer</span>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <main class="p-4 lg:p-8">
+            <h1 class="text-2xl font-bold text-gray-800 mb-6">International Transfer</h1>
+
+            <!-- Transfer Method Selection -->
+            <div id="methodSelection" class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-sm p-4 lg:p-8">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-6">Select Transfer Method</h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Wire Transfer -->
+                        <button onclick="showWireForm()" class="p-6 border-2 border-gray-200 rounded-xl hover:border-cyan-500 hover:bg-cyan-50 transition-all text-left">
+                            <div class="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fa fa-building text-cyan-600 text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-gray-800 mb-2">Wire Transfer</h3>
+                            <p class="text-sm text-gray-500">Transfer funds directly to international bank accounts.</p>
+                        </button>
+
+                        <!-- Cryptocurrency -->
+                        <button onclick="showCryptoForm()" class="p-6 border-2 border-gray-200 rounded-xl hover:border-orange-500 hover:bg-orange-50 transition-all text-left">
+                            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fa fa-bitcoin text-orange-600 text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-gray-800 mb-2">Cryptocurrency</h3>
+                            <p class="text-sm text-gray-500">Send funds to your cryptocurrency wallet.</p>
+                        </button>
+
+                        <!-- PayPal -->
+                        <button onclick="showPayPalForm()" class="p-6 border-2 border-gray-200 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fab fa-paypal text-blue-600 text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-gray-800 mb-2">PayPal</h3>
+                            <p class="text-sm text-gray-500">Transfer funds to your PayPal account.</p>
+                        </button>
+                    </div>
+
+                    <!-- Security Notice -->
+                    <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                        <div class="flex items-start space-x-3">
+                            <i class="fa fa-shield-alt text-blue-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-gray-800 mb-1">Secure Transaction</p>
+                                <p class="text-sm text-gray-600">All transactions are encrypted and processed securely. Never share your PIN with anyone.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wire Transfer Form -->
+            <div id="wireForm" class="max-w-2xl mx-auto hidden">
+                <div class="bg-gradient-to-r from-cyan-500 to-cyan-600 rounded-t-2xl p-4 lg:p-6 text-white">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <button onclick="showMethodSelection()" class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center hover:bg-white/30">
+                                <i class="fa fa-arrow-left"></i>
+                            </button>
+                            <div>
+                                <h2 class="text-xl lg:text-2xl font-bold">International Wire Transfer</h2>
+                                <p class="text-sm opacity-90 hidden sm:block">Funds will reflect in the Beneficiary Account within 72 hours</p>
+                            </div>
+                        </div>
+                        <div class="w-12 h-12 lg:w-16 lg:h-16 bg-white/20 rounded-full flex items-center justify-center">
+                            <i class="fa fa-building text-2xl lg:text-3xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-b-2xl shadow-sm p-4 lg:p-8">
+                    <form id="wireTransferForm">
+                        <!-- Amount -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Amount to Transfer</label>
+                            <div class="relative">
+                                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg lg:text-xl">$</span>
+                                <input type="text" placeholder="0.00" class="w-full pl-10 lg:pl-12 pr-4 py-3 lg:py-4 text-xl lg:text-2xl border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
+                            </div>
+                            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-2 gap-2">
+                                <p class="text-sm text-gray-500">Available balance: <span class="font-semibold" data-balance>$0.00</span></p>
+                                <div class="flex flex-wrap gap-2">
+                                    <button type="button" class="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200">$100</button>
+                                    <button type="button" class="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200">$500</button>
+                                    <button type="button" class="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200">$1000</button>
+                                    <button type="button" class="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200">Max</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                            <!-- Beneficiary Name -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Beneficiary Account Name</label>
+                                <div class="relative">
+                                    <i class="fa fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                    <input type="text" placeholder="Enter beneficiary's full name" class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
+                                </div>
+                            </div>
+
+                            <!-- Account Number -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Beneficiary Account Number</label>
+                                <div class="relative">
+                                    <i class="fa fa-hashtag absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                    <input type="text" placeholder="Enter account number" class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
+                                </div>
+                            </div>
+
+                            <!-- Bank Name -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Bank Name</label>
+                                <div class="relative">
+                                    <i class="fa fa-building absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                    <input type="text" placeholder="Enter bank name" class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
+                                </div>
+                            </div>
+
+                            <!-- Bank Address -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Bank Address</label>
+                                <div class="relative">
+                                    <i class="fa fa-map-marker-alt absolute left-4 top-4 text-gray-400"></i>
+                                    <input type="text" placeholder="Enter bank address" class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
+                                </div>
+                            </div>
+
+                            <!-- Account Type -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Account Type</label>
+                                <div class="relative">
+                                    <i class="fa fa-credit-card absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                    <select class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 appearance-none">
+                                        <option>Online Banking</option>
+                                        <option>Savings</option>
+                                        <option>Checking</option>
+                                    </select>
+                                    <i class="fa fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                                </div>
+                            </div>
+
+                            <!-- Country -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Country</label>
+                                <div class="relative">
+                                    <i class="fa fa-globe absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                    <select class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 appearance-none">
+                                        <option>United States</option>
+                                        <option>United Kingdom</option>
+                                        <option>Canada</option>
+                                        <option>Australia</option>
+                                        <option>Germany</option>
+                                        <option>France</option>
+                                    </select>
+                                    <i class="fa fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                                </div>
+                            </div>
+
+                            <!-- Swift Code -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Swift Code</label>
+                                <div class="relative">
+                                    <i class="fa fa-code absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                    <input type="text" placeholder="Enter SWIFT/BIC code" class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
+                                </div>
+                            </div>
+
+                            <!-- IBAN -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">IBAN Number</label>
+                                <div class="relative">
+                                    <i class="fa fa-barcode absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                    <input type="text" placeholder="Enter IBAN number" class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">International Bank Account Number - Format varies by country</p>
+                            </div>
+                        </div>
+
+                        <!-- Transaction PIN -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Transaction PIN</label>
+                            <div class="relative">
+                                <i class="fa fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="password" placeholder="Enter your 4-10 digit PIN" class="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
+                                <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">This is your transaction PIN, not your login password</p>
+                        </div>
+
+                        <!-- Warning Notice -->
+                        <div class="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                            <div class="flex items-start space-x-3">
+                                <i class="fa fa-exclamation-triangle text-yellow-600 mt-1"></i>
+                                <div>
+                                    <p class="font-semibold text-gray-800 mb-1">Important Warning</p>
+                                    <p class="text-sm text-gray-600">International wire transfers are irreversible. Please verify all details carefully before proceeding.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button type="submit" class="flex-1 px-6 py-4 bg-cyan-500 text-white rounded-lg font-semibold hover:bg-cyan-600 flex items-center justify-center">
+                                <i class="fa fa-paper-plane mr-2"></i>
+                                Continue to Transfer
+                            </button>
+                            <button type="button" onclick="showMethodSelection()" class="flex-1 px-6 py-4 border-2 border-gray-300 rounded-lg font-semibold hover:bg-gray-50 flex items-center justify-center">
+                                <i class="fa fa-arrow-left mr-2"></i>
+                                Back
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Cryptocurrency Form -->
+            <div id="cryptoForm" class="max-w-2xl mx-auto hidden">
+                <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-t-2xl p-4 lg:p-6 text-white">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <button onclick="showMethodSelection()" class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center hover:bg-white/30">
+                                <i class="fa fa-arrow-left"></i>
+                            </button>
+                            <div>
+                                <h2 class="text-xl lg:text-2xl font-bold">Cryptocurrency Transfer</h2>
+                                <p class="text-sm opacity-90 hidden sm:block">Send funds to your cryptocurrency wallet</p>
+                            </div>
+                        </div>
+                        <div class="w-12 h-12 lg:w-16 lg:h-16 bg-white/20 rounded-full flex items-center justify-center">
+                            <i class="fa fa-bitcoin text-2xl lg:text-3xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-b-2xl shadow-sm p-4 lg:p-8">
+                    <form id="cryptoTransferForm">
+                        <!-- Amount -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Amount to Transfer (USD)</label>
+                            <div class="relative">
+                                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg lg:text-xl">$</span>
+                                <input type="text" placeholder="0.00" class="w-full pl-10 lg:pl-12 pr-4 py-3 lg:py-4 text-xl lg:text-2xl border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
+                            </div>
+                            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-2 gap-2">
+                                <p class="text-sm text-gray-500">Available balance: <span class="font-semibold" data-balance>$0.00</span></p>
+                                <div class="flex flex-wrap gap-2">
+                                    <button type="button" class="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200">$100</button>
+                                    <button type="button" class="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200">$500</button>
+                                    <button type="button" class="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200">$1000</button>
+                                    <button type="button" class="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200">Max</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cryptocurrency Type -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Select Cryptocurrency</label>
+                            <div class="relative">
+                                <i class="fa fa-coins absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <select class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 appearance-none">
+                                    <option value="btc">Bitcoin (BTC)</option>
+                                    <option value="eth">Ethereum (ETH)</option>
+                                    <option value="usdt">Tether (USDT)</option>
+                                    <option value="usdc">USD Coin (USDC)</option>
+                                    <option value="bnb">Binance Coin (BNB)</option>
+                                    <option value="ada">Cardano (ADA)</option>
+                                </select>
+                                <i class="fa fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                            </div>
+                        </div>
+
+                        <!-- Wallet Address -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Wallet Address</label>
+                            <div class="relative">
+                                <i class="fa fa-wallet absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" placeholder="Enter your crypto wallet address" class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Double-check your wallet address. Transactions cannot be reversed.</p>
+                        </div>
+
+                        <!-- Network -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Network</label>
+                            <div class="relative">
+                                <i class="fa fa-network-wired absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <select class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 appearance-none">
+                                    <option>BTC (Bitcoin)</option>
+                                    <option>ETH (Ethereum - ERC20)</option>
+                                    <option>BSC (Binance Smart Chain - BEP20)</option>
+                                    <option>TRC20 (Tron)</option>
+                                    <option>Polygon</option>
+                                </select>
+                                <i class="fa fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Ensure the network matches your wallet to avoid loss of funds</p>
+                        </div>
+
+                        <!-- Transaction PIN -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Transaction PIN</label>
+                            <div class="relative">
+                                <i class="fa fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="password" placeholder="Enter your 4-10 digit PIN" class="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
+                                <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">This is your transaction PIN, not your login password</p>
+                        </div>
+
+                        <!-- Warning Notice -->
+                        <div class="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                            <div class="flex items-start space-x-3">
+                                <i class="fa fa-exclamation-triangle text-yellow-600 mt-1"></i>
+                                <div>
+                                    <p class="font-semibold text-gray-800 mb-1">Important Warning</p>
+                                    <p class="text-sm text-gray-600">Cryptocurrency transactions are irreversible. Please verify all details carefully before proceeding.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button type="submit" class="flex-1 px-6 py-4 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600 flex items-center justify-center">
+                                <i class="fa fa-paper-plane mr-2"></i>
+                                Continue to Transfer
+                            </button>
+                            <button type="button" onclick="showMethodSelection()" class="flex-1 px-6 py-4 border-2 border-gray-300 rounded-lg font-semibold hover:bg-gray-50 flex items-center justify-center">
+                                <i class="fa fa-arrow-left mr-2"></i>
+                                Back
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- PayPal Form -->
+            <div id="paypalForm" class="max-w-2xl mx-auto hidden">
+                <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-t-2xl p-4 lg:p-6 text-white">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <button onclick="showMethodSelection()" class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center hover:bg-white/30">
+                                <i class="fa fa-arrow-left"></i>
+                            </button>
+                            <div>
+                                <h2 class="text-xl lg:text-2xl font-bold">PayPal Withdrawal</h2>
+                                <p class="text-sm opacity-90 hidden sm:block">Funds will be sent to your PayPal account within 24 hours</p>
+                            </div>
+                        </div>
+                        <div class="w-12 h-12 lg:w-16 lg:h-16 bg-white/20 rounded-full flex items-center justify-center">
+                            <i class="fab fa-paypal text-2xl lg:text-3xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-b-2xl shadow-sm p-4 lg:p-8">
+                    <form id="paypalTransferForm">
+                        <!-- Amount -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Amount to Transfer</label>
+                            <div class="relative">
+                                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg lg:text-xl">$</span>
+                                <input type="text" placeholder="0.00" class="w-full pl-10 lg:pl-12 pr-4 py-3 lg:py-4 text-xl lg:text-2xl border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-2 gap-2">
+                                <p class="text-sm text-gray-500">Available balance: <span class="font-semibold" data-balance>$0.00</span></p>
+                                <div class="flex flex-wrap gap-2">
+                                    <button type="button" class="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200">$100</button>
+                                    <button type="button" class="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200">$500</button>
+                                    <button type="button" class="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200">$1000</button>
+                                    <button type="button" class="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200">Max</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PayPal Info -->
+                        <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <i class="fab fa-paypal text-blue-500 text-2xl"></i>
+                                <div>
+                                    <p class="font-semibold text-gray-800">PayPal</p>
+                                    <p class="text-sm text-gray-600">Transfer funds to your PayPal account</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PayPal Email -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">PayPal Email</label>
+                            <div class="relative">
+                                <i class="fa fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="email" placeholder="Enter PayPal email address" class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Please ensure this is the email address associated with your PayPal account</p>
+                        </div>
+
+                        <!-- Transaction PIN -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Transaction PIN</label>
+                            <div class="relative">
+                                <i class="fa fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="password" placeholder="Enter your 4-10 digit PIN" class="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                                <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">This is your transaction PIN, not your login password</p>
+                        </div>
+
+                        <!-- Note -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Note (Optional)</label>
+                            <div class="relative">
+                                <i class="fa fa-comment absolute left-4 top-4 text-gray-400"></i>
+                                <textarea rows="3" placeholder="Optional payment description or note" class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Security Notice -->
+                        <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                            <div class="flex items-start space-x-3">
+                                <i class="fa fa-shield-alt text-blue-500 mt-1"></i>
+                                <div>
+                                    <p class="font-semibold text-gray-800 mb-1">Secure Transaction</p>
+                                    <p class="text-sm text-gray-600">Your transaction is protected and will be processed securely.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button type="submit" class="flex-1 px-6 py-4 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 flex items-center justify-center">
+                                <i class="fa fa-paper-plane mr-2"></i>
+                                Continue to Transfer
+                            </button>
+                            <button type="button" onclick="showMethodSelection()" class="flex-1 px-6 py-4 border-2 border-gray-300 rounded-lg font-semibold hover:bg-gray-50 flex items-center justify-center">
+                                <i class="fa fa-arrow-left mr-2"></i>
+                                Back
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t mt-12 py-6">
+            <div class="px-4 lg:px-8 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500">
+                <p>Calivra © 2026 Calivra Chase. All rights reserved.</p>
+                <div class="flex flex-wrap justify-center gap-4 lg:gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-cyan-500">Privacy Policy</a>
+                    <a href="#" class="hover:text-cyan-500">Terms of Service</a>
+                    <a href="#" class="hover:text-cyan-500">Contact Support</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    
+    <!-- Firebase Config -->
+    <script src="firebase-config.js"></script>
+    
+    <!-- User Dashboard Script -->
+    <script src="user-dashboard.js"></script>
+
+    <script>
+        // Dynamic date
+        const date = new Date();
+        document.getElementById('currentDate').textContent = date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        document.getElementById('shortDate').textContent = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const sidebar = document.getElementById('sidebar');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth < 1024) {
+                if (!sidebar.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    sidebar.classList.add('-translate-x-full');
+                }
+            }
+        });
+
+        // Show/Hide Forms
+        function showMethodSelection() {
+            document.getElementById('methodSelection').classList.remove('hidden');
+            document.getElementById('wireForm').classList.add('hidden');
+            document.getElementById('paypalForm').classList.add('hidden');
+            document.getElementById('cryptoForm').classList.add('hidden');
+        }
+
+        function showWireForm() {
+            document.getElementById('methodSelection').classList.add('hidden');
+            document.getElementById('wireForm').classList.remove('hidden');
+            document.getElementById('paypalForm').classList.add('hidden');
+            document.getElementById('cryptoForm').classList.add('hidden');
+        }
+
+        function showPayPalForm() {
+            document.getElementById('methodSelection').classList.add('hidden');
+            document.getElementById('wireForm').classList.add('hidden');
+            document.getElementById('paypalForm').classList.remove('hidden');
+            document.getElementById('cryptoForm').classList.add('hidden');
+        }
+
+        function showCryptoForm() {
+            document.getElementById('methodSelection').classList.add('hidden');
+            document.getElementById('wireForm').classList.add('hidden');
+            document.getElementById('paypalForm').classList.add('hidden');
+            document.getElementById('cryptoForm').classList.remove('hidden');
+        }
+
+        // Form Submissions with Firebase
+        document.getElementById('wireTransferForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const form = e.target;
+            const amount = parseFloat(form.querySelector('input[placeholder="0.00"]').value);
+            const beneficiaryName = form.querySelector('input[placeholder="Enter beneficiary\'s full name"]').value;
+            const accountNumber = form.querySelector('input[placeholder="Enter account number"]').value;
+            const bankName = form.querySelector('input[placeholder="Enter bank name"]').value;
+            const bankAddress = form.querySelector('input[placeholder="Enter bank address"]').value;
+            const accountType = form.querySelector('select').value; // First select is account type
+            const country = form.querySelectorAll('select')[1].value; // Second select is country
+            const swiftCode = form.querySelector('input[placeholder="Enter SWIFT/BIC code"]').value;
+            const iban = form.querySelector('input[placeholder="Enter IBAN number"]').value;
+
+            const user = firebase.auth().currentUser;
+            if (!user) return alert("Please log in.");
+
+            const balanceRef = firebase.database().ref(`users/${user.uid}/balance`);
+            const snapshot = await balanceRef.once('value');
+            const currentBalance = snapshot.val() || 0;
+
+            if (amount > currentBalance || amount <= 0) {
+                return alert("Invalid amount or insufficient balance.");
+            }
+
+            const transactionData = {
+                type: 'International Transfer - Wire',
+                amount: amount,
+                beneficiaryName: beneficiaryName,
+                accountNumber: accountNumber,
+                bankName: bankName,
+                bankAddress: bankAddress,
+                accountType: accountType,
+                country: country,
+                swiftCode: swiftCode,
+                iban: iban,
+                status: 'Pending',
+                category: 'Debit',
+                date: new Date().toLocaleDateString(),
+                timestamp: Date.now()
+            };
+
+            try {
+                await firebase.database().ref(`users/${user.uid}/transactions`).push(transactionData);
+                alert('International wire transfer request submitted! It will be processed once approved by the admin.');
+                window.location.href = 'transactions.html';
+            } catch (error) {
+                alert("Error processing transfer: " + error.message);
+            }
+        });
+
+        document.getElementById('cryptoTransferForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const form = e.target;
+            const amount = parseFloat(form.querySelector('input[placeholder="0.00"]').value);
+            const cryptoType = form.querySelector('select').value; // First select is crypto type
+            const walletAddress = form.querySelector('input[placeholder="Enter your crypto wallet address"]').value;
+            const network = form.querySelectorAll('select')[1].value; // Second select is network
+
+            const user = firebase.auth().currentUser;
+            if (!user) return alert("Please log in.");
+
+            const balanceRef = firebase.database().ref(`users/${user.uid}/balance`);
+            const snapshot = await balanceRef.once('value');
+            const currentBalance = snapshot.val() || 0;
+
+            if (amount > currentBalance || amount <= 0) {
+                return alert("Invalid amount or insufficient balance.");
+            }
+
+            const transactionData = {
+                type: 'International Transfer - Crypto',
+                amount: amount,
+                cryptoType: cryptoType,
+                walletAddress: walletAddress,
+                network: network,
+                status: 'Pending',
+                category: 'Debit',
+                date: new Date().toLocaleDateString(),
+                timestamp: Date.now()
+            };
+
+            try {
+                await firebase.database().ref(`users/${user.uid}/transactions`).push(transactionData);
+                alert('Cryptocurrency transfer request submitted! It will be processed once approved by the admin.');
+                window.location.href = 'transactions.html';
+            } catch (error) {
+                alert("Error processing transfer: " + error.message);
+            }
+        });
+
+        document.getElementById('paypalTransferForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const form = e.target;
+            const amount = parseFloat(form.querySelector('input[placeholder="0.00"]').value);
+            const paypalEmail = form.querySelector('input[type="email"]').value;
+            const note = form.querySelector('textarea').value;
+
+            const user = firebase.auth().currentUser;
+            if (!user) return alert("Please log in.");
+
+            const balanceRef = firebase.database().ref(`users/${user.uid}/balance`);
+            const snapshot = await balanceRef.once('value');
+            const currentBalance = snapshot.val() || 0;
+
+            if (amount > currentBalance || amount <= 0) {
+                return alert("Invalid amount or insufficient balance.");
+            }
+
+            const transactionData = {
+                type: 'International Transfer - PayPal',
+                amount: amount,
+                paypalEmail: paypalEmail,
+                note: note,
+                status: 'Pending',
+                category: 'Debit',
+                date: new Date().toLocaleDateString(),
+                timestamp: Date.now()
+            };
+
+            try {
+                await firebase.database().ref(`users/${user.uid}/transactions`).push(transactionData);
+                alert('PayPal transfer request submitted! It will be processed once approved by the admin.');
+                window.location.href = 'transactions.html';
+            } catch (error) {
+                alert("Error processing transfer: " + error.message);
+            }
+        });
+    </script>
+    <!-- Begin of Chaport Live Chat code -->
+<script type="text/javascript">
+(function(w,d,v3){
+w.chaportConfig = {
+appId : '69727a7624f1437fc1298784',
+};
+
+if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
+</script>
+<!-- End of Chaport Live Chat code -->
+</body>
+</html>
